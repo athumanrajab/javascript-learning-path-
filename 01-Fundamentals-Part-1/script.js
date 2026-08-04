@@ -240,6 +240,7 @@ console.log("23" * "10" * 3); //Here's the 23 and 10 are automatically converted
 */
 
 
+/*
 // Truthy and Falsy Values
 // Falsy values are the values that are not exactly false, but they will become false when we try to convert them into a boolean by using Boolean().
 
@@ -279,3 +280,34 @@ if (height) {
 } else {
     console.log("Height is UNDEFINED") //Since we didnt assign any value yet to height then the height is undefined, but also since undefined has falsy value then the else block will be executed
 }
+*/
+
+// Equality Operators ==(loose equality) VS ===(strictly equality)
+// strictly equality operator (===) does not perfomr type coercion hence it return true when both values are exactly the same
+
+const age = 18;
+if (age === 18) {
+    console.log("You just become an adult")
+}
+
+// loose equality operator(==) does type coercion
+console.log("18" == 18) //Here's the == operator perform type coercion , such that "18" will be converted to a number. Hence it will return true
+
+// NB: Avoid the use of loose equality operator as much as you can when comparing values because it can be hard to find bugs in our codes..
+// Always use strict equality operator for clean code
+
+// We can also prompt the user on the browser for input by using prompt() which accept any value and converted into string 
+
+let luckNumber;
+luckNumber = prompt("What's your lucky number?: "); //any value entered by the user will be converted into string
+console.log(typeof luckNumber);
+
+// If the aim is to get the data as a number , the we should convert the string into number manually(Type Conversion) by using Number()
+
+let luckyNumber = Number(luckNumber)
+console.log(typeof luckyNumber)
+
+// All the above process can be generally written as 
+let luckNumber = Number(prompt("What's your lucky number?: "))
+console.log(typeof luckNumber)
+

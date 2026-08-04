@@ -216,6 +216,7 @@ if (markBMI > johnBMI) {
 }
 */
 
+/*
 // Type conversion(Manually convert one type to another)
 // 1.Converting string to a number by using Number()
 const birthYear = "1990";
@@ -236,4 +237,45 @@ console.log("I am " + 24 + "Years old") //Here's the 24 is automatically convert
 console.log("23" - "10" - 3); //Here's the 23 and 10 are automatically converted to a number by using the - operator
 
 console.log("23" * "10" * 3); //Here's the 23 and 10 are automatically converted to a number by using the * operator
+*/
 
+
+// Truthy and Falsy Values
+// Falsy values are the values that are not exactly false, but they will become false when we try to convert them into a boolean by using Boolean().
+
+// 5 falsy values: 0, ""(empty string), undefined, null, NaN(Not a Number/Invalid number), Everything else will be referred to as truthy values
+
+console.log(Boolean(0));
+console.log(Boolean(""));
+
+console.log(Boolean(undefined));
+
+let age; //This also is undefined variable so when converted to boolean , it'll has false value
+console.log(Boolean(age));
+
+console.log(Boolean(null));
+console.log(Boolean(NaN));
+
+console.log(Boolean("jones"));
+
+// In practice the conversion of boolean in always implicit(type coercion, that javaScript automatically does behind the scene), not explicit
+
+// Below codes show how javaScript automatically convert values into boolean
+
+const money = 0;
+
+if (money) {
+    console.log("Don't spend it all !")
+} else {
+    console.log("You should get a job!") //This second block will be executed because 0 is falsy value
+}
+
+// Truthy and falsy value can be used to check if the variable is actually defined or not
+
+let height;
+
+if (height) {
+    console.log("YAY! Height is defined")
+} else {
+    console.log("Height is UNDEFINED") //Since we didnt assign any value yet to height then the height is undefined, but also since undefined has falsy value then the else block will be executed
+}

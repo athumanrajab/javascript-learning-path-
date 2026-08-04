@@ -1,3 +1,4 @@
+/*
 let js = "amaizing";
 if (js === "amaizing") alert("JavaScript is FUN!");
 
@@ -67,3 +68,52 @@ console.log(typeof javascriptIsFun)
 
 // The following piece of code is considered to be a bug in javascript , it occur when you check the type of null, and it return type "object"
 console.log(typeof null)
+*/
+
+
+// Variable declaration
+// 1.Use "let" to declare variable that can be changed later in code (Mutable variables)
+
+let age = 30;
+age = 32;
+
+let firstName;
+firstName = "John"
+
+// 2.Use the "const" to declare variable that are not supposed to be changed in the future (Immutable variables)
+
+const PI = 3.14;
+// PI = 2.9; //uncaught TypeError: Assignment to constant variable.
+
+// Also the const variable cannot be declared without assigning the value to it
+
+// const birthyear; //Uncaught SyntaxError: Missing initializer in const declaration
+
+// 3.Avoid the use of var in declaring variables, because the old ways of declaring variables and can easily leads to bugs
+
+// var is function-scoped, not block-scoped - such that it ignores blocks (if, for, while, etc)
+if (true) {
+    var message1 = "Hello world"
+}
+console.log(message1); //on the console it will print "Hello world"
+
+// But with let keyword, it will print "ReferenceError" on the console
+if (true) {
+    let message2 = "Another Hello world"
+}
+// console.log(message2); //Uncaught ReferenceError: message2 is not defined
+
+//Also var can be redeclared, preventing redeclaration helps catches mistakes easily
+
+var birthYear = 1990;
+var birthyear = 1991;
+
+// while with let , the console will print syntaxError
+
+let hasDance = true;
+// let hasDance = false; //Uncaught SyntaxError: Identifier 'hasDance' has already been declared
+
+//But also in javaScript you can write a variable without declaring it but it not the best practice
+
+middlename = "Fayma";
+console.log(middlename);

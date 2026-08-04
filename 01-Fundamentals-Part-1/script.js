@@ -160,7 +160,7 @@ let markHigherBMI = markBMI > johnBMI;
 console.log(markHigherBMI);
 */
 
-
+/*
 // We can avoid string concatination by using template string or template literal which is the back tick `` found above the key tab with ${variable name}
 
 const firstName = "Danniel";
@@ -182,3 +182,35 @@ console.log(`This is a regular string`);
 console.log(`This is the string with
     multiple
     lines`);
+*/
+
+/*
+Coding Challenge #2
+Use the BMI example from Challenge #1, and the code you already wrote, and
+improve it.
+Your tasks:
+1. Print a nice output to the console, saying who has the higher BMI. The message
+is either "Mark's BMI is higher than John's!" or "John's BMI is higher than Mark's!"
+2. Use a template literal to include the BMI values in the outputs. Example: "Mark's
+BMI (28.3) is higher than John's (23.9)!"
+Hint: Use an if/else statement 😉
+GOOD LUCK 😀
+*/
+
+let markMass , markHeight, johnMass, johnHeight;
+
+markMass = 78;
+markHeight = 1.69;
+johnMass = 92;
+johnHeight = 1.95;
+
+let markBMI = markMass / (markHeight * markHeight);
+
+let johnBMI = johnMass / (johnHeight * johnHeight);
+
+
+if (markBMI > johnBMI) {
+    console.log(`Mark's BMI (${markBMI}) is higher than John's BMI (${johnBMI})!`);
+} else {
+    console.log(`John's BMI (${johnBMI}) is higher than Marks's BMI (${markBMI})!`);
+}

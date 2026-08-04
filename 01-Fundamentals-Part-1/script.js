@@ -140,7 +140,7 @@ m tall.
 m tall.
 GOOD LUCK 😀
 */
-
+/*
 let markMass , markHeight, johnMass, johnHeight;
 
 markMass = 78;
@@ -158,3 +158,27 @@ console.log("johnBMI: ", johnBMI)
 
 let markHigherBMI = markBMI > johnBMI;
 console.log(markHigherBMI);
+*/
+
+
+// We can avoid string concatination by using template string or template literal which is the back tick `` found above the key tab with ${variable name}
+
+const firstName = "Danniel";
+const lastName = "Purcell";
+const birthYear = 2003;
+const currentYear = 2026;
+const job = "Back-end developer";
+
+const templateString = `I'm ${firstName} ${lastName}, ${currentYear - birthYear} years old ${job}`
+
+console.log(templateString);
+
+// Template literal can also be used to write regular string
+
+console.log(`This is a regular string`);
+
+// Template literal is also useful when string extends multiple line
+
+console.log(`This is the string with
+    multiple
+    lines`);

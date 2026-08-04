@@ -195,7 +195,7 @@ is either "Mark's BMI is higher than John's!" or "John's BMI is higher than Mark
 BMI (28.3) is higher than John's (23.9)!"
 Hint: Use an if/else statement 😉
 GOOD LUCK 😀
-*/
+
 
 let markMass , markHeight, johnMass, johnHeight;
 
@@ -214,3 +214,26 @@ if (markBMI > johnBMI) {
 } else {
     console.log(`John's BMI (${johnBMI}) is higher than Marks's BMI (${markBMI})!`);
 }
+*/
+
+// Type conversion(Manually convert one type to another)
+// 1.Converting string to a number by using Number()
+const birthYear = "1990";
+console.log(`Initially the birth year is: ${typeof birthYear}`);
+const newBirthYear = Number(birthYear);
+console.log(`Finally the birth year is: ${typeof newBirthYear}`);
+
+// 2.Converting number to a string by using String()
+const luckNumber = 9;
+console.log(`Initially my Lucky number is: ${typeof luckNumber}`);
+const newLuckNumber = String(luckNumber);
+console.log(`Finally my Lucky number is: ${typeof newLuckNumber}`);
+
+// Type Coercion(JavaScript automatically convert one data type into another), it is not the best practice to use Type Coercion because it introduce bugs into our program
+
+console.log("I am " + 24 + "Years old") //Here's the 24 is automatically converted by javascript from a number to a string by using the + operator
+
+console.log("23" - "10" - 3); //Here's the 23 and 10 are automatically converted to a number by using the - operator
+
+console.log("23" * "10" * 3); //Here's the 23 and 10 are automatically converted to a number by using the * operator
+

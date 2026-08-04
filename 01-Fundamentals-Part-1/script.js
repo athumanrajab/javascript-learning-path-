@@ -25,3 +25,45 @@ let job2 = "Teacher";
 
 let firstName = "Jonas";
 console.log(firstName);
+
+// The 7 Primitive Data types
+// 1.Number - Floating point numbers, Used for decimals and integers 
+let age = 23;
+
+// 2.String - Sequence of characters , Used for text 
+let lastName = "Danniel";
+
+// 3.Boolean - Logical types that can only be True or False, Used for taking decisions
+let isEmpty = true;
+
+// 4.Undefined - Value taken by a variable that is not yet defined 
+// It's simply referred to as "Empty value", It's the variable
+// that you can declare without assigning it's value 
+let children;
+
+// 5.Null - also means empty value 
+
+// 6.Symbol (ES2015) - Value that is unique and cannot be changed
+
+// 7.Bigint (ES2020) - Larger integers that the number type can hold
+
+// JavaScript has dynamic typing - We do not have to manually define the data type of the value stored in a variable. Instead, data types are determined automatically
+
+let javascriptIsFun = true;
+
+console.log(typeof javascriptIsFun);
+console.log(typeof 23);
+console.log(typeof "javascriptIsFun");
+// typeof can be used to show the data type of the value 
+
+
+// Value has type, NOT variable
+
+// We can also assign a new value of different data type to the same variable without a problem
+
+javascriptIsFun = "The value has changed from boolean to string"
+console.log(javascriptIsFun);
+console.log(typeof javascriptIsFun)
+
+// The following piece of code is considered to be a bug in javascript , it occur when you check the type of null, and it return type "object"
+console.log(typeof null)

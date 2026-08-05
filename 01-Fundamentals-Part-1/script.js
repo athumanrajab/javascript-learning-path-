@@ -282,6 +282,9 @@ if (height) {
 }
 */
 
+
+
+/*
 // Equality Operators ==(loose equality) VS ===(strictly equality)
 // strictly equality operator (===) does not perfomr type coercion hence it return true when both values are exactly the same
 
@@ -310,4 +313,70 @@ console.log(typeof luckyNumber)
 // All the above process can be generally written as 
 let luckNumber = Number(prompt("What's your lucky number?: "))
 console.log(typeof luckNumber)
+*/
 
+
+/*
+Coding Challenge #3
+There are two gymnastics teams, Dolphins and Koalas. They compete against each
+other 3 times. The winner with the highest average score wins a trophy!
+Your tasks:
+1. Calculate the average score for each team, using the test data below
+2. Compare the team's average scores to determine the winner of the competition,
+and print it to the console. Don't forget that there can be a draw, so test for that
+as well (draw means they have the same average score)
+3. Bonus 1: Include a requirement for a minimum score of 100. With this rule, a
+team only wins if it has a higher score than the other team, and the same time a
+score of at least 100 points. Hint: Use a logical operator to test for minimum
+score, as well as multiple else-if blocks 😉
+4. Bonus 2: Minimum score also applies to a draw! So a draw only happens when
+both teams have the same score and both have a score greater or equal 100
+points. Otherwise, no team wins the trophy
+Test data:
+§Data 1: Dolphins score 96, 108 and 89. Koalas score 88, 91 and 110
+§Data Bonus 1: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 123
+§Data Bonus 2: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 106
+GOOD LUCK 😀
+*/
+
+const dolphinScore1 = 97;
+const dolphinScore2 = 112;
+const dolphinScore3 = 101;
+
+const koalasScore1 = 109;
+const koalasScore2 = 95;
+const koalasScore3 = 106;
+
+const minAvgScore = 100;
+
+const avgDolphinScore = (dolphinScore1 + dolphinScore2 + dolphinScore3) / 3
+
+const avgKoalasScore = (koalasScore1 + koalasScore2 + koalasScore3) / 3
+
+console.log(`Average Dolphin Score: ${avgDolphinScore}`)
+console.log(`Average Koalas Score: ${avgKoalasScore}`)
+
+// Task 1 and Task 2
+// if (avgDolphinScore > avgKoalasScore) {
+//     console.log("Wow! Dolphin wins the Trophy!");
+// }
+// else if(avgDolphinScore === avgKoalasScore){
+//     console.log("Opps! Draw!");
+// }
+// else{
+//     console.log("Wow! Koalas wins the Trophy!");
+// }
+
+// Bonus 1 and Bonus 2
+if ((avgDolphinScore >= minAvgScore) && (avgDolphinScore > avgKoalasScore)) {
+    console.log("Wow! Dolphin wins the Trophy!");
+}
+else if((avgKoalasScore >= minAvgScore) && (avgKoalasScore > avgDolphinScore)) {
+    console.log("Wow! Koalas wins the Trophy!");
+}
+else if((avgDolphinScore >= minAvgScore) && (avgKoalasScore >= minAvgScore) && (avgDolphinScore === avgKoalasScore)){
+    console.log("Opps! Draw!");
+}
+else{
+    console.log("Ooh! No team wins the Trophy!");
+}

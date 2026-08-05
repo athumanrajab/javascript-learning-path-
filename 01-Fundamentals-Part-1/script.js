@@ -383,6 +383,7 @@ else{
 */
 
 
+/*
 // The Switch Statement, it's technically designed for strict equality and not comparison
 const day = "monday"
 
@@ -431,3 +432,22 @@ else if(day === "saturday" || day === "sunday"){
 else{
     console.log("Not a valid day!")
 }
+*/
+
+/*
+// Statement VS Expression
+1.An Expression is the piece of code that produce a value
+Examples
+3 + 4
+1991
+true && false && !false
+
+2.A statement is the bigger piece of code which is executed and does not produce a value on itself
+Examples
+if/else statement
+switch statement
+
+Example when we use template literal , we expect an expression and not a statement inside {}
+ console.log(`I am ${2026 - 2003} years old`);
+*/
+

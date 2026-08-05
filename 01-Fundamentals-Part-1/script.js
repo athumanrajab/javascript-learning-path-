@@ -337,7 +337,7 @@ Test data:
 §Data Bonus 1: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 123
 §Data Bonus 2: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 106
 GOOD LUCK 😀
-*/
+
 
 const dolphinScore1 = 97;
 const dolphinScore2 = 112;
@@ -379,4 +379,55 @@ else if((avgDolphinScore >= minAvgScore) && (avgKoalasScore >= minAvgScore) && (
 }
 else{
     console.log("Ooh! No team wins the Trophy!");
+}
+*/
+
+
+// The Switch Statement, it's technically designed for strict equality and not comparison
+const day = "monday"
+
+switch (day) {
+    case "monday": // day === monday
+        console.log("Plan course structure");
+        console.log("Go to coding meetup");
+        break;
+    case "tuesday":
+        console.log("Prepare theory videos");
+        break;
+    case "wednesday":
+    case "thursday":
+        console.log("Write code example");
+        break;
+    case "friday":
+        console.log("Record videos");
+        break;
+    case "saturday":
+    case "sunday":
+        console.log("Enjoy the weekend!");
+        break;
+
+    default:
+        console.log("Not a valid day");
+        break;
+}
+
+// The above scenario can also be represented using if/else statement
+if (day === "monday"){
+    console.log("Plan course structure");
+    console.log("Go to coding meetup");
+}
+else if(day === "tuesday"){
+    console.log("Prepare theory videos");
+}
+else if(day === "wednesday" || day === "thursday"){
+    console.log("Write code example");
+}
+else if(day === "friday"){
+    console.log("Record videos");
+}
+else if(day === "saturday" || day === "sunday"){
+    console.log("Enjoy the weekend!");
+}
+else{
+    console.log("Not a valid day!")
 }

@@ -65,6 +65,7 @@ console.log(`You're ${age2} years old.`);
 */
 
 
+/*
 // Arrow functions
 // Arrow functions can be implemented by using the "=>" syntax. Arrow functions are always expressions and they do not have their own "this" keyword. They are best suited for non-method functions.
 
@@ -100,3 +101,27 @@ console.log(retirementAge2);
 
 retirementAge2 = yearsUntilRetirement2(2004, "Carrine");
 console.log(retirementAge2);
+*/
+
+
+// Funtions calling other functions,
+// This is a good practice to keep the code modular and reusable. It also helps to avoid code duplication and makes the code easier to read and maintain.
+
+// Cutting fruit into pieces, This function accepts a number of fruits and returns the number of pieces of fruit. Each fruit is cut into 4 pieces.
+function cutFruitPieces(fruit){
+    return fruit * 4;
+}
+
+// This function accepts two parameters, the number of apples and oranges, and returns a string that describes the juice made with the given number of pieces of apple and orange. It calls the cutFruitPieces function to get the number of pieces of each fruit.
+function fruitProcessor(apples, oranges){
+    const applePieces = cutFruitPieces(apples);
+    const orangePieces = cutFruitPieces(oranges);
+
+    console.log(`Apple pieces: ${applePieces}`);
+    console.log(`Orange pieces: ${orangePieces}`);
+
+    return `Juice made with ${applePieces} pieces of apple and ${orangePieces} pieces of orange.`;
+}
+
+const mixedJuice = fruitProcessor(2, 3); 
+console.log(mixedJuice);

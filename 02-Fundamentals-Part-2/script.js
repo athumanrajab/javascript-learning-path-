@@ -43,7 +43,7 @@ console.log(fruitProcessor(3, 2)); // This will log the return value of the func
 */
 
 
-
+/*
 // Function declarations vs Function expressions
 // Function declaration can be done by using the "function" keyword followed by the function name and parameters. Function declarations are hoisted, which means they can be called before they are defined in the code.
 
@@ -62,3 +62,41 @@ const calcAge2 = function(birthYear){
 
 const age2 = calcAge2(2003); //
 console.log(`You're ${age2} years old.`);
+*/
+
+
+// Arrow functions
+// Arrow functions can be implemented by using the "=>" syntax. Arrow functions are always expressions and they do not have their own "this" keyword. They are best suited for non-method functions.
+
+const calcAge3 = birthYear => 2026 - birthYear; // This is a single parameter arrow function that returns the age based on the birth year.You dont need to use the "return" keyword or curly braces for single line arrow functions.
+
+const age3 = calcAge3(2003);
+console.log(`You're ${age3} years old.`);
+
+// Arrow function with single parameters and multiple lines of code can be implemented by using the "=>" syntax with curly braces and return keyword.
+
+const yearsUntilRetirement1 = birthYear => {
+    const currentAge = 2026 - birthYear;
+    const maxRetirementAge = 65;
+    const retirementAge = maxRetirementAge - currentAge;
+    return retirementAge;
+}
+
+const retirementAge1 = yearsUntilRetirement1(2003);
+console.log(`You have ${retirementAge1} years until retirement.`);
+
+// Arrow function with multiple parameters and multiple lines of code can be implemented by using the "=>" syntax with curly braces and return keyword.
+
+const yearsUntilRetirement2 = (birthYear, firstName) => {
+    const currentAge = 2026 - birthYear;
+    const maxRetirementAge = 65;
+    const retirementAge = maxRetirementAge - currentAge;
+    return `${firstName} has ${retirementAge} years until retirement.`;
+}
+
+let retirementAge2; //This variable is declared outside the function so that it can be used to store the return value of the function and log it to the console.
+retirementAge2 = yearsUntilRetirement2(2003, "Danniel");
+console.log(retirementAge2);
+
+retirementAge2 = yearsUntilRetirement2(2004, "Carrine");
+console.log(retirementAge2);

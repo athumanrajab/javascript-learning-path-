@@ -6,3 +6,5 @@ let passTest = true;
 
 if (passTest) hasDriverLicense = true; // This line will throw an error on the console with the help of strict mode because "hasDriverLicense" is not declared. The correct variable name is "hasDriversLicense".
 if (hasDriversLicense) console.log("I can drive");
+
+const interface = "Audio"; // This line will throw an error on the console with the help of strict mode because "interface" is a reserved keyword in javascript.

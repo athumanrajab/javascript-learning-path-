@@ -158,7 +158,7 @@ Hints:
 §To check if number A is at least double number B, check for A >= 2 * B.
 Apply this to the team's average scores 😉
 GOOD LUCK 😀
-*/
+
 
 const calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3;
 
@@ -185,4 +185,64 @@ function checkWinner(avgDolphins, avgKoalas){
 
 const winner = checkWinner(avgDolphinsScore, avgKoalasScore);
 console.log(winner);
+*/
 
+
+// Arrays
+const friends = ["Michael", "Steven", "Peter"]; //This is an array literal that contains three string elements. Arrays are used to store multiple values in a single variable.
+console.log(friends);
+
+const years = new Array(1991, 1984, 2008, 2020); //This is an array constructor that creates an array with four number elements. Arrays can also be created using the Array constructor.
+console.log(years);
+
+console.log(friends[0]); //This will log the first element of the array to the console.
+console.log(friends[2]); //This will log the third element of the array to the console.
+
+console.log(friends.length); //This will log the length of the array to the console.
+
+console.log(friends[friends.length - 1]); //This will log the last element of the array to the console. The last element of an array can be accessed by using the length property of the array and subtracting 1 from it.
+
+// Also inside [] we can store any type of data such as numbers, strings, and expressions. We can also store other arrays and objects inside an array. This is called a nested array or multidimensional array.
+
+friends[1] = "Danniel"; //This will change the second element of the array to "Danniel". Arrays are mutable, which means we can change the elements of an array after it has been created.
+console.log(friends); //This will log the updated array to the console.
+
+// Only the primitive values declared with const are immutable(they cannot be changed). Arrays and objects declared with const are mutable(they can be changed). We can change the elements of an array.However, we cannot reassign a new array or object to a variable declared with const.
+
+friends[0] = 2000;
+friends[1] = 2001;
+friends[2] = 2002;
+console.log(friends); //This will log the updated array to the console.
+
+// We cannot reassign a new array to a variable declared with const. The following line will throw an error on the console.
+
+const newFriends = ["John", "Jane", "Jack"];
+// newFriends = ["Mary", "Mark", "Mike"]; // This line will throw an error on the console because we cannot reassign a new array to a variable declared with const. However, we can change the elements of the array as shown above.
+// // console.log(newFriends); //This will log the updated array to the console.
+
+// We can also create an array with mixed data types. This is called a heterogeneous array. However, it is not a good practice to create an array with mixed data types because it can lead to confusion and bugs in the code. It is better to create an array with homogeneous data types.
+
+const firstName = "Danniel";
+const lastName = "Purcell";
+const myProfile = [firstName, lastName, 2026 - 2003, "Software Engineer", newFriends];
+console.log(myProfile); //This will log the array to the console.
+
+// Exercise
+
+// The below function is a function expression that calculates the age of a person based on their birth year. It takes one parameter, birthYear, and returns the age by subtracting the birth year from the current year (2026). The function is assigned to a variable called calcAge.
+const calcAge = function(birthYear){
+    return 2026 - birthYear;
+}
+
+const yearsArray = [1990, 1967, 2002, 2010, 2018]; //This is an array literal that contains five number elements. It represents the birth years of five people.
+
+const age1 = calcAge(yearsArray[0]); //This will calculate the age of the first person in the array by passing the first element of the array to the calcAge function.
+const age2 = calcAge(yearsArray[1]); //This will calculate the age of the second person in the array by passing the second element of the array to the calcAge function.
+const age3 = calcAge(yearsArray[yearsArray.length - 1]); //This will calculate the age of the last person in the array by passing the last element of the array to the calcAge function.
+
+console.log(age1, age2, age3); //This will log the ages of the three people to the console.
+
+// But also we can directly pass the calcAge function to the array elements without storing them in variable , and store them in a new array.
+
+const ages = [calcAge(yearsArray[0]), calcAge(yearsArray[1]), calcAge(yearsArray[yearsArray.length - 1])]; //This will create a new array called ages that contains the ages of the three people by passing the elements of the yearsArray to the calcAge function.
+console.log(ages); //This will log the ages array to the console.

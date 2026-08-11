@@ -187,7 +187,7 @@ const winner = checkWinner(avgDolphinsScore, avgKoalasScore);
 console.log(winner);
 */
 
-
+/*
 // Arrays
 const friends = ["Michael", "Steven", "Peter"]; //This is an array literal that contains three string elements. Arrays are used to store multiple values in a single variable.
 console.log(friends);
@@ -246,3 +246,59 @@ console.log(age1, age2, age3); //This will log the ages of the three people to t
 
 const ages = [calcAge(yearsArray[0]), calcAge(yearsArray[1]), calcAge(yearsArray[yearsArray.length - 1])]; //This will create a new array called ages that contains the ages of the three people by passing the elements of the yearsArray to the calcAge function.
 console.log(ages); //This will log the ages array to the console.
+*/
+
+
+// Basic Array Operations (Methods)
+
+// Add elements either to the begining or end of the array
+
+const friends = ["John", "Jane", "Jack"];
+friends.push("Danniel"); //The push method adds the new element to the end of the array.
+console.log(friends);
+
+// Also the push function return the length of the array, consider the code below
+
+// const lengthOfFriends = friends.push("Purcell");
+// console.log(lengthOfFriends);
+
+friends.unshift("Carrine"); //The unshift method add the new element to the begining of the array
+console.log(friends);
+
+// Also the unshift function return the length of the array, consider the code below
+
+const lengthOfFriends = friends.unshift("Nevin");
+console.log(`The length of the array is : ${lengthOfFriends}`);
+
+// Remove elements
+friends.pop() //The pop function will remove the last element of the array
+console.log(friends)
+
+// Unlike the push function which return the length of the array, the pop function return the popped(removed) element
+
+// const poppedElement = friends.pop();
+// console.log(`The removed element is: ${poppedElement}`);
+
+friends.shift(); //The shift functions remove the first element on the array
+console.log(friends);
+
+// Also the shift function return the popped(removed) element
+
+const poppedElement = friends.shift();
+console.log(`The removed element is: ${poppedElement}`);
+
+// We can also check the position/index of any element in an array by usinf indexOf()
+console.log(friends.indexOf("John"));
+
+// We can also check if an element either belonf to that array of not by using includes(). It will return true if the element belong to that array , or false if the element does not belong to that array
+console.log(friends.includes("Jane"));
+console.log(friends.includes("Emmanuel"));
+
+// One of the usefull application of the includes() method is that, it can be used with conditional statement, consider the codes below
+
+if(friends.includes("Paula")){
+    console.log("You have friend called Paula");
+}
+else{
+    console.log("You don't have friend called Paula");
+}

@@ -347,7 +347,7 @@ const tips = [tip(bills[0]), tip(bills[1]), tip(bills[2])];
 const total = [bills[0]+tips[0], bills[1]+tips[1], bills[2]+tips[2]];
 */
 
-
+/*
 // Introduction to objects
 // We use objects to essentially group together different variables that really belong together, we store them in key: value pair
 
@@ -403,3 +403,66 @@ console.log(danniel);
 // Challenge: convert the following sentence in dynamic way "Jonas has 3 friends, and his best friend is called Nevin".
 
 console.log(`${danniel.firstName} has ${danniel.friends.length} friends, and his best friend is called ${danniel.friends[0]}`);
+*/
+
+
+// Object Methods
+const danniel = {
+    firstName: "Danniel",
+    lastName: "Purcell",
+    birthYear: 2003,
+    job: "Software developer",
+    friends: ["Nevin", "Carrine", "John"],
+    hasDriverLicense: false,
+
+    // Any function that is attached to an object is called a method
+    // calcAge: function(birthYear){
+    //     return 2026 - birthYear;
+    // }
+
+    // We can use the "this" keyword to access the properties of the object without passing any argument to the method as shown below
+    // calcAge: function(){
+    //     console.log(this); // The "this" keyword is a special variable that is created for every execution context. It is a reference to the object that is calling the method. In this case, the "this" keyword is a reference to the "danniel" object.
+    //     return 2026 - this.birthYear;
+    // }
+
+    // We can also store the return value of the method in a property of the object as shown below
+    calcAge: function(){
+        this.age = 2026 - this.birthYear; // This will create a new property called "age" in the "danniel" object and store the return value of the method in that property.
+        return this.age;
+    },
+
+    // Challenge: Write a method called getSummary that will summarize the object information as follows "Danniel is a 46-years old teacher, and he has a driver's license."
+
+    // ownDriverLicense: function(){
+    //     return this.hasDriverLicense? "he has driver's license.": "he has no driver's license.";
+    // },
+    
+    // getSummary: function(){
+    //     return `${this.firstName} is a ${this.calcAge()}-years old ${this.job}, and ${this.ownDriverLicense()}`
+    // }
+
+    // The above codes can also be implemented as follows
+    getSummary: function(){
+        return `${this.firstName} is a ${this.calcAge()}-years old ${this.job}, and he has ${this.hasDriverLicense? "a": "no"} driver's license`
+    }
+};
+
+// To access the calcAge method, we can use either Dot notation or bracket Notation by directly passing the argument to the method
+// console.log(danniel.calcAge(2003));
+// console.log(danniel["calcAge"](2003));
+
+// Through the use of "this" keyword we can access the properties of the object without passing any argument to the method as shown below
+console.log(danniel.calcAge());
+console.log(danniel["calcAge"]());  //These two ways will be computationally expensive because assume we want to use the age 10 times in our program , then we have to repeat calling the function multiple times
+
+// Solution to above problem is store the return value of the method in a property of the object, this will help to call the function once and then we can use the stored value multiple times as shown below
+
+console.log(danniel.age);
+console.log(danniel.age);
+console.log(danniel.age);
+console.log(danniel.age);
+
+
+console.log(danniel.getSummary());
+

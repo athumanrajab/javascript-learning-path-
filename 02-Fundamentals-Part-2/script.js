@@ -329,7 +329,7 @@ actually be the returned value of a function! So you can just call a function as
 values (so don't store the tip values in separate variables first, but right in the new
 array) 😉
 GOOD LUCK 😀
-*/
+
 
 const tip = function calcTip(bill){
     if(bill >=50 && bill<=300){
@@ -345,3 +345,61 @@ const bills = [125,555,44];
 const tips = [tip(bills[0]), tip(bills[1]), tip(bills[2])];
 
 const total = [bills[0]+tips[0], bills[1]+tips[1], bills[2]+tips[2]];
+*/
+
+
+// Introduction to objects
+// We use objects to essentially group together different variables that really belong together, we store them in key: value pair
+
+// The simplest way of creating an object is by using curly braces and it's sometimes refers to as "Object Literal Syntax"
+
+// Unlike arrays , the order of items in object does not matter when we want to retrieve items. This property make arrays to be much useful in structure data while object to be usefull in unstructured data
+
+// The contents inside object are called properties, example firstName, lastName, age etc these are called properties
+
+const danniel = {
+    firstName: "Danniel",
+    lastName: "Purcell",
+    age: 2026 - 2003,
+    job: "Software developer",
+    friends: ["Nevin", "Carrine", "John"]
+};
+
+// There are two ways of retrieve or access the properties from an objects which are "Dot Vs Bracket Notation"
+
+// The first way of access the properties from an object is by using Dot Notation which involve the use of "." and the property name to get the value of that property
+
+console.log(danniel.job);
+
+// The second way of access the properties from an object is Bracket Notation which involve the use of "[]" and the property name to get the value of that property.
+
+console.log(danniel["job"]);
+
+// But also we can put any expression inside [] as shown below
+const nameKey = "Name";
+
+console.log(danniel["first" + nameKey]);
+console.log(danniel["last" + nameKey]);
+
+const interestedIn = prompt("What do you want to know about Danniel? Choose between firstName, lastName, age, job and friends")
+
+// console.log(danniel[interestedIn]);
+
+// When we try to access the property that does not exist in a given object the result will be undefined...
+// Since the "undefined" is falsy value value we can limit the user to choose only the available properties 
+
+if(danniel[interestedIn]){
+    console.log(danniel[interestedIn]);
+}else{
+    console.log("The property does not exist! Please choose between firstName, lastName, age, job and friends");
+}
+
+// Adding properties to an object can also be done by using either dot notation or bracket notation as shown below
+
+danniel.location = "Tanzania";
+danniel["instagram"] = "@iampurcell";
+console.log(danniel);
+
+// Challenge: convert the following sentence in dynamic way "Jonas has 3 friends, and his best friend is called Nevin".
+
+console.log(`${danniel.firstName} has ${danniel.friends.length} friends, and his best friend is called ${danniel.friends[0]}`);

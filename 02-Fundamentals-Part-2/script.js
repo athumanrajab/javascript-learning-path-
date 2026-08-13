@@ -523,7 +523,7 @@ if (markBMI > johnBMI) {
 
 
 
-
+/*
 // Iteration_The for Loop
 const purcellArray = [
     "Danniel",
@@ -574,6 +574,32 @@ for(let i = 0; i < purcellArray.length; i++){
     }
     console.log(purcellArray[i], typeof purcellArray[i]);
 }
+*/
+
+
+
+// Lopping backwards
+const purcellArray = [
+    "Danniel",
+    "Purcell",
+    2026 - 2003,
+    "Teacher",
+    ["Nevin", "Carrine", "Emmanuel"]
+];
+
+for(let i = purcellArray.length - 1; i >= 0; i--){
+    console.log(i, purcellArray[i]);
+}
+
+// Creating loops inside another loops
+for(let exercise = 1; exercise <= 3; exercise++){
+    console.log(`--- Starting Exercise ${exercise} ---`);
+    for(let rep = 1; rep <= 5; rep++){
+        console.log(`Lifting weight repetition ${rep}`);
+    }
+}
+
+
 
 
 

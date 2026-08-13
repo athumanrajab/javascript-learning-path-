@@ -577,7 +577,7 @@ for(let i = 0; i < purcellArray.length; i++){
 */
 
 
-
+/*
 // Lopping backwards
 const purcellArray = [
     "Danniel",
@@ -596,6 +596,25 @@ for(let exercise = 1; exercise <= 3; exercise++){
     console.log(`--- Starting Exercise ${exercise} ---`);
     for(let rep = 1; rep <= 5; rep++){
         console.log(`Lifting weight repetition ${rep}`);
+    }
+}
+*/
+
+
+// The while Loop: The while loop does not depend on counter variable, so it become useful when you need a loop without a counter
+let rep = 1;
+while(rep <= 10){
+    console.log(`WHILE: Lifting weights repetition ${rep}`);
+    rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while(dice !== 6){
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if(dice === 6){
+        console.log("The loop is about to end...")
     }
 }
 

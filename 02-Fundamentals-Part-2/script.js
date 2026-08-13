@@ -486,7 +486,6 @@ respective BMI. Example: "John's BMI (28.3) is higher than Mark's (23.9)!"
 Test data: Marks weights 78 kg and is 1.69 m tall. John weights 92 kg and is 1.95 m
 tall.
 GOOD LUCK 😀
-*/
 
  const mark = {
     fullName: "Mark Miller",
@@ -520,3 +519,62 @@ if (markBMI > johnBMI) {
 }else{
     console.log("Both have equal BMI!")
 }
+*/
+
+
+
+
+// Iteration_The for Loop
+const purcellArray = [
+    "Danniel",
+    "Purcell",
+    2026 - 2003,
+    "Teacher",
+    ["Nevin", "Carrine", "Emmanuel"]
+];
+
+// Creating new array that will be used to store type of each variable
+const types = [];
+
+// for loop keeps running while the condition is true
+for(let i = 0; i < purcellArray.length; i++){
+    console.log(purcellArray[i], typeof purcellArray[i]);
+
+    // Filling types array
+    types.push(typeof purcellArray[i]);
+}
+
+console.log(types);
+
+const birthYears = [1991, 2003, 1998, 2000];
+const ages = [];
+
+for(let i = 0; i < birthYears.length; i++){
+    ages.push(2026 - birthYears[i]);
+}
+
+console.log(ages)
+
+// continue Vs break
+// continue is to exit(skip) the current iteration of the loop and continue with to the next one
+// break is to completely terminate the whole loop
+
+console.log("--- PRINTING ONLY STRINGS ---");
+for(let i = 0; i < purcellArray.length; i++){
+    if(typeof purcellArray[i] !== "string"){
+        continue;
+    }
+    console.log(purcellArray[i], typeof purcellArray[i]);
+}
+
+console.log("---  BREAK WITH NUMBER ---");
+for(let i = 0; i < purcellArray.length; i++){
+    if(typeof purcellArray[i] === "number"){
+        break;
+    }
+    console.log(purcellArray[i], typeof purcellArray[i]);
+}
+
+
+
+

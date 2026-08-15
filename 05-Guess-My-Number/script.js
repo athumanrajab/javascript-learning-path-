@@ -8,7 +8,7 @@ let highscore = 0;
 
 const displayMessage = function(message){
     document.querySelector(".message").textContent = message;
-}
+} 
 
 // TODO: Implementing "check" button
 document.querySelector(".check").addEventListener("click", function(){

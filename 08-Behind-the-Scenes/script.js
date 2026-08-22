@@ -30,6 +30,7 @@ const firstName = "Purcell";
 calcAge(1991);
 */
 
+/*
 // Hoisting: Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution. This means that you can use functions and variables before they are declared in the code. However, only the declarations are hoisted, not the initializations.
 console.log(myName); // Output: undefined
 // console.log(job); // Output: ReferenceError: Cannot access 'job' before initialization
@@ -75,3 +76,33 @@ const z = 3;
 console.log(x === window.x); // Output: true
 console.log(y === window.y); // Output: false
 console.log(z === window.z); // Output: false
+*/
+
+// this keyword: The this keyword in JavaScript refers to the object that is executing the current function. It can have different values depending on how the function is called, and it can be used to access properties and methods of the object that is executing the function. The value of this is determined at runtime, and it can be affected by factors such as the context in which the function is called, whether strict mode is enabled, and whether the function is called as a method of an object or as a standalone function.
+console.log(this); // Output: Window { ... } (in browsers) or global object (in Node.js)
+
+// Regular function call: In a regular function call, the value of this is determined by how the function is called. If the function is called as a standalone function, this will refer to the global object (in browsers) or undefined (in strict mode). If the function is called as a method of an object, this will refer to the object that the method is called on.
+const calcAge = function (birthYear) {
+  console.log(2026 - birthYear);
+  console.log(this); // Output: undefined (in strict mode) or Window { ... } (in browsers)
+};
+calcAge(1991);
+
+// Arrow function call: In an arrow function call, the value of this is determined by the surrounding lexical scope. This means that arrow functions do not have their own this value, but instead inherit it from the parent scope. If the arrow function is defined inside a regular function, this will refer to the same value as the regular function's this. If the arrow function is defined in the global scope, this will refer to the global window object (in browsers) or undefined (in strict mode).
+const calcAgeArrow = (birthYear) => {
+  console.log(2026 - birthYear);
+  console.log(this); // Output: Window { ... } (in browsers) or global object (in Node.js)
+};
+calcAgeArrow(1991);
+
+// Method call: In a method call, the value of this is determined by the object that the method is called on. If the method is called on an object, this will refer to that object. If the method is called on a different object, this will refer to that object instead.
+const purcell = {
+  year: 1991,
+  calcAge: function () {
+    console.log(this); // Output: purcell object
+    console.log(2026 - this.year);
+  },
+};
+purcell.calcAge();
+
+// NOTE: The this keyword behaves differently in arrow functions compared to regular functions. In regular functions, this refers to the object that the function is called on, while in arrow functions, this refers to the surrounding lexical scope. This can lead to unexpected behavior when using arrow functions as methods of objects, as they do not have their own this value and will instead inherit it from the parent scope.

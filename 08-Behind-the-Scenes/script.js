@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 
 function calcAge(birthYear) {
   const age = 2026 - birthYear;
@@ -17,7 +17,7 @@ function calcAge(birthYear) {
       }
     }
     console.log(millenial);
-    console.log(add(2, 4)); // While the 'strict mode' is enabled, this will throw reference error, becaue the add() function has a block-scope , hence can be accessed with that if-block. But when the 'strict mode' is disabled , this code will be executed because it is no longer a block-scoped , it's a function-scoped hence it's available within the printAge() and not otherwise
+    // console.log(add(2, 4)); // While the 'strict mode' is enabled, this will throw reference error, becaue the add() function has a block-scope , hence can be accessed with that if-block. But when the 'strict mode' is disabled , this code will be executed because it is no longer a block-scoped , it's a function-scoped hence it's available within the printAge() and not otherwise
     // console.log(str); This will throw reference error
   }
   printAge();

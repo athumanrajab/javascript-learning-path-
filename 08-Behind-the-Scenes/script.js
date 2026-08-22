@@ -1,5 +1,6 @@
 "use strict";
 
+/*
 function calcAge(birthYear) {
   const age = 2026 - birthYear;
 
@@ -27,3 +28,50 @@ function calcAge(birthYear) {
 
 const firstName = "Purcell";
 calcAge(1991);
+*/
+
+// Hoisting: Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution. This means that you can use functions and variables before they are declared in the code. However, only the declarations are hoisted, not the initializations.
+console.log(myName); // Output: undefined
+// console.log(job); // Output: ReferenceError: Cannot access 'job' before initialization
+// console.log(year); // Output: ReferenceError: Cannot access 'year' before initialization
+
+var myName = "Purcell"; //NOTE: The variable declared with var keyword is hoisted to the top of the scope and initialized with undefined, hence it can be accessed before it's declaration but will return undefined
+let job = "software engineer"; //NOTE: The variable declared with let keyword is hoisted to the top of the scope but not initialized, hence it can't be accessed before it's declaration and will throw reference error
+const year = 1991; //NOTE: The variable declared with const keyword is hoisted to the top of the scope but not initialized, hence it can't be accessed before it's declaration and will throw reference error
+
+// Function hoisting: Function declarations are hoisted to the top of their scope, which means you can call them before they are defined in the code. However, function expressions and arrow functions are not hoisted in the same way, so you cannot call them before they are defined.
+console.log(addDecl(2, 3)); // Output: 5
+// console.log(addExpr(2, 3)); // Output: ReferenceError: Cannot access 'addExpr' before initialization
+// console.log(addArrow(2, 3)); // Output: ReferenceError: Cannot access 'addArrow' before initialization
+
+function addDecl(a, b) {
+  return a + b;
+}
+
+// The hoisting also depend with either the function is declared with var, let or const keyword. The function declared with var keyword is hoisted to the top of the scope and initialized with undefined, hence it can be accessed before it's declaration but will return undefined. The function declared with let or const keyword is hoisted to the top of the scope but not initialized, hence it can't be accessed before it's declaration and will throw reference error.
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+const addArrow = (a, b) => a + b;
+
+// Problems with hoisting: Hoisting can lead to unexpected behavior and bugs in your code, especially when using variables and functions before they are declared. It can make the code harder to read and understand, as it may not be clear where a variable or function is coming from. To avoid these issues, it's generally recommended to declare variables and functions at the top of their scope, and to use let and const instead of var for variable declarations.
+
+var numProducts = 10;
+if (!numProducts) deleteShoppingCart();
+
+function deleteShoppingCart() {
+  console.log("All products deleted!");
+}
+
+//NOTE: The above code will log "All products deleted!" to the console, even though numProducts is defined and has a value of 10. This is because the variable numProducts is hoisted to the top of the scope and initialized with undefined, which is a falsy value. Therefore, the condition in the if statement evaluates to true, and the deleteShoppingCart function is called. This can lead to unexpected behavior and bugs in your code, so it's important to be aware of hoisting and how it works in JavaScript.
+
+//NOTE: Also, the variable declared with var keyword will create a proprty on the global window object(in browsers) or global object (in Node.js). Hence, the variable declared with var keyword can be accessed as a property of the window object in browsers or global object in Node.js. However, the variable declared with let or const keyword will not create a property on the global window object (in browsers) or global object (in Node.js). Hence, the variable declared with let or const keyword can't be accessed as a property of the window object in browsers or global object in Node.js.
+//NOTE: The advantage of this is that it can help to avoid naming conflicts and accidental overwriting of global variables, which can lead to bugs and unexpected behavior in your code. By using let and const, you can create block-scoped variables that are only accessible within the block they are defined in, which can help to keep your code organized and prevent unintended side effects.
+var x = 1;
+let y = 2;
+const z = 3;
+
+console.log(x === window.x); // Output: true
+console.log(y === window.y); // Output: false
+console.log(z === window.z); // Output: false

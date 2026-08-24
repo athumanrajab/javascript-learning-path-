@@ -109,6 +109,7 @@ purcell.calcAge();
 // NOTE: The this keyword behaves differently in arrow functions compared to regular functions. In regular functions, this refers to the object that the function is called on, while in arrow functions, this refers to the surrounding lexical scope. This can lead to unexpected behavior when using arrow functions as methods of objects, as they do not have their own this value and will instead inherit it from the parent scope.
 */
 
+/*
 // Reglar function VS Arrow function: The main difference between regular functions and arrow functions is how they handle the this keyword. Regular functions have their own this value, which is determined by how the function is called. Arrow functions, on the other hand, do not have their own this value and instead inherit it from the surrounding lexical scope. This can lead to unexpected behavior when using arrow functions as methods of objects, as they will not have access to the object's properties and methods through this.
 const purcell = {
   firstName: "Purcell",
@@ -160,3 +161,20 @@ const jonas = {
 };
 jonas.greet();
 jonas.calcAge();
+*/
+
+// arguments keyword
+// Regular functions have argument object, which is an array-like object that contains all the arguments passed to the function.
+const addExpr = function (a, b) {
+  console.log(arguments); // Output: [Arguments] { '0': 2, '1': 5 } (in browsers) or [Arguments] { '0': 2, '1': 5 } (in Node.js)
+  return a + b;
+};
+addExpr(2, 5);
+addExpr(2, 5, 8, 12);
+
+// Arrow functions do not have their own arguments object, but they can access the arguments of the enclosing function.
+var addArrow = (a, b) => {
+  console.log(arguments); // Output: ReferenceError: arguments is not defined (in browsers) or ReferenceError: arguments is not defined (in Node.js)
+  return a + b;
+};
+addArrow(2, 5, 8);

@@ -163,6 +163,7 @@ jonas.greet();
 jonas.calcAge();
 */
 
+/*
 // arguments keyword
 // Regular functions have argument object, which is an array-like object that contains all the arguments passed to the function.
 const addExpr = function (a, b) {
@@ -178,3 +179,36 @@ var addArrow = (a, b) => {
   return a + b;
 };
 addArrow(2, 5, 8);
+*/
+
+// Copying objects
+const jessica = {
+  firstName: "Jessica",
+  lastName: "William",
+  age: 27,
+  family: ["Alice", "Bob"],
+};
+
+// Shallow copy: A shallow copy of an object is a new object that has the same properties as the original object, but the properties themselves are still references to the same objects in memory. This means that if you change a property of the original object, it will also change in the shallow copy, and vice versa. In JavaScript, you can create a shallow copy of an object using Object.assign() or the spread operator (...).
+const marriedJessica = Object.assign({}, jessica); //NOTE: This will create a shallow copy of the jessica object, meaning that the properties of the jessica object will be copied to the new marriedJessica object, but if any of those properties are objects themselves, they will still reference the same object in memory. Hence, if we change any property of the nested object in either jessica or marriedJessica, it will affect both objects.
+marriedJessica.lastName = "Davis";
+console.log("Before marriage:", jessica);
+console.log("After marriage:", marriedJessica);
+
+//NOTE: The above code will log the following to the console:
+// Before marriage: { firstName: 'Jessica', lastName: 'William', age: 27 }
+// After marriage: { firstName: 'Jessica', lastName: 'Davis', age: 27 }
+
+//NOTE: The Object.assign() method is used to copy the properties of one or more source objects to a target object. In this case, we are creating a new empty object {} as the target object and copying the properties of the jessica object to it. This creates a new object that has the same properties as the jessica object, but is a separate object in memory.
+
+marriedJessica.family.push("Mary");
+marriedJessica.family.push("John");
+
+console.log("Before marriage:", jessica);
+console.log("After marriage:", marriedJessica);
+
+//NOTE: The above code will log the following to the console:
+// Before marriage: { firstName: 'Jessica', lastName: 'William', age: 27, family: [ 'Alice', 'Bob', 'Mary', 'John' ] }
+// After marriage: { firstName: 'Jessica', lastName: 'Davis', age: 27, family: [ 'Alice', 'Bob', 'Mary', 'John' ] }
+
+//NOTE: This is because the family property of both jessica and marriedJessica objects is still referencing the same array in memory. Hence, when we push new elements to the family array in either object, it affects both objects. This is an example of a shallow copy, where the properties of the object are copied, but the nested objects are still references to the same objects in memory.

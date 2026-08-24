@@ -78,6 +78,7 @@ console.log(y === window.y); // Output: false
 console.log(z === window.z); // Output: false
 */
 
+/*
 // this keyword: The this keyword in JavaScript refers to the object that is executing the current function. It can have different values depending on how the function is called, and it can be used to access properties and methods of the object that is executing the function. The value of this is determined at runtime, and it can be affected by factors such as the context in which the function is called, whether strict mode is enabled, and whether the function is called as a method of an object or as a standalone function.
 console.log(this); // Output: Window { ... } (in browsers) or global object (in Node.js)
 
@@ -106,3 +107,56 @@ const purcell = {
 purcell.calcAge();
 
 // NOTE: The this keyword behaves differently in arrow functions compared to regular functions. In regular functions, this refers to the object that the function is called on, while in arrow functions, this refers to the surrounding lexical scope. This can lead to unexpected behavior when using arrow functions as methods of objects, as they do not have their own this value and will instead inherit it from the parent scope.
+*/
+
+// Reglar function VS Arrow function: The main difference between regular functions and arrow functions is how they handle the this keyword. Regular functions have their own this value, which is determined by how the function is called. Arrow functions, on the other hand, do not have their own this value and instead inherit it from the surrounding lexical scope. This can lead to unexpected behavior when using arrow functions as methods of objects, as they will not have access to the object's properties and methods through this.
+const purcell = {
+  firstName: "Purcell",
+  year: 2003,
+  greet: () => console.log(`Hey, ${this.firstName}`),
+};
+purcell.greet(); // Output: Hey, undefined (in browsers) or Hey, undefined (in Node.js), this is undefined because the arrow function does not have its own this value and inherits it from the surrounding lexical scope, which is the global scope in this case. Since there is no firstName property in the global scope, it returns undefined.
+// purcell is an object and it's not a block scope, hence the this keyword in the arrow function will not refer to the purcell object, but instead it will refer to the surrounding lexical scope, which is the global scope in this case. Since there is no firstName property in the global scope, it returns undefined.
+
+// NOTE: You should never use an arrow function as a method of an object, because it will not have access to the object's properties and methods through this. Instead, you should use a regular function expression or a method shorthand syntax to define methods on objects, so that they have their own this value and can access the object's properties and methods correctly.
+
+const danniel = {
+  firstName: "Danniel",
+  year: 2004,
+  greet: function () {
+    console.log(`Hey, ${this.firstName}`);
+  },
+};
+danniel.greet(); // Output: Hey, Danniel, this is because the greet method is defined as a regular function expression, which has its own this value that refers to the danniel object. Therefore, it can access the firstName property of the danniel object correctly.
+
+// var firstName = 'Matilda';
+
+const jonas = {
+  firstName: "Jonas",
+  year: 1991,
+  calcAge: function () {
+    // console.log(this);
+    console.log(2037 - this.year);
+
+    // Solution 1
+    // const self = this; // self or that
+    // const isMillenial = function () {
+    //   console.log(self);
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+
+    // Solution 2
+    const isMillenial = () => {
+      console.log(this);
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillenial();
+  },
+
+  greet: () => {
+    console.log(this);
+    console.log(`Hey ${this.firstName}`);
+  },
+};
+jonas.greet();
+jonas.calcAge();

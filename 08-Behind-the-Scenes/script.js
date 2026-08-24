@@ -181,6 +181,7 @@ var addArrow = (a, b) => {
 addArrow(2, 5, 8);
 */
 
+/*
 // Copying objects
 const jessica = {
   firstName: "Jessica",
@@ -212,3 +213,4 @@ console.log("After marriage:", marriedJessica);
 // After marriage: { firstName: 'Jessica', lastName: 'Davis', age: 27, family: [ 'Alice', 'Bob', 'Mary', 'John' ] }
 
 //NOTE: This is because the family property of both jessica and marriedJessica objects is still referencing the same array in memory. Hence, when we push new elements to the family array in either object, it affects both objects. This is an example of a shallow copy, where the properties of the object are copied, but the nested objects are still references to the same objects in memory.
+*/

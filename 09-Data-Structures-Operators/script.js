@@ -43,6 +43,10 @@ const restaurant = {
       `Here is your delicious pasta made with ${ingridient1}, ${ingridient2}, ${ingridient3}`,
     );
   },
+  orderPizza: function (mainIngridient, ...otherIngridient) {
+    console.log(`Main ingridient: ${mainIngridient}`);
+    console.log(`Other ingridient: ${otherIngridient}`);
+  },
 
   openingHours: {
     thu: {
@@ -208,6 +212,7 @@ restaurant.orderDeliver({
 });
 */
 
+/*
 // The Spread Operator (...)
 // spread operator(...) is used to unpack the elements of an array or object, and it can be used in places where we would otherwise write values separated by commas. The spread operator is used when we want to create a new array or object based on an existing one, or when we want to pass multiple values as arguments to a function.
 
@@ -268,3 +273,46 @@ const restaurantCopy = { ...restaurant };
 restaurantCopy.name = "Mattie B\'s";
 console.log(`Old restaurant name: ${restaurant.name}`);
 console.log(`New restaurant name: ${restaurantCopy.name}`);
+*/
+
+// Rest Pattern and parameters
+
+// Consider the following code for SPREAD
+const arr = [1, 2, 3, 4];
+const newArr = [...arr, 5, 7]; // NOTE: This is the spread operator because it appears on the rightside of the assignment(=) operator
+console.log(newArr);
+
+// Again consider the code below for REST operator
+// The rest operator collects the elements that are unused in the destructuring assignment
+const [a, b, ...others] = [1, 2, 3, 4, 5]; // NOTE: This is the rest operator because it appears on the leftside of the assignment(=) operator, It's called rest because it'll take the rest(remaining elements) of the array and then put them into a new array and in this case we call this array "others"
+console.log(a, b, others);
+
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menu);
+// We can use then destructure the menu array, say that we only need the first food and the third food, and the rest of the food through rest operator
+const [firstPizza, , thirdRisotto, ...otherFood] = menu;
+console.log(firstPizza, thirdRisotto, otherFood);
+
+// The rest operator also applied to object, but here the unused items will be collected into a new object
+const { sat: weekEnd, ...weekDays } = restaurant.openingHours; //Here's the thu and friday objects are unused hence the rest operator will collect them and put them in new weekDays object
+console.log(weekDays);
+
+// Consider the following functions that takes many arguments and add them together to get the sum. This is possible since we can use the rest operator that will collect every argument passed to that function and collect it in an array , then we can use the for loop to loop and add element into that array
+const add = function (...numbers) {
+  console.log(`Array is: ${numbers}`);
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(`Sum is : ${sum}`);
+};
+
+add(1, 3);
+add(45, 83, 35, 894);
+add(748, 367, 7383, 883, 228);
+
+// We can use spread operator
+const x = [23, 45, 56];
+add(...x); //Here's the array elements are unpacked and get spreaded in the add() as individual values, but when reaching the add function, the values will now be collected as arrays of numbers and pass as an argument on the add function
+
+restaurant.orderPizza("Mushroom", "Onion", "Olive", "Spinach");

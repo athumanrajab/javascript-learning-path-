@@ -38,6 +38,11 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address}, at ${time}`,
     );
   },
+  orderPasta: function (ingridient1, ingridient2, ingridient3) {
+    console.log(
+      `Here is your delicious pasta made with ${ingridient1}, ${ingridient2}, ${ingridient3}`,
+    );
+  },
 
   openingHours: {
     thu: {
@@ -105,6 +110,7 @@ const [p = 1, q = 1, r = 1] = [8, 9]; //This will help to avoid getting undefine
 console.log(p, q, r);
 */
 
+/*
 // Destructuring Objects, can done by using {} operator , and provide the variable names that exactly match the property names that we want to retrieve from the object
 // NOTE: The order of the variable names does not matter when destructuring objects, but it does matter when destructuring arrays
 // const { name, openingHours, categories } = restaurant;
@@ -176,7 +182,7 @@ const {
 console.log(friOpenHour, friCloseHour);
 
 // One of the practical application of destructuring object is that, we can create a method inside an object and passing the destructuring operator with it's property as arguments , this is because when we normally call a function someone might not know the correct order required to pass the arguments.
-/*
+
 // So within the object will create a method like this
 // orderDeliver: function ({ starterIndex, mainIndex, address, time }) {
 //     console.log(
@@ -191,7 +197,7 @@ console.log(friOpenHour, friCloseHour);
 //       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address}, at ${time}`,
 //     );
 //   }
-*/
+
 
 // Calling the function by specify the argument values
 restaurant.orderDeliver({
@@ -200,3 +206,65 @@ restaurant.orderDeliver({
   address: "Ubungo Msewe",
   time: "22:30",
 });
+*/
+
+// The Spread Operator (...)
+// spread operator(...) is used to unpack the elements of an array or object, and it can be used in places where we would otherwise write values separated by commas. The spread operator is used when we want to create a new array or object based on an existing one, or when we want to pass multiple values as arguments to a function.
+
+// Suppose we want to create a new array that has elements of the a certain previous created array (arr)
+// Case 1: We can do it manually as follows
+const arr = [7, 8, 9];
+const badNewArray = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArray);
+
+// Case 2: By using spread operator
+const goodNewArray = [1, 2, ...arr];
+console.log(goodNewArray);
+
+// Whenever we need the values of arrays individually we can use the spread operator
+console.log(...goodNewArray);
+
+// We can also expand the mainMenu array in restaurant object
+const newMainMenu = [...restaurant.mainMenu, "Gnocci"]; //Here we are creating a completely new array
+console.log(newMainMenu);
+
+// We can also create copy of array by using the spread operator
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+// Spred operator can also be used to join 2 arrays
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+// Spread operator works for all iterables which includes, arrays, strings, maps, stes, but NOT objects
+const str = "Purcell";
+const letters = [...str, " ", "D."];
+console.log(letters);
+
+// We  can use the spread operator to pass as argument to the function, now let's get the ingridient values from the user and store them in an array
+// const ingridients = [
+//   prompt(`Please enter the first ingridient: `),
+//   prompt(`Please enter the second ingridient: `),
+//   prompt(`Please enter the third ingridient: `),
+// ];
+
+// We can pass the ingridients array function to the restaurant.orderPasta() as follow
+// Case 1: we can manually pass the ingridients
+// restaurant.orderPasta(ingridients[0], ingridients[1], ingridients[2]);
+
+// Case 2: We can use the spread operator to pass the array elements as arguments in restaurant.orderPasta()
+// restaurant.orderPasta(...ingridients);
+
+// But ES2018, make the spread operator to also be used in object, such that we can create a new object with the same or more properties , the order does not matter
+const newRestaurant = {
+  ...restaurant,
+  founder: "Danniel Purcell",
+  foundIn: 2000,
+};
+console.log(newRestaurant);
+
+// Spread operator can also be used to make a shallow copy object as follow
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = "Mattie B\'s";
+console.log(`Old restaurant name: ${restaurant.name}`);
+console.log(`New restaurant name: ${restaurantCopy.name}`);

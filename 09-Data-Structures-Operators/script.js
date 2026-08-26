@@ -275,6 +275,7 @@ console.log(`Old restaurant name: ${restaurant.name}`);
 console.log(`New restaurant name: ${restaurantCopy.name}`);
 */
 
+/*
 // Rest Pattern and parameters
 
 // Consider the following code for SPREAD
@@ -316,3 +317,45 @@ const x = [23, 45, 56];
 add(...x); //Here's the array elements are unpacked and get spreaded in the add() as individual values, but when reaching the add function, the values will now be collected as arrays of numbers and pass as an argument on the add function
 
 restaurant.orderPizza("Mushroom", "Onion", "Olive", "Spinach");
+ */
+
+// Short Circuiting (&& , ||)
+// OR operator(||) can be used to return the first truth value that exit on the sequence, consider the example below
+console.log(3 || "Jonas"); //Here both 3 and jonas are truth values but 3 is the first one to appear hence it should be returned
+console.log("" || "Jonas"); //Here, jonas the empty string "" is the falsy value hence jonas will be returned since it is the truthy value
+console.log(true || 0); //true will  be returned since 0 is the falsy value
+console.log(undefined || null); //null will be return since the || will return the last falsy value if all of the values are falsy in the sequence
+
+// One of the usefull application of short circuit is that, it can be used instead of ternary operator to check is the certain property or value exist or not
+// Consider from the code above we want to check if restaurant.numGuests exist .. if it's not exist we assign a certain default value to it , actually it does not exist by using ternary operator
+
+// const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guest1);
+
+// But we can use the || to check if restaurant.numGuests, such that if that numGuests property exist it will assign it's value to guest 2, if it's not exist means the value of numGuests will be udefined, and since the undefined is the falsy value hence the || will ignore it look for a truth value hence 12 will be assigned to guest2
+// const guest2 = restaurant.numGuests || 12;
+// console.log(guest2);
+
+// // AND operator(&&), work opposite of the || operator such that it will return the first falsy value occur on the sequence, and incase the sequence contain all truth values then the last truth value will be return
+// console.log(0 && "Jonas"); //Here 0 will be returned since it's the first falsy value
+// console.log(7 && "Jonas"); //Here Jonas will be returned because the sequence contain all truth values, hence the last truth value will be returned
+// console.log("Hello" && 23 && null && "Jonas"); //Here null will be return since it's the falsy value
+
+// // && can be used instead of if, suppose we want to check if a certain property exist
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza("Mushroom", "Onion");
+// }
+
+// // But we use && to the above task
+// restaurant.orderPizza && restaurant.orderPizza("Chicken", "tomatoes");
+
+// Consider the case below were the numGuests is initially set to 0
+restaurant.numGuest = 0;
+const guest3 = restaurant.numGuest || 10; //This is where the || fail because 0 is the real number and the result here should be 0 because the restaurant.numGuest already exist and has been set to 0, but since 0 is the falsy value so here will be ignored hence 10 will be returned
+console.log(guest3);
+
+// The above problem can be solved by using Nullish coalescing operator ??
+// ?? operator work for null and undefined value except 0 and ""
+
+const guest4 = restaurant.numGuest ?? 10; //This is where the || fail because 0 is the real number and the result here should be 0 because the restaurant.numGuest already exist and has been set to 0, but since 0 is the falsy value so here will be ignored hence 10 will be returned
+console.log(guest4);

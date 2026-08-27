@@ -574,6 +574,8 @@ const hours = {
 };
 */
 
+/*
+
 // Optional Chaining ?. operator
 // This operator is used to check if the certain property (optional properties) exist, and if it does not exist , it will immediately return undefined
 // Suppose we don't know if the openingHours.mon , openingHours.mon.open object which is inside restaurant object exist, the first way we could use the if statement as usual, second way we can use the optional chain operator
@@ -623,3 +625,28 @@ console.log(restaurant.orderBurger?.(0, 1) ?? "Method does not exist");
 // Suppose the array is empty
 const users = [];
 console.log(users[0]?.name ?? "The array is empty");
+*/
+
+// Looping objects: Object keys, values and entries
+// Objects are not directly iterable for for-of, but  `Object.keys()`, `Object.values()`, and `Object.entries()` convert the object's contents into arrays that can then be easily iterated
+
+// Property names(keys)
+// const properties = Object.keys(restaurant.openingHours);
+// let openStr = `We are open on ${properties.length} days: `;
+
+// for (const day of properties) {
+//   openStr += `${day}, `;
+// }
+// console.log(openStr);
+
+// Property values
+// const values = Object.values(restaurant.openingHours);
+// console.log(values);
+
+// Entire object , by using Object.entries(), it will return key/value pair
+const entries = Object.entries(restaurant.openingHours);
+console.log(entries);
+
+for (const [day, { open: openHour, close: closeHour }] of entries) {
+  console.log(`On ${day} we are open at ${openHour} and close at ${closeHour}`);
+}

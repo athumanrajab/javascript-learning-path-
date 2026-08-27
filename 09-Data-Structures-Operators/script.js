@@ -518,6 +518,7 @@ team1 < team2 && console.log("team1 is more likely to win");
 team1 > team2 && console.log("team2 is more likely to win");
 */
 
+/*
 // for-of Loop, this is just another way of looping an array
 // This for-of loop allow the use of continue and break keyword
 const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
@@ -571,3 +572,54 @@ const hours = {
     close: 24,
   },
 };
+*/
+
+// Optional Chaining ?. operator
+// This operator is used to check if the certain property (optional properties) exist, and if it does not exist , it will immediately return undefined
+// Suppose we don't know if the openingHours.mon , openingHours.mon.open object which is inside restaurant object exist, the first way we could use the if statement as usual, second way we can use the optional chain operator
+
+// without an optional chain
+// console.log(restaurant.openingHours.mon); //Here we'll get undefined because the "mon" property does exit
+// console.log(restaurant.openingHours.mon.open); //Here we'll get TypeError: Cannot read properties of undefined (reading 'open')
+
+// With optional chain
+// console.log(restaurant.openingHours.mon?.open); //Here the ? operator will check if the "mon" property exist within an openingHour, will immediately return undefined hence help to avoid errors
+// console.log(restaurant.openingHours?.mon?.open); //Here the ? will first check if the openingHours exist, if it exist it will then go to check if "mon" property exist and proceed as usually. But if the openingHours property it will immediately return undefined
+
+// Practical application of optional chain
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+// for (const day of days) {
+//   const openTime = restaurant.openingHours[day]?.open; //we dont write const open = restaurant.openingHours.day?.open; because "day" is not an actual property in the given object, instead we write restaurant.openingHours[day].open which will be interpreted as restaurant.openingHours.day.open by the JS engine
+//   console.log(`On ${day}, we open at ${openTime}`);
+// }
+
+// Since the code above will return undefined for all days that they dont exist as property in openingHours object , hence we want to use the logical assignment operator to assign the default value instead of undefine
+for (const day of days) {
+  const openTime = restaurant.openingHours[day]?.open ?? "8";
+  console.log(`On ${day}, we open at ${openTime}`);
+}
+
+// The optional chain operator also applied to a method to check if that method exist
+console.log(restaurant.order?.(0, 1)); //Here since the method exist then we pass the argument into that method
+
+// But also we can still use ?? operator to specify the default value if the method does not exist
+console.log(restaurant.orderBurger?.(0, 1) ?? "Method does not exist");
+
+// The ? can also be used to check if the array is empty
+// const users = [{ name: "Danniel", email: "danniel@gmail.com" }];
+
+// Inorder to check if the array is empty we can use 1. if..else statement or 2. The optional chain operator
+// By using if-else statement
+// if (users.length > 0) {
+//   console.log(users[0].name);
+// } else {
+//   console.log("The array is empty");
+// }
+
+// By using the ? operator
+// console.log(users[0]?.name ?? "The array is empty");
+
+// Suppose the array is empty
+const users = [];
+console.log(users[0]?.name ?? "The array is empty");

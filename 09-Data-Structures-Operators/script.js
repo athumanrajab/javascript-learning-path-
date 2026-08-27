@@ -374,6 +374,7 @@ const restaurant2 = {
   owner: "Danniel Purcell",
 };
 
+/*
 // NOTE:  OR || operator (Short Circuit)
 // Let use || to set the default value of properties if they dont exit
 // restaurant1.numGuests = restaurant1.numGuests || 10;
@@ -400,3 +401,118 @@ restaurant1.owner &&= "<Anonymous>"; //Here the owner property does not exist su
 restaurant2.owner &&= "<Anonymous>"; //Here the owner proprty exist hence it's truth value and hence the last value which is <Anonymous> will be returned
 console.log(restaurant1);
 console.log(restaurant2);
+*/
+
+/* 
+Coding Challenge #1
+We're building a football betting app (soccer for my American friends 😅)!
+Suppose we get data from a web service about a certain game ('game' variable on
+next page). In this challenge we're gonna work with that data.
+Your tasks:
+1. Create one player array for each team (variables 'players1' and
+'players2')
+2. The first player in any player array is the goalkeeper and the others are field
+players. For Bayern Munich (team 1) create one variable ('gk') with the
+goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10
+field players
+3. Create an array 'allPlayers' containing all players of both teams (22
+players)
+4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a
+new array ('players1Final') containing all the original team1 players plus
+'Thiago', 'Coutinho' and 'Perisic'
+5. Based on the game.odds object, create one variable for each odd (called
+'team1', 'draw' and 'team2')
+6. Write a function ('printGoals') that receives an arbitrary number of player
+names (not an array) and prints each of them to the console, along with the
+number of goals that were scored in total (number of player names passed in)
+7. The team with the lower odd is more likely to win. Print to the console which
+team is more likely to win, without using an if/else statement or the ternary
+operator.
+Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'.
+Then, call the function again with players from game.scored
+GOOD LUCK 😀
+*/
+const game = {
+  team1: "Bayern Munich",
+  team2: "Borrussia Dortmund",
+  players: [
+    [
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
+    ],
+    [
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
+    ],
+  ],
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// TODO: Task 1
+// const player1 = game.players[0];
+// const player2 = game.players[1];
+
+const [player1, player2] = game.players;
+console.log(player1);
+console.log(player2);
+
+// TODO: Task 2
+const [goalKeper, ...fieldPlayers] = player1;
+console.log(`Goal Keeper: ${goalKeper}`);
+console.log(`Other Field Players: ${fieldPlayers}`);
+
+// TODO: Task 3
+const allPlayer = [...player1, ...player2];
+console.log(allPlayer);
+
+// TODO: Task 4
+const players1Final = [...player1, "Thiago", "Coutinho", "Peristic"];
+console.log(players1Final);
+
+// TODO: Task 5
+const { team1, x: draw, team2 } = game.odds;
+console.log(team1);
+console.log(draw);
+console.log(team2);
+
+// TODO: Task 6
+const printGoals = function (...players) {
+  console.log(...players); //here the spread operator is used to unpack the element of the players arrays created by using the rest operator on passing argument
+  console.log(`${players.length} were scored`);
+};
+
+// Case 1:use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'.
+printGoals("Davies", "Muller", "Lewandowski", "Kimmich");
+printGoals("Davies", "Muller");
+
+// Case 2: call the function again with players from game.scored
+printGoals(...game.scored); //Since the game.scored is the array hence we must unpack it's values using spread operator , hence we can be able to pass them to the function
+
+// TODO: Task 7
+team1 < team2 && console.log("team1 is more likely to win");
+team1 > team2 && console.log("team2 is more likely to win");

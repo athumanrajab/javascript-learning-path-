@@ -678,7 +678,7 @@ Hummels: 1,
 Lewandowski: 2
 }
 GOOD LUCK 😀
-*/
+
 const game = {
   team1: "Bayern Munich",
   team2: "Borrussia Dortmund",
@@ -743,3 +743,67 @@ for (const [team, odd] of oddScore) {
   const teamStr = team === "x" ? "draw" : `victory ${game[team]}`;
   console.log(`Odd of ${teamStr}: ${odd}`);
 }
+*/
+
+// SET, this is just collection of unique values, it does not allow the duplicate value
+// Set works with iterables such as arrays, string etc
+const orderSet = new Set([
+  "Pizza",
+  "Pasta",
+  "Pizza",
+  "Rissoto",
+  "Pasta",
+  "Pizza",
+]);
+console.log(orderSet);
+
+console.log(new Set("Purcell"));
+
+console.log(orderSet.size); //This will print the size of the set, such that the total number of elements presents in a set
+
+// has(), this method is used to check if the certain item/element is in a set, it work similar to the includes() in an array
+console.log(orderSet.has("Bread"));
+console.log(orderSet.has("Pizza"));
+
+// add(), this is used to add new item to the set, work similar to push() in array
+orderSet.add("Garlic Bread");
+console.log(orderSet);
+
+// delete(), this is used to delete item in a set
+orderSet.delete("Pasta");
+console.log(orderSet);
+
+// NOTE: There is no way of retrieving values out of the set because , order does not matter when you're storing values in the set
+
+// clear(), this is used to delete all element in the set at once
+// orderSet.clear();
+// console.log(orderSet);
+
+// set is also an iterable, hence we can loop through it
+for (const order of orderSet) {
+  console.log(order);
+}
+
+// In a normal code base, one of the practical application of a set is to remove duplicate values from arrays
+// Suppose we have the following staffs in our restaurant
+const staffs = ["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"];
+
+// Since our array contain multiple repeated staffs of the same position, we now need to use set so as we can know how many unique position does our set have
+const uniqueStaffs = new Set(staffs);
+console.log(uniqueStaffs);
+
+// But also we can convert the set to array by using the spread operator because the spread operator works for all iterables
+const colors = [
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "red",
+  "blue",
+  "green",
+  "red",
+  "yellow",
+];
+const uniqueColors = [...new Set(colors)]; //Here the uniqueColor is an array such that, it's no longer a set , hence when we want to get it's size/length we'll use uniqueColor.length
+console.log(uniqueColors);
+console.log(uniqueColors.length);

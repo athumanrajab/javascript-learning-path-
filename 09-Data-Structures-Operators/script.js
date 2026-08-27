@@ -431,7 +431,7 @@ operator.
 Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'.
 Then, call the function again with players from game.scored
 GOOD LUCK 😀
-*/
+
 const game = {
   team1: "Bayern Munich",
   team2: "Borrussia Dortmund",
@@ -516,3 +516,58 @@ printGoals(...game.scored); //Since the game.scored is the array hence we must u
 // TODO: Task 7
 team1 < team2 && console.log("team1 is more likely to win");
 team1 > team2 && console.log("team2 is more likely to win");
+*/
+
+// for-of Loop, this is just another way of looping an array
+// This for-of loop allow the use of continue and break keyword
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+
+for (const item of menu) {
+  console.log(item);
+}
+
+// Some of the ES6 enhanced object literal are
+// Suppose we have an computer object declared globally
+const computer = {
+  brand: "Apple",
+  model: "MacBook Pro",
+  ramGB: 16,
+  isLaptop: true,
+};
+// Then i need this computer object to also include in workstation object, the ES6 made it easier by simply taking the computer object name and write within the workstation NOT necessary to be in key-value pair
+const workstation = {
+  roomNumber: 302,
+  hasDeskLight: true,
+  monitorBrand: "Dell",
+  computer,
+};
+
+// But also another useful feature is that when we are creating method , we dont have to use the key-value pair but also to use the function keywork
+const workstation2 = {
+  roomNumber: 302,
+  hasDeskLight: true,
+  monitorBrand: "Dell",
+  computer,
+  getDetails() {
+    return `Room ${this.roomNumber} features an ${this.computer.brand} ${this.computer.model} connected to a ${this.monitorBrand} monitor.`;
+  },
+};
+console.log(workstation2.getDetails());
+
+// But also ES6 made easy for us to compute the property values, consider the code below
+const weekDay = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+
+const hours = {
+  [weekDay[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekDay[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekDay[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};

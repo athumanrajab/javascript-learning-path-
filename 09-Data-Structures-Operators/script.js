@@ -319,6 +319,7 @@ add(...x); //Here's the array elements are unpacked and get spreaded in the add(
 restaurant.orderPizza("Mushroom", "Onion", "Olive", "Spinach");
  */
 
+/*
 // Short Circuiting (&& , ||)
 // OR operator(||) can be used to return the first truth value that exit on the sequence, consider the example below
 console.log(3 || "Jonas"); //Here both 3 and jonas are truth values but 3 is the first one to appear hence it should be returned
@@ -359,3 +360,43 @@ console.log(guest3);
 
 const guest4 = restaurant.numGuest ?? 10; //This is where the || fail because 0 is the real number and the result here should be 0 because the restaurant.numGuest already exist and has been set to 0, but since 0 is the falsy value so here will be ignored hence 10 will be returned
 console.log(guest4);
+*/
+
+// There 3 new logical assignment operators that are introduced in ES2021
+
+const restaurant1 = {
+  name: "Capri",
+  // numGuests: 20,
+  numGuest: 0,
+};
+const restaurant2 = {
+  name: "La Piazza",
+  owner: "Danniel Purcell",
+};
+
+// NOTE:  OR || operator (Short Circuit)
+// Let use || to set the default value of properties if they dont exit
+// restaurant1.numGuests = restaurant1.numGuests || 10;
+// restaurant2.numGuests = restaurant2.numGuests || 10;
+
+// NOTE: The above codes can be written by using OR assignment operator as follow
+// NOTE: Logical OR || assignment operator
+// restaurant1.numGuests ||= 10;
+// restaurant2.numGuests ||= 10;
+// console.log(restaurant1);
+// console.log(restaurant2);
+
+// The main challenge encountered by using this logical OR || operator, is that when the value of property is set to 0, the restaurant1.numGuests will be evakuated as falsy value hence 10 will be assigned as the default value
+// This can be solved by using logical nullish assignment operator which work for (null or undefined)
+// NOTE: Logical nullish ?? assignment operator
+// restaurant1.numGuest ??= 10;
+// restaurant2.numGuest ??= 10;
+// console.log(restaurant1);
+// console.log(restaurant2);
+
+// NOTE: Logical AND && assignment operator
+// &&  is used to reassign value of a variable or property that already exist, in such a way that it return the first falsy value
+restaurant1.owner &&= "<Anonymous>"; //Here the owner property does not exist such that it's undefined, since it's falsy value hence it will be returned
+restaurant2.owner &&= "<Anonymous>"; //Here the owner proprty exist hence it's truth value and hence the last value which is <Anonymous> will be returned
+console.log(restaurant1);
+console.log(restaurant2);

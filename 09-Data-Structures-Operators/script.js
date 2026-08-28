@@ -745,6 +745,7 @@ for (const [team, odd] of oddScore) {
 }
 */
 
+/*
 // SET, this is just collection of unique values, it does not allow the duplicate value
 // Set works with iterables such as arrays, string etc
 const orderSet = new Set([
@@ -807,3 +808,46 @@ const colors = [
 const uniqueColors = [...new Set(colors)]; //Here the uniqueColor is an array such that, it's no longer a set , hence when we want to get it's size/length we'll use uniqueColor.length
 console.log(uniqueColors);
 console.log(uniqueColors.length);
+*/
+
+// MAPS Fundamental, This is the data Structure that we can use to map values to keys
+// Just like an object data is stored in key:value pair in maps
+// The key difference btn object and maps is that , the key can have any type, there can be either object, arrays or other maps
+
+const rest = new Map();
+
+// set() is used to add the new data to the Map
+rest.set("name", "Classico Italiano");
+rest.set(1, "Firenze, Italy");
+rest.set(2, "Lisborn, Portugal");
+console.log(rest);
+
+// We can even chain the Map by using the set()
+rest
+  .set("categories", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+  .set("open", 11)
+  .set("close", 24)
+  .set(true, "We are open")
+  .set(false, "We are closed");
+
+// We can read the data from a map by using get()
+console.log(rest.get("name")); // NOTE:The data type of the key matter , such that when we pass name instead of "name", the result will be undefined
+console.log(rest.get(true));
+
+// has() is used to check if the certain item exist in a map
+console.log(rest.has("categories"));
+
+// delete() is used to delete items from a map
+console.log(rest.delete(2));
+
+// size() is used to check the size of the map
+console.log(rest.size);
+
+// clear() is used to delete everythin in the map at once
+// rest.clear();
+
+const arr = [1, 2];
+rest.set(arr, "Test");
+
+rest.set(document.querySelector("h1"), "Heading");
+console.log(rest);

@@ -971,7 +971,7 @@ for (const [min, event] of gameEvents) {
 }
 */
 
-/* */
+/*
 // Working with strings -Part 1
 const airline = "TAP Air Portugal";
 const plane = "A320";
@@ -1017,3 +1017,53 @@ const checkMiddleSeat = function (seat) {
 checkMiddleSeat("11B");
 checkMiddleSeat("23E");
 checkMiddleSeat("54D");
+ */
+
+const airline = "TAP Air Portugal";
+const plane = "A320";
+
+console.log(airline.toLocaleLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in name
+const passanger = "PuRCeL";
+const passangerLower = passanger.toLowerCase();
+console.log(passangerLower);
+const passangerCorrect =
+  passangerLower[0].toUpperCase() + passangerLower.slice(1);
+console.log(passangerCorrect);
+
+// This can be written in a function
+const fixCapitalization = function (firstName) {
+  const nameLower = firstName.toLowerCase();
+  const correctName = nameLower[0].toUpperCase() + nameLower.slice(1);
+  console.log(correctName);
+};
+
+fixCapitalization("daNieL");
+
+// trim(), which is used to trim all white space
+const email = " Hello@Jonas.io \n";
+
+const lowerEmail = email.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+
+// replace() and replaceAll()
+const priceGB = "263,984#";
+const priceUS = priceGB.replace("#", "$").replace(",", ".");
+console.log(priceUS);
+
+const announcement =
+  "All passangers come to boarding door 23, Boarding door 23";
+console.log(announcement.replace("door", "gate"));
+console.log(announcement.replaceAll("door", "gate"));
+
+// includes(), it returns true or false
+const newPlane = "A320Neo";
+console.log(newPlane.includes("A32"));
+
+// startWith()
+console.log(newPlane.startsWith("Air"));
+
+// endWith()
+console.log(newPlane.endsWith("neo"));

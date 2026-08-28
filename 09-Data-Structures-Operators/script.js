@@ -810,6 +810,7 @@ console.log(uniqueColors);
 console.log(uniqueColors.length);
 */
 
+/*
 // MAPS Fundamental, This is the data Structure that we can use to map values to keys
 // Just like an object data is stored in key:value pair in maps
 // The key difference btn object and maps is that , the key can have any type, there can be either object, arrays or other maps
@@ -851,3 +852,57 @@ rest.set(arr, "Test");
 
 rest.set(document.querySelector("h1"), "Heading");
 console.log(rest);
+*/
+
+// Maps Iteration
+// We can directly create a map and fill it with values without even using the set method
+const question = new Map([
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Correct"],
+  [false, "Try Again"],
+]);
+
+console.log(question);
+
+console.log(Object.entries(restaurant.openingHours));
+
+// We can easily convert object to a map by as follow
+const HoursMap = new Map(Object.entries(restaurant.openingHours));
+console.log(HoursMap);
+
+// We can also use the for loop because Map is an iterable
+console.log(question.get("question"));
+for (const [key, value] of question) {
+  if (typeof key === "number") {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+
+// const answer = Number(prompt("Choose the correct answer: "));
+// Solution 1
+// if (answer === question.get("correct")) {
+//   console.log(question.get(true));
+// } else {
+//   console.log(question.get(false));
+// }
+
+// Solution 2
+// console.log(question.get(answer === question.get("correct")));
+
+//We can also convert a map to an array by using the spread operator
+const questionArr = [...question];
+const keysArr = [...question.keys()];
+const valuesArr = [...question.values()];
+
+console.log(questionArr);
+console.log(keysArr);
+console.log(valuesArr);
+
+// Or you can do directly as this
+console.log([...question.keys()]);
+console.log([...question.values()]);
+console.log([...question.entries()]);

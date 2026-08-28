@@ -927,7 +927,7 @@ whether it's in the first half or second half (after 45 min) of the game, like t
 ⚽
 [FIRST HALF] 17:
 GOAL
-*/
+
 
 const gameEvents = new Map([
   [17, "⚽ GOAL"],
@@ -969,3 +969,51 @@ for (const [min, event] of gameEvents) {
   const x = min <= 45 ? "First Half" : "Second Half";
   console.log(`[${x}] ${min}: ${event}`);
 }
+*/
+
+/* */
+// Working with strings -Part 1
+const airline = "TAP Air Portugal";
+const plane = "A320";
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log("B737"[0]);
+
+console.log(plane.length);
+console.log("B737".length);
+
+// Strings methods
+console.log(airline.indexOf("r")); //Getting the position in which a certain letter is on a string
+console.log(airline.lastIndexOf("r")); //Return the last occurence of substring in the string, return -1 if it's not found
+console.log(airline.indexOf("Air"));
+
+// slice() method
+console.log(airline.slice(4)); // 4 is the number in which the extraction will start, the returned string will be called "substring". But also this does not change the original string, because string are immutate variables
+console.log(airline.slice(4, 7)); // 7 is the end value , which always is excluded from extraction
+
+// indexOf() and the lastIndexOf() can be useful on the slice(), when we want to extract a certain part of word without hardcoded it
+// Suppose we want to extract the "TAP" from airline
+console.log(airline.slice(0, airline.indexOf(" ")));
+
+// Also suppose we want to extract "Portugal"
+console.log(airline.slice(airline.lastIndexOf(" ") + 1));
+
+// We can also specify negative values
+console.log(airline.slice(-2));
+console.log(airline.slice(0, -5));
+console.log(airline.slice(-1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  if (seat.slice(-1) === "B" || seat.slice(-1) === "E") {
+    console.log("You got the middle seat!");
+  } else {
+    console.log("You got lucky!");
+  }
+};
+
+checkMiddleSeat("11B");
+checkMiddleSeat("23E");
+checkMiddleSeat("54D");

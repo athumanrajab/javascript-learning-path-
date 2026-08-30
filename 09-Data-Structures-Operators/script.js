@@ -1019,6 +1019,7 @@ checkMiddleSeat("23E");
 checkMiddleSeat("54D");
  */
 
+/*
 const airline = "TAP Air Portugal";
 const plane = "A320";
 
@@ -1067,3 +1068,65 @@ console.log(newPlane.startsWith("Air"));
 
 // endWith()
 console.log(newPlane.endsWith("neo"));
+*/
+
+// Working of String - Part 3
+// split() - Help us to split a string into multiple parts based on a divider string
+const str = "a+very+nice+string";
+const myName = "Danniel Purcell";
+console.log(myName.split(" ")); //Here the split is done by using space
+console.log(str.split("+")); //Here the split is done by using +
+
+// This makes easy to use the power of destructuring of arrays so as we can create multiple variables
+const [firstName, lastName] = myName.split(" ");
+console.log(firstName);
+console.log(lastName);
+
+// join() - it's used to join multiple elements of an arrays by specifying the join operator , such as " " , - , etc
+const newName = ["Hello", "Mr.", firstName, lastName];
+console.log(newName.join(" "));
+
+// We can also capitalize the first later of each names by using the combination of split(), slice(), and join()
+const capitalizeName = function (names) {
+  const nameLower = names.toLowerCase();
+  const nameArr = nameLower.split(" ");
+  const nameUpperArr = [];
+  let nameUpper;
+  for (const word of nameArr) {
+    // nameUpper = word[0].toUpperCase() + word.slice(1);
+    // nameUpperArr.push(nameUpper);
+
+    // We can also use replace()
+    nameUpper = word.replace(word[0], word[0].toUpperCase());
+    nameUpperArr.push(nameUpper);
+  }
+  console.log(nameUpperArr.join(" "));
+};
+
+capitalizeName("danniel deus purcell");
+capitalizeName("athuman rajab athuman");
+
+// padStart() - this method is used to add certain number of character from the begining of any string, by specifying the length of string and the exactly strings of character you want to add
+const message = "Go to the gate 23!";
+console.log(message.padStart(25, "%")); //Here's the new string added, will make sure that it fit the 25 characters long
+console.log("Danniel".padStart(20, "+"));
+
+// padEnd() - this method is used to add certain number of character from the end of any string, by specifying the length of string and the exactly strings of character you want to add
+console.log(message.padEnd(25, "+"));
+console.log(message.padStart(25, "=").padEnd(35, "="));
+
+// One of the real word application of padStart()/padEnd, is masking the several numbers of credit card and leave only the four last digits as used when purchasing several items on the internet
+const maskCreditCard = function (number) {
+  const str = String(number);
+  const lastDigits = str.slice(-4); //Here we are extracting only the last for digits
+  const maskedDigits = lastDigits.padStart(str.length, "*");
+  console.log(maskedDigits);
+};
+
+maskCreditCard(2748494273);
+maskCreditCard(28779480902420);
+maskCreditCard(287794809024947830);
+
+// repeat()
+const message2 = "Bad weather, All departures delayed... ";
+console.log(message2.repeat(5));

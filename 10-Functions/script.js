@@ -153,6 +153,7 @@ greetHey("Purcell");
 greet("Hey")("Danniel");
  */
 
+/*
 // The call and  apply method
 const lufthansa = {
   airline: "Lufthansa",
@@ -207,3 +208,80 @@ newBook.apply(swiss, flightData);
 // Instead we can keep use the call() and spread operator
 newBook.call(swiss, ...flightData);
 console.log(swiss);
+ */
+
+// The bind() method
+// bind() also allows us to set manually the "this" keyword for any function call
+// The difference os that, bind() does not immediately call the function , instead it returns a new function where the this keyword is bound
+
+const lufthansa = {
+  airline: "Lufthansa",
+  iatacode: "LH",
+  bookings: [],
+
+  book(flighNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iatacode}${flighNum}`,
+    );
+    this.bookings.push({ flight: ` ${this.iatacode}${flighNum}`, name });
+  },
+};
+const eurowings = {
+  airline: "Eurowings",
+  iatacode: "EW",
+  bookings: [],
+};
+
+const swiss = {
+  airline: "Swiss Air Lines",
+  iatacode: "LX",
+  bookings: [],
+};
+
+const newBook = lufthansa.book;
+
+const bookSwiss = newBook.bind(swiss);
+const bookLufthansa = newBook.bind(lufthansa);
+const bookEurowings = newBook.bind(eurowings);
+
+bookSwiss(23, "Dominic Purcell");
+bookLufthansa(54, "Danniel Purcell");
+bookEurowings(75, "Danniel Deus");
+
+// We can also pass some few arguments in bind()
+const bookEW23 = newBook.bind(eurowings, 23); //Here we directly pass the flight number , hence make it easy when we call this function we'll only be required to pass only the name of the passager
+bookEW23("Martha Cooper");
+bookEW23("Chase Cooper");
+
+// Another useful application of bind() method is with event listener
+// Suppose that we want to attach an handler function on a "buy new plane" button such that when we click that button it should print to the console the number of planes that has been increased such that if initially the company has 300 planes, when we click the buy new plane button it should be increased by one
+// Lets start by adding some new property and method to our lufthansa object
+
+lufthansa.planes = 300;
+lufthansa.buy = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+
+// Now let's add our eventlistener to the DOM element(button)
+
+// document.querySelector(".buy").addEventListener("click", lufthansa.buy); //here the console.log(this); will result <button class="buy">Buy new plane 🛩</button> will be printed to the console but also console.log(this.planes); will result to NaN, this is because the "this" keyword is dynamic such that when it is used inside the DOM element , it will directly point back that element and that's why it has printed the button element to the console
+
+// The solution to above problem is to use the bind() so as we can explicit set which object does the "this" keyword should refer to
+document.addEventListener("click", lufthansa.buy.bind(lufthansa));
+
+// Another useful application of bind method is partial application where we can preset parameter
+// Lets create a normal function
+
+const addTax = function (rate, value) {
+  return value + value * rate;
+};
+console.log(addTax(0.3, 300));
+
+// So by using the bind(), we can create another function from the existing function with some preset parameters, suppose the mostly used rate for VAT is 23%
+const addVAT = addTax.bind(null, 0.23); //In partial application we dont care about this keyword, thus why we wrote the null
+console.log(addVAT(347));
+
+// NOTE: This is different from using the default parameters because , here we create a brand new function

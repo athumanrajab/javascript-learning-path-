@@ -1,5 +1,6 @@
 "use strict";
 
+/*
 // Default parameter
 
 // const bookings = [];
@@ -73,3 +74,27 @@ createBooking("LH123", 20);
 
 // NOTE: We can skip specifying the argument while calling the function by using "undefined" keyword, consider the codes below in which we want only to specify the flightNum and price ... but skip to specify numPassangers
 createBooking("LH123", undefined, 20); //Here since the numPassager is set to undefined hence the default parameter of numPassager will be set
+*/
+
+// How passing arguments works: Values Vs References
+const flight = "LH234";
+const danniel = {
+  name: "Danniel Purcell",
+  passport: 26387474,
+};
+
+const checkIn = function (flightNum, passanger) {
+  flightNum = "LH999";
+  passanger.name = "Mr. " + passanger.name;
+  if (passanger.passport === 26387474) {
+    alert("Checked in");
+  } else {
+    alert("Wrong passport!");
+  }
+};
+
+checkIn(flight, danniel);
+console.log(flight); //Here the value remain the same (LH234) because primitive value are stored on stack hence flightNum = fligh will create a complete new variable
+console.log(danniel); //Here the value of name changed because as we now the reference types like object are stored on stack but reference on memory heap hence since passanger.name reference the same danniel.name on the memory heap hence changing one variable will affect another variable
+
+// NOTE: JavaScript use passing by value not passing by references

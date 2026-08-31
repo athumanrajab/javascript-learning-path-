@@ -101,6 +101,7 @@ console.log(danniel); //Here the value of name changed because as we now the ref
 // NOTE: JavaScript use passing by value not passing by references
  */
 
+/*
 //Functions Accepting callback functions
 
 // Lets create two generic functions that we can later pass them in higher-order function
@@ -125,3 +126,27 @@ const transformer = function (str, fn) {
 
 transformer("JavaScript is the best!", upperFirstWord);
 transformer("JavaScript is the best!", oneWord);
+ */
+
+// Functions returning functions
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+// const greetHey = greet("Hey");
+// greetHey("Purcell");
+
+// // We can also call it direct
+// greet("Hey")("Danniel");
+
+// We can also write the code above using an arrow function
+const greet = (greeting) => {
+  return (name) => console.log(`${greeting} ${name}`);
+};
+const greetHey = greet("Hey");
+greetHey("Purcell");
+
+// We can also call it direct
+greet("Hey")("Danniel");

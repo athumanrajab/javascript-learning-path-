@@ -76,6 +76,7 @@ createBooking("LH123", 20);
 createBooking("LH123", undefined, 20); //Here since the numPassager is set to undefined hence the default parameter of numPassager will be set
 */
 
+/*
 // How passing arguments works: Values Vs References
 const flight = "LH234";
 const danniel = {
@@ -98,3 +99,29 @@ console.log(flight); //Here the value remain the same (LH234) because primitive 
 console.log(danniel); //Here the value of name changed because as we now the reference types like object are stored on stack but reference on memory heap hence since passanger.name reference the same danniel.name on the memory heap hence changing one variable will affect another variable
 
 // NOTE: JavaScript use passing by value not passing by references
+ */
+
+//Functions Accepting callback functions
+
+// Lets create two generic functions that we can later pass them in higher-order function
+const oneWord = function (str) {
+  return str.replaceAll(" ", "").toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(" ");
+  return [first.toUpperCase(), ...others].join(" ");
+};
+
+// Higher-order function
+const transformer = function (str, fn) {
+  console.log(`Original text: ${str}`);
+  console.log(`Transformed text: ${fn(str)}`);
+
+  console.log(`Transformed by: ${fn.name}`); //SInce functions are object hence has both properties and methods
+};
+
+// Here the tranformer() is called the higher-order function because it does not care about the level of detail about the str is really transformed, it just work on higher level
+
+transformer("JavaScript is the best!", upperFirstWord);
+transformer("JavaScript is the best!", oneWord);

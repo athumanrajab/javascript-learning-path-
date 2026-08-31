@@ -128,6 +128,7 @@ transformer("JavaScript is the best!", upperFirstWord);
 transformer("JavaScript is the best!", oneWord);
  */
 
+/*
 // Functions returning functions
 // const greet = function (greeting) {
 //   return function (name) {
@@ -150,3 +151,59 @@ greetHey("Purcell");
 
 // We can also call it direct
 greet("Hey")("Danniel");
+ */
+
+// The call and  apply method
+const lufthansa = {
+  airline: "Lufthansa",
+  iatacode: "LH",
+  bookings: [],
+
+  book(flighNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iatacode}${flighNum}`,
+    );
+    this.bookings.push({ flight: ` ${this.iatacode}${flighNum}`, name });
+  },
+};
+
+// lufthansa.book(239, "Danniel Purcell");
+// lufthansa.book(626, "Danniel Deus");
+// console.log(lufthansa.bookings);
+
+// Suppose that after some year the lufthansa create a new airline called eurowings
+const eurowings = {
+  airline: "Eurowings",
+  iatacode: "EW",
+  bookings: [],
+  //Suppose we want also this eurowings to have book() method as appeared in lufthansa, we can copy directly the method and paste here but that is literally the bad practice and violate the DRY principle.. so instead we can take the book() and store it somewhere else
+};
+
+const newBook = lufthansa.book;
+
+// newBook(342, "Danniel Purcell"); //This will throw an error Uncaught TypeError: Cannot read properties of undefined (reading 'airline'), this is because the newBook() is a regular function such that it's no longer a method, as we know the regular function handle this keyword by return undefined
+
+// The solution to above problem is by using the call() method in which the first argument that it takes(We should specify explicitly which object does the "this" keyword should refer), and the other argument should be as they are
+newBook.call(eurowings, 333, "Danniel Purcell");
+console.log(eurowings);
+
+newBook.call(lufthansa, 234, "Danniel Deus");
+console.log(lufthansa);
+
+const swiss = {
+  airline: "Swiss Air Lines",
+  iatacode: "LX",
+  bookings: [],
+};
+
+newBook.call(swiss, 555, "Athuman Rajab");
+console.log(swiss);
+
+// apply() method - this method work the same as call(), the only differece is that the apply() does not accept specify the argument after this keyword(after specify the object to be refered by this keyword) instead it accept the array of data
+const flightData = [675, "Mary Cooper"];
+newBook.apply(swiss, flightData);
+// NOTE: The apply() is no longer useful in modern javaScript.. although you can keep use it if you want
+
+// Instead we can keep use the call() and spread operator
+newBook.call(swiss, ...flightData);
+console.log(swiss);

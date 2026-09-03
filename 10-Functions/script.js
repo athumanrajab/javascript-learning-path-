@@ -362,6 +362,7 @@ document
   .addEventListener("click", poll.registerNewAnswer.bind(poll));
 */
 
+/*
 // NOTE: Immediately Invoked Function Expressions (IIFE)
 // Sometimes in javaScript we need to create a function and call it immediately after creating it.. and run it once so as we can never call again
 // This can be achieved by wrapping the function inside (), and when we want to call it immediately we should add () at the end
@@ -372,6 +373,7 @@ document
 // This can also be applied in arrow function
 (() => console.log("This will also never run again"))();
 // Also the IIFE is no longer used in modern javaScript
+*/
 
 /*
 // NOTE: Closure
@@ -456,7 +458,7 @@ the time you need. Think about when exactly the callback function is executed,
 and what that means for the variables involved in this example.
 
 GOOD LUCK 😀
-
+*/
 
 (function () {
   const header = document.querySelector("h1");
@@ -465,4 +467,3 @@ GOOD LUCK 😀
     header.style.color = "blue";
   });
 })();
-*/

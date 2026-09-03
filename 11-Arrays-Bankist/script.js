@@ -290,6 +290,7 @@ console.log(letters.join("-"));
 // Other methods include push(), pop(), indexOf(), shift(), unshift()
  */
 
+/*
 // NOTE: The new at() - This method was introduced in ES2022 where by it's an enhanced way of retrieving an element at a certain position or index arr[index]
 
 const arr = [23, 11, 64];
@@ -316,10 +317,10 @@ console.log(arr.at(-1)); //TRICK: used to easily get the last element of an arra
 const firstName = "Danniel";
 console.log(firstName.at(0));
 console.log(firstName.at(-1));
+ */
 
-/*
 // NOTE: Looping arrays forEach()
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // Suppose we want to log to the console, whether the money is deposited or withdrawn based on the movements array
 // We ca achieve this by using the following ways
@@ -368,7 +369,6 @@ movements.forEach(function (movement, index, array) {
 });
 
 // INFO: the break and continue keywords, are not supported by forEach loop so, if you want to use break and continue keywords, you better use for-of loop
-*/
 
 /*
 //NOTE: forEach() with maps and sets

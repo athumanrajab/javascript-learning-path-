@@ -511,6 +511,7 @@ console.log(withdrawals);
 // reduce() - it boils(reduces) all array elements down to one single value (eg. adding all elements together)
  */
 
+/*
 // NOTE: reduce()
 // It is used to boils down all elements in array into a single values
 // The reduce(), accepts the callback function and the initial value of accumlator(which we mostly use 0), and the callback function accepts the four arguments which are not necessary to be specified
@@ -539,6 +540,7 @@ const maxValue = movements.reduce(function (accum, mov) {
   }
 }, movements[0]);
 console.log(maxValue);
+*/
 
 /*
 NOTE: Coding Challenge #2
@@ -559,7 +561,7 @@ Test data:
 §Data 1: [5, 2, 4, 1, 15, 8, 3]
 §Data 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
-
+*/
 
 const calcAverageHumanAge = function (dogAges) {
   const humanAges = dogAges.map(function (dog) {
@@ -583,7 +585,6 @@ const calcAverageHumanAge = function (dogAges) {
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
-*/
 
 /*
 // NOTE: The magic of chaining

@@ -561,7 +561,6 @@ Test data:
 §Data 1: [5, 2, 4, 1, 15, 8, 3]
 §Data 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
-*/
 
 const calcAverageHumanAge = function (dogAges) {
   const humanAges = dogAges.map(function (dog) {
@@ -585,8 +584,8 @@ const calcAverageHumanAge = function (dogAges) {
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
+*/
 
-/*
 // NOTE: The magic of chaining
 // We can chain multiple array methods together
 // Suppose we want to work with movements array , so as we can create a new deposit array which will contain all non negative value, the convert each value from euro to usd and then calculate the total deposit
@@ -607,7 +606,6 @@ console.log(totalDeposit);
 // One major disadvantage of chaining is that, it's kind hard to debug when we get the weird result, perhaps we can use console.log() in each method so as we can see that method
 // It's bad practice to chain up methods that mutates the underlying array example splice(), reverse()
 // Too much chaining can result to performance issues when working with large arrays, so try to optimize the chaining
-*/
 
 /*
 NOTE: Coding Challenge #3

@@ -458,7 +458,7 @@ the time you need. Think about when exactly the callback function is executed,
 and what that means for the variables involved in this example.
 
 GOOD LUCK 😀
-*/
+
 
 (function () {
   const header = document.querySelector("h1");
@@ -467,3 +467,4 @@ GOOD LUCK 😀
     header.style.color = "blue";
   });
 })();
+*/

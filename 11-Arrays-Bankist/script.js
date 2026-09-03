@@ -227,13 +227,13 @@
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ["USD", "United States dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
-]);
+// const currencies = new Map([
+//   ["USD", "United States dollar"],
+//   ["EUR", "Euro"],
+//   ["GBP", "Pound sterling"],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -319,6 +319,7 @@ console.log(firstName.at(0));
 console.log(firstName.at(-1));
  */
 
+/*
 // NOTE: Looping arrays forEach()
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -369,8 +370,8 @@ movements.forEach(function (movement, index, array) {
 });
 
 // INFO: the break and continue keywords, are not supported by forEach loop so, if you want to use break and continue keywords, you better use for-of loop
+ */
 
-/*
 //NOTE: forEach() with maps and sets
 
 // MAPS- forEach() loop , also work on MAP because they are iterables
@@ -393,7 +394,6 @@ const currenciesUnique = new Set(["USD", "GBP", "USD", "EUR", "EUR"]);
 currenciesUnique.forEach(function (value, set) {
   console.log(`${value}`);
 });
-*/
 
 /*
 NOTE: Coding Challenge #1 : Working With Arrays

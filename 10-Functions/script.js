@@ -362,7 +362,6 @@ document
   .addEventListener("click", poll.registerNewAnswer.bind(poll));
 */
 
-/*
 // NOTE: Immediately Invoked Function Expressions (IIFE)
 // Sometimes in javaScript we need to create a function and call it immediately after creating it.. and run it once so as we can never call again
 // This can be achieved by wrapping the function inside (), and when we want to call it immediately we should add () at the end
@@ -373,8 +372,8 @@ document
 // This can also be applied in arrow function
 (() => console.log("This will also never run again"))();
 // Also the IIFE is no longer used in modern javaScript
-*/
 
+/*
 // NOTE: Closure
 // closure is not a feature that we explicitly use, such as when we create an array or a new function etc , closure happens automatically in certain situation
 // Conside the code below
@@ -443,6 +442,7 @@ const boardPassengers = function (numPassengers, waitTime) {
 
 boardPassengers(180, 3);
 // Due to closure, makes the setTimeout() function to still have all the variables that were exist on it's birth place because when we call boardPassanger(), it's executed and popped out of call stack, and then when the setTimeout() is executed , it's still has access to all variables
+ */
 
 /*
 NOTE: Coding Challenge #2

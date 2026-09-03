@@ -237,6 +237,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+/*
 // NOTE: Simple array methods
 
 let arr = ["a", "b", "c", "d", "e"];
@@ -287,8 +288,8 @@ console.log(letters2);
 console.log(letters.join("-"));
 
 // Other methods include push(), pop(), indexOf(), shift(), unshift()
+ */
 
-/*
 // NOTE: The new at() - This method was introduced in ES2022 where by it's an enhanced way of retrieving an element at a certain position or index arr[index]
 
 const arr = [23, 11, 64];
@@ -315,7 +316,6 @@ console.log(arr.at(-1)); //TRICK: used to easily get the last element of an arra
 const firstName = "Danniel";
 console.log(firstName.at(0));
 console.log(firstName.at(-1));
- */
 
 /*
 // NOTE: Looping arrays forEach()

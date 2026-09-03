@@ -289,7 +289,7 @@ console.log(addVAT(347));
  */
 
 /*
-ding Challenge #1
+NOTE: Coding Challenge #1
 Let's build a simple poll app!
 A poll has a question, an array of options from which people can choose, and an
 array with the number of replies for each option. This data is stored in the starter
@@ -327,7 +327,7 @@ est data for bonus:
 §Data 2: [1, 5, 3, 9, 6, 1]
 Hints: Use many of the tools you learned about in this and the last section 😉
 GOOD LUCK 😀
-*/
+
 
 const poll = {
   question: "What is your favourite programming language?",
@@ -360,3 +360,109 @@ const poll = {
 document
   .querySelector(".poll")
   .addEventListener("click", poll.registerNewAnswer.bind(poll));
+*/
+
+/*
+// NOTE: Immediately Invoked Function Expressions (IIFE)
+// Sometimes in javaScript we need to create a function and call it immediately after creating it.. and run it once so as we can never call again
+// This can be achieved by wrapping the function inside (), and when we want to call it immediately we should add () at the end
+(function () {
+  console.log("This will never run again");
+})();
+
+// This can also be applied in arrow function
+(() => console.log("This will also never run again"))();
+// Also the IIFE is no longer used in modern javaScript
+*/
+
+// NOTE: Closure
+// closure is not a feature that we explicitly use, such as when we create an array or a new function etc , closure happens automatically in certain situation
+// Conside the code below
+
+const secureBooking = function () {
+  let passangerCount = 0;
+
+  return function () {
+    passangerCount++;
+    console.log(`${passangerCount} passangers`);
+  };
+};
+
+const booker = secureBooking();
+// SInce the booker function is the function that exist in global execution scope, and the environment in which the booker function was created which was inside the secureBooking was already executed in call stack and already removed from the call stack
+// But due to closure , the booker function can still have access to all variables existed inside the secureBooking function
+// Closure makes the function remember all variables that existed at the function birth place
+
+booker();
+booker();
+booker();
+
+// We can access these internal properties of closures to see all varaible that the booker function still has access too by using console.dir(booker)
+console.dir(booker);
+
+// NOTE: More examples on closure
+// These example demonstrate that we dont need to create a function that return another function so as to create a closure
+
+// Example 1
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 10;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f); //Due to the closure property, help the function to not always loose the connection to all variables that were present at it's birthplace
+
+// Re-assign f function
+h();
+f();
+console.dir(f);
+
+// Example 2
+const boardPassengers = function (numPassengers, waitTime) {
+  const perGroup = numPassengers / 3;
+
+  // This function accept 2 arguments which are callback function and time in mill second in which the callback function shall be executed
+  setTimeout(function () {
+    console.log(`We are now boarding all ${numPassengers} passangers`);
+    console.log(`There are 3 groups , each with ${perGroup} passangers`);
+  }, waitTime * 1000);
+
+  console.log(`Will start boarding in ${waitTime} seconds.`);
+};
+
+boardPassengers(180, 3);
+// Due to closure, makes the setTimeout() function to still have all the variables that were exist on it's birth place because when we call boardPassanger(), it's executed and popped out of call stack, and then when the setTimeout() is executed , it's still has access to all variables
+
+/*
+NOTE: Coding Challenge #2
+This is more of a thinking challenge than a coding challenge 🤓
+Your tasks:
+1. Take the IIFE below and at the end of the function, attach an event listener that
+changes the color of the selected h1 element ('header') to blue, each time
+the body element is clicked. Do not select the h1 element again!
+2. And now explain to yourself (or someone around you) why this worked! Take all
+the time you need. Think about when exactly the callback function is executed,
+and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+
+
+(function () {
+  const header = document.querySelector("h1");
+  header.style.color = "red";
+  document.body.addEventListener("click", function () {
+    header.style.color = "blue";
+  });
+})();
+*/

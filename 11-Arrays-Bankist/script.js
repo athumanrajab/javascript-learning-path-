@@ -617,7 +617,7 @@ Test data:
 §Data 1: [5, 2, 4, 1, 15, 8, 3]
 §Data 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
-*/
+
 
 const calcAverageHumanAge = (dogAges) => {
   const humanAges = dogAges
@@ -631,8 +631,8 @@ const calcAverageHumanAge = (dogAges) => {
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(avg1, avg2);
+*/
 
-/*
 // NOTE: The find()
 // It's used to retrieve one element on array based on condition
 // It does not return a new array, but it will only return the first element of an array that satisfies the condition
@@ -685,4 +685,3 @@ const accounts = [account1, account2, account3, account4];
 for (const acc of accounts) {
   acc.owner === "Jessica Davis" ? console.log(acc) : "No account Found!";
 }
-*/

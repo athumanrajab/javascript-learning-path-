@@ -438,6 +438,7 @@ const checkDogs = function (dogsJulia, dogsKate) {
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 */
 
+/*
 // NOTE: Data transformation: map(), filter() and reduce()
 // NOTE: map()
 // map()- returns a new array containing the results of applying an operation on all original array elements
@@ -475,8 +476,8 @@ const movementDescription = movements.map(function (mov, index, array) {
   }
 });
 console.log(movementDescription);
+ */
 
-/*
 // NOTE: filter()
 // filter() - returns a new array containing the array elements that passed a specified test condition
 // It is used to filter elements that satisfy a certain condition
@@ -507,7 +508,6 @@ const withdrawals = movements.filter(function (mov) {
 });
 console.log(withdrawals);
 // reduce() - it boils(reduces) all array elements down to one single value (eg. adding all elements together)
- */
 
 /*
 // NOTE: reduce()

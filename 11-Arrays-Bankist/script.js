@@ -478,6 +478,7 @@ const movementDescription = movements.map(function (mov, index, array) {
 console.log(movementDescription);
  */
 
+/*
 // NOTE: filter()
 // filter() - returns a new array containing the array elements that passed a specified test condition
 // It is used to filter elements that satisfy a certain condition
@@ -508,8 +509,8 @@ const withdrawals = movements.filter(function (mov) {
 });
 console.log(withdrawals);
 // reduce() - it boils(reduces) all array elements down to one single value (eg. adding all elements together)
+ */
 
-/*
 // NOTE: reduce()
 // It is used to boils down all elements in array into a single values
 // The reduce(), accepts the callback function and the initial value of accumlator(which we mostly use 0), and the callback function accepts the four arguments which are not necessary to be specified
@@ -538,7 +539,6 @@ const maxValue = movements.reduce(function (accum, mov) {
   }
 }, movements[0]);
 console.log(maxValue);
-*/
 
 /*
 NOTE: Coding Challenge #2

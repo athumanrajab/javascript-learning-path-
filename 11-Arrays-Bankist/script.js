@@ -372,6 +372,7 @@ movements.forEach(function (movement, index, array) {
 // INFO: the break and continue keywords, are not supported by forEach loop so, if you want to use break and continue keywords, you better use for-of loop
  */
 
+/*
 //NOTE: forEach() with maps and sets
 
 // MAPS- forEach() loop , also work on MAP because they are iterables
@@ -394,6 +395,7 @@ const currenciesUnique = new Set(["USD", "GBP", "USD", "EUR", "EUR"]);
 currenciesUnique.forEach(function (value, set) {
   console.log(`${value}`);
 });
+*/
 
 /*
 NOTE: Coding Challenge #1 : Working With Arrays
@@ -420,7 +422,7 @@ Test data:
 §Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 Hints: Use tools from all lectures in this section so far 😉
 GOOD LUCK 😀
-
+*/
 
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCopy = dogsJulia.slice(1, -2);
@@ -434,7 +436,6 @@ const checkDogs = function (dogsJulia, dogsKate) {
 
 // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
-*/
 
 /*
 // NOTE: Data transformation: map(), filter() and reduce()

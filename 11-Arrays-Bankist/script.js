@@ -422,7 +422,7 @@ Test data:
 §Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 Hints: Use tools from all lectures in this section so far 😉
 GOOD LUCK 😀
-*/
+
 
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCopy = dogsJulia.slice(1, -2);
@@ -436,8 +436,8 @@ const checkDogs = function (dogsJulia, dogsKate) {
 
 // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+*/
 
-/*
 // NOTE: Data transformation: map(), filter() and reduce()
 // NOTE: map()
 // map()- returns a new array containing the results of applying an operation on all original array elements
@@ -475,7 +475,6 @@ const movementDescription = movements.map(function (mov, index, array) {
   }
 });
 console.log(movementDescription);
- */
 
 /*
 // NOTE: filter()

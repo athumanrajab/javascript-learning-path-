@@ -1,0 +1,355 @@
+"use strict";
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// BANKIST APP
+
+/////////////////////////////////////////////////
+// Data
+
+// DIFFERENT DATA! Contains movement dates, currency and locale
+
+const account1 = {
+  owner: "Jonas Schmedtmann",
+  movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+
+  movementsDates: [
+    "2019-11-18T21:31:17.178Z",
+    "2019-12-23T07:42:02.383Z",
+    "2020-01-28T09:15:04.904Z",
+    "2020-04-01T10:17:24.185Z",
+    "2020-05-08T14:11:59.604Z",
+    "2020-05-27T17:01:17.194Z",
+    "2020-07-11T23:36:17.929Z",
+    "2020-07-12T10:51:36.790Z",
+  ],
+  currency: "EUR",
+  locale: "pt-PT", // de-DE
+};
+
+const account2 = {
+  owner: "Jessica Davis",
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+
+  movementsDates: [
+    "2019-11-01T13:15:33.035Z",
+    "2019-11-30T09:48:16.867Z",
+    "2019-12-25T06:04:23.907Z",
+    "2020-01-25T14:18:46.235Z",
+    "2020-02-05T16:33:06.386Z",
+    "2020-04-10T14:43:26.374Z",
+    "2020-06-25T18:49:59.371Z",
+    "2020-07-26T12:01:20.894Z",
+  ],
+  currency: "USD",
+  locale: "en-US",
+};
+
+const accounts = [account1, account2];
+
+/////////////////////////////////////////////////
+// Elements
+const labelWelcome = document.querySelector(".welcome");
+const labelDate = document.querySelector(".date");
+const labelBalance = document.querySelector(".balance__value");
+const labelSumIn = document.querySelector(".summary__value--in");
+const labelSumOut = document.querySelector(".summary__value--out");
+const labelSumInterest = document.querySelector(".summary__value--interest");
+const labelTimer = document.querySelector(".timer");
+
+const containerApp = document.querySelector(".app");
+const containerMovements = document.querySelector(".movements");
+
+const btnLogin = document.querySelector(".login__btn");
+const btnTransfer = document.querySelector(".form__btn--transfer");
+const btnLoan = document.querySelector(".form__btn--loan");
+const btnClose = document.querySelector(".form__btn--close");
+const btnSort = document.querySelector(".btn--sort");
+
+const inputLoginUsername = document.querySelector(".login__input--user");
+const inputLoginPin = document.querySelector(".login__input--pin");
+const inputTransferTo = document.querySelector(".form__input--to");
+const inputTransferAmount = document.querySelector(".form__input--amount");
+const inputLoanAmount = document.querySelector(".form__input--loan-amount");
+const inputCloseUsername = document.querySelector(".form__input--user");
+const inputClosePin = document.querySelector(".form__input--pin");
+
+/////////////////////////////////////////////////
+// Features implementation
+
+// TODO: 1.Displaying the movement of cash in the App
+
+const displayMovement = function (movements, sort = false) {
+  containerMovements.innerHTML = "";
+
+  // Since we dont want to modify the original movements array, hence we'll create a shallow copy by using slice()
+  const sortedMovs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  sortedMovs.forEach(function (mov, i) {
+    const type = mov > 0 ? "deposit" : "withdrawal";
+    const html = `
+        <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+          <div class="movements__value">${mov}€</div>
+        </div>
+    `;
+    containerMovements.insertAdjacentHTML("afterbegin", html);
+  });
+};
+
+displayMovement(account1.movements);
+
+// TODO: 2.Computing username for each account owner
+const createUsername = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map(function (name) {
+        return name[0];
+      })
+      .join("");
+  });
+};
+
+createUsername(accounts);
+
+// TODO: 3.Calculate and display balance
+const calcDisplayBalance = function (account) {
+  account.balance = account.movements.reduce(function (accum, mov) {
+    return accum + mov;
+  }, 0);
+  labelBalance.textContent = `${account.balance}€`;
+};
+
+// TODO: 4.Calculate and display summary
+const calcDisplaySummary = function (account) {
+  const income = account.movements
+    .filter(function (mov) {
+      return mov > 0;
+    })
+    .reduce(function (accum, mov) {
+      return accum + mov;
+    }, 0);
+  labelSumIn.textContent = `${Math.trunc(income)}€`;
+
+  const outcome = account.movements
+    .filter(function (mov) {
+      return mov < 0;
+    })
+    .reduce(function (accum, mov) {
+      return accum + mov;
+    }, 0);
+  labelSumOut.textContent = `${Math.trunc(Math.abs(outcome))}€`;
+
+  // Suppose that the bank pay an interest rate of 1.2% , for a customer who deposited at least 1 euro
+  const interest = account.movements
+    .filter(function (mov) {
+      return mov > 0;
+    })
+    .map(function (mov) {
+      return (mov * account.interestRate) / 100;
+    })
+    .filter(function (int) {
+      return int >= 1;
+    })
+    .reduce(function (prev, curr) {
+      return prev + curr;
+    }, 0);
+  labelSumInterest.textContent = `${Math.trunc(interest)}€`;
+};
+
+// TODO: Function to update UI
+
+const updateUI = function (acc) {
+  // Display Movement
+  displayMovement(acc.movements);
+
+  // Display balance
+  calcDisplayBalance(acc);
+
+  // Display summary
+  calcDisplaySummary(acc);
+};
+
+// TODO: 5.Implementing login functionality
+// Attach event handlers
+let currentAccount;
+btnLogin.addEventListener("click", function (e) {
+  // Preventing form from submitting(Preventing the form from reloading th page)
+  e.preventDefault();
+
+  // Retrieving account based on the username
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value,
+  );
+
+  // Check for the user password
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display the UI and Welcome message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(" ")[0]}`;
+    containerApp.style.opacity = 100;
+
+    // Clear the input fields and remove the focus
+    inputLoginUsername.value = "";
+    inputLoginPin.value = "";
+    // inputLoginPin.blur();
+
+    //  UpdateUI
+    updateUI(currentAccount);
+  }
+});
+
+// TODO: 6.Implementing transfer money feature
+btnTransfer.addEventListener("click", function (e) {
+  // Preventing form from submitting(Preventing the form from reloading th page)
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(function (acc) {
+    return inputTransferTo.value === acc.username;
+  });
+
+  // Before we transfer money we should check for several condition such as,
+  // the amount of money to be transfered should be greater that 0,
+  // also the balance should not be less than  the amount to be transfered,
+  // also we should make sure that the receiver account exist,
+  // also we should not be able to transfer money to ourself
+
+  // Clear input field
+  inputTransferAmount.value = "";
+  inputTransferTo.value = "";
+
+  if (
+    amount > 0 &&
+    currentAccount.balance >= amount &&
+    receiverAcc &&
+    receiverAcc.username !== currentAccount.username
+  ) {
+    // Doing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // UpdateUI
+    updateUI(currentAccount);
+  }
+});
+
+// TODO: 7.Implementing request loan functionality
+// Suppose that the bank grant loan , if there is at least one deposit of at least 10% of the requested loan amount
+// This is the good use case of the some()
+btnLoan.addEventListener("click", function (e) {
+  // Preventing form from submitting(Preventing the form from reloading th page)
+  e.preventDefault();
+
+  const loanAmount = Number(inputLoanAmount.value);
+  const hasTenPercentDeposit = currentAccount.movements.some(
+    (deposit) => deposit >= loanAmount * 0.1,
+  );
+
+  if (loanAmount > 0 && hasTenPercentDeposit) {
+    // Add the movement to the current account
+    currentAccount.movements.push(loanAmount);
+
+    //  UpdateUI
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = "";
+});
+
+// TODO: 8.Implementing close account feature
+btnClose.addEventListener("click", function (e) {
+  // Preventing form from submitting(Preventing the form from reloading th page)
+  e.preventDefault();
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(function (acc) {
+      return currentAccount.username === acc.username;
+    });
+    // Delete account
+    accounts.splice(index, 1);
+
+    // Clear input fields
+    inputCloseUsername.value = inputClosePin.value = "";
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+});
+
+// TODO: 9.Implementing the sorting functionality
+let sortedState = false; //Keep track of whether the sorted element is true or false
+btnSort.addEventListener("click", function (e) {
+  // Preventing form from submitting(Preventing the form from reloading th page)
+  e.preventDefault();
+
+  displayMovement(currentAccount.movements, !sortedState);
+  sortedState = !sortedState; //This help to invert the boolean value of sorted variable such that, initially before the sort button was clicked the boolean value of sortedState was false, after the click the button the value comes to true hence the array is sorted and come back to false
+});
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// LECTURES
+
+// Numbers- all numbers is javascript are presented as floating point number
+// All numbers in javascript are stored as 64 base 2, hence sometimes is quite hard to represent some simple fractions which are easy to to be represented in base 10 (0-9).. to represent them in binary
+// Example see the result below
+console.log(0.1 + 0.2);
+console.log(10 / 3);
+// So we can not do some precise calculation in js and that is kind of error that we have to accept in js
+console.log(0.1 + 0.2 === 0.3); //Here the result is false, in which we expect it to be true
+
+// Conversion
+// There is one trick of converting string into a number in js
+console.log(Number("23"));
+// TRICK: the simple trick is to use + operator before that string so as the js engine will perform type coercion
+console.log(+"23");
+
+// Parsing - We can parse a number from a string by using Number(), but since even function is an object it can also have some method example parseInt()
+console.log(Number.parseInt("30px")); //Here the strind can contain a number and some other words but the parseInt() method will eventually try to extract only the number part and the result of extraction will be a number not a string
+
+// But inorder to make the parseInt work.. the string has to start with a number
+console.log(Number.parseInt("e45")); //Here it wont work coz the string doesn't start with a number
+
+// The parseInt method accept two arguments which are string and radix, we always use 10 for radix which mean base 10 number (0-9)
+
+console.log(Number.parseInt("40em", 10));
+
+// parseInt also only work for integer only
+console.log(Number.parseInt("4.5em", 10)); //Here the result will be 4
+
+// parseFloat() - this work the same as parseInt but here we are parsing float number, it useful when you want to read values from a string example css properties
+console.log(Number.parseFloat("4.5em", 10));
+
+// So these two methods parseInt() and parseFloat(), are also called global functions such that we don't have to necessary call them inside Number objects
+console.log(parseFloat("54.44rem"));
+console.log(parseInt("88em"));
+// But doing so is kind traditional way, so we are reccommended to use them inside the Number object
+
+// Sometimes these methods are referred to as namespaces, so the Number provide the namespace for all different functions such as parseInt , parseFloat
+
+// isNaN() - This is another Number namespace which can be used to check if any value is a not a number
+console.log(Number.isNaN(20));
+console.log(Number.isNaN("20"));
+console.log(Number.isNaN("a"));
+console.log(Number.isNaN(+"a23"));
+console.log(Number.isNaN(+"23x"));
+console.log(Number.isNaN(23 / 0));
+
+// isFinite() - This is the best way of checking if the value if the number
+console.log(Number.isFinite(20));
+console.log(Number.isFinite("20"));
+console.log(Number.isFinite(+"20px"));
+console.log(Number.isFinite(23 / 0));
+
+// isInteger() - This is used to check if the number is an integer
+console.log(Number.isInteger(23));
+console.log(Number.isInteger("23"));
+console.log(Number.isInteger(23.4444444444444));
+console.log(Number.isInteger(23.1));

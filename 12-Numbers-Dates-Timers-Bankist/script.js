@@ -469,6 +469,7 @@ console.log(diameter);
 console.log(Number("3000_3044"));
 */
 
+/*
 // NOTE: Working with BigInt
 // This is the special type of integer which was introduced in ES2020
 // Since javaScript store number value in 64 bit base 2.. then only 53 bits are used to store a number while.. the remaininf bits are used for storing decimal place
@@ -520,3 +521,63 @@ console.log(20n == "20");
 // Division
 console.log(10n / 3n); //here the result will not be as expected , it will return 3n since it's the closest value and cutoff the decimal part
 console.log(12n / 3n); //here the result will not be as expected , it will return 3n since it's the closest value
+*/
+
+// NOTE: Creating dates
+// There are four different ways of creating dates in javaScript , they all use the new date constructor function but they can accept different parameters
+const now = new Date();
+console.log(now);
+
+// We can pass in string in new Date() constructor function
+console.log(new Date("Wed Sep 09 2026 23:10:06"));
+console.log(new Date("December 24, 2025"));
+
+console.log(new Date(account1.movementsDates[0]));
+
+// We can also pass something like this .. (Year, month, day, hours, min, sec)
+console.log(new Date(2026, 7, 31, 10, 30, 23)); //Here the month specified here is july but since the month in js is zero-based hence it will print Aug on the console
+
+// Also Date(), auto correct the day
+console.log(new Date(2026, 1, 31, 10, 30, 23)); //Here on the console March 03 will be printed
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// 3 * 24 * 60 * 60 * 1000 the result of this is called timestamp which is the millisecond passed since 1970
+
+// Dates are also special types of object hence they have their own methods and properties
+// Working with dates
+const future = new Date(2030, 6, 15, 16, 30);
+console.log(future);
+
+// getFullYear() - this is used to get the full year
+console.log(future.getFullYear());
+
+// getMonth() - this is used to get the month
+console.log(future.getMonth()); //on the console it will display 6, since it's 0-based that 6 will literally represent July
+
+// getDate() - this is used to get the exactly day of the month
+console.log(future.getDate());
+
+//getDay() -  this is used to get the day of the week .. it is 0-based
+console.log(future.getDay());
+
+console.log(future.getHours());
+
+console.log(future.getMinutes());
+
+console.log(future.getSeconds());
+
+// toISOString() - convert the date object into a string
+console.log(future.toISOString());
+
+// getTime() - it return the timestamp since january 1 , 1970
+console.log(future.getTime()); //1910352600000
+
+// We can also reverse the value 1910352600000
+console.log(new Date(1910352600000));
+
+// We can also get the current time stamp by using Date.now()
+console.log(Date.now());
+
+// There are also set methods like setFullYear(), setMonth(), setDate() etc

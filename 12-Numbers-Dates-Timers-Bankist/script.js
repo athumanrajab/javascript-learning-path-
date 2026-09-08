@@ -94,7 +94,7 @@ const displayMovement = function (movements, sort = false) {
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-          <div class="movements__value">${mov}€</div>
+          <div class="movements__value">${mov.toFixed(2)}€</div>
         </div>
     `;
     containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -123,7 +123,7 @@ const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce(function (accum, mov) {
     return accum + mov;
   }, 0);
-  labelBalance.textContent = `${account.balance}€`;
+  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
 };
 
 // TODO: 4.Calculate and display summary
@@ -135,7 +135,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumIn.textContent = `${Math.trunc(income)}€`;
+  labelSumIn.textContent = `${income.toFixed(2)}€`;
 
   const outcome = account.movements
     .filter(function (mov) {
@@ -144,7 +144,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumOut.textContent = `${Math.trunc(Math.abs(outcome))}€`;
+  labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
 
   // Suppose that the bank pay an interest rate of 1.2% , for a customer who deposited at least 1 euro
   const interest = account.movements
@@ -160,7 +160,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (prev, curr) {
       return prev + curr;
     }, 0);
-  labelSumInterest.textContent = `${Math.trunc(interest)}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 // TODO: Function to update UI
@@ -245,7 +245,7 @@ btnLoan.addEventListener("click", function (e) {
   // Preventing form from submitting(Preventing the form from reloading th page)
   e.preventDefault();
 
-  const loanAmount = Number(inputLoanAmount.value);
+  const loanAmount = Math.floor(inputLoanAmount.value);
   const hasTenPercentDeposit = currentAccount.movements.some(
     (deposit) => deposit >= loanAmount * 0.1,
   );
@@ -297,7 +297,8 @@ btnSort.addEventListener("click", function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
-// Numbers- all numbers is javascript are presented as floating point number
+/*
+// NOTE: Numbers- all numbers is javascript are presented as floating point number
 // All numbers in javascript are stored as 64 base 2, hence sometimes is quite hard to represent some simple fractions which are easy to to be represented in base 10 (0-9).. to represent them in binary
 // Example see the result below
 console.log(0.1 + 0.2);
@@ -353,3 +354,102 @@ console.log(Number.isInteger(23));
 console.log(Number.isInteger("23"));
 console.log(Number.isInteger(23.4444444444444));
 console.log(Number.isInteger(23.1));
+*/
+
+// NOTE: math and rounding
+// Square root
+console.log(Math.sqrt(25));
+
+// an alternative way to get square root, cuberoot, fourth root etc is by using an exponention
+console.log(25 ** (1 / 2));
+
+console.log(8 ** (1 / 3));
+
+console.log(16 ** (1 / 4));
+
+// maximum number
+console.log(Math.max(5, 23, 46, 3, 28, 4, 12));
+
+// Math.max(), also  does the type coercion
+console.log(Math.max(5, 23, "46", 3, 28, 4, 12));
+
+// Math.max(), does not do parsing
+console.log(Math.max(5, 23, "46ps", 3, 28, 4, 12));
+
+// minimum value
+console.log(Math.min(5, 23, 46, 3, 28, 4, 12));
+
+// Math.min(), also does the type coercion
+console.log(Math.min(5, 23, "46", "3", 28, 4, 12));
+
+// There are also constant values in Math namespace such PI
+// Suppose we want to calculate the area of a cycle, given the radius of 10 px from a user interface
+
+console.log(Math.PI * Number.parseFloat("10px") ** 2);
+
+// Math.random() - used to generate random number btn 0 and 1
+
+console.log(Math.random());
+
+// We can cut off the decimal part by using the Math.trunc()
+// Suppose we want to generate a random number between 1 and 6
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+// Consider the following function which can be used to generate random number
+const randomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min) + 1) + 1;
+};
+
+console.log(randomInt(1, 6));
+
+// Rounding integer- this can be done by using different ways
+// 1. Math.trunc() - is used to remove the decimal part from a number
+console.log(Math.trunc(34.222));
+
+// Math.round() - round a number to a nearest integer
+console.log(Math.round(23.4));
+console.log(Math.round(23.5));
+
+// Math.ceil() - it is used to round up a number
+console.log(Math.ceil(11));
+console.log(Math.ceil(11.4));
+console.log(Math.ceil(11.5));
+console.log(Math.ceil(11.8));
+
+// Math.floor() - it is used to round down a number
+console.log(Math.floor(50));
+console.log(Math.floor(50.4));
+console.log(Math.floor(50.5));
+console.log(Math.floor(50.8));
+
+console.log("------Type Coercion-----");
+// TRICK: both of these methods perform type coercion
+console.log(Math.trunc("34.222"));
+
+console.log(Math.round("23.4"));
+console.log(Math.round("23.5"));
+
+console.log(Math.ceil("11"));
+console.log(Math.ceil("11.4"));
+console.log(Math.ceil("11.5"));
+console.log(Math.ceil("11.8"));
+
+console.log(Math.floor("50"));
+console.log(Math.floor("50.4"));
+console.log(Math.floor("50.5"));
+console.log(Math.floor("50.8"));
+
+// Someone might think that Math.trunc() and Math.floor() are the same, but they only work the same when they both dealing only with positive numbers.. when it comes to negative numbers they work different
+console.log(Math.trunc(-23.4));
+console.log(Math.floor(-23.4));
+// It is advised to use floor instead of trunc because it work for both positive and negative number
+
+// Rounding decimal places
+console.log((2.7).toFixed(0)); //Here the result after applying the toFixed() method is the string and not a number
+console.log((2.7).toFixed(1));
+console.log((2.7).toFixed(2));
+console.log((2.7).toFixed(3));
+console.log(+(2.345).toFixed(2));
+
+// The operation above is possible despite that we are callinh toFixed() from primitive values which already know that primitive values have no built in methods.. this is because javascript behind the scenes will do boxing
+// Boxing involve transform those primitive values to a number obeject then call a method on that object and once the process is finished it will convert them back to a primitive values

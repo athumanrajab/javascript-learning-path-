@@ -94,7 +94,7 @@ const displayMovement = function (movements, sort = false) {
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-          <div class="movements__value">${mov.toFixed(2)}€</div>
+          <div class="movements__value">${Number(mov.toFixed(2))}€</div>
         </div>
     `;
     containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -123,7 +123,7 @@ const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce(function (accum, mov) {
     return accum + mov;
   }, 0);
-  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
+  labelBalance.textContent = `${Number(account.balance.toFixed(2))}€`;
 };
 
 // TODO: 4.Calculate and display summary
@@ -135,7 +135,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumIn.textContent = `${income.toFixed(2)}€`;
+  labelSumIn.textContent = `${Number(income.toFixed(2))}€`;
 
   const outcome = account.movements
     .filter(function (mov) {
@@ -144,7 +144,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
+  labelSumOut.textContent = `${Number(Math.abs(outcome).toFixed(2))}€`;
 
   // Suppose that the bank pay an interest rate of 1.2% , for a customer who deposited at least 1 euro
   const interest = account.movements
@@ -160,7 +160,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (prev, curr) {
       return prev + curr;
     }, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${Number(interest.toFixed(2))}€`;
 };
 
 // TODO: Function to update UI
@@ -356,6 +356,7 @@ console.log(Number.isInteger(23.4444444444444));
 console.log(Number.isInteger(23.1));
 */
 
+/*
 // NOTE: math and rounding
 // Square root
 console.log(Math.sqrt(25));
@@ -453,3 +454,15 @@ console.log(+(2.345).toFixed(2));
 
 // The operation above is possible despite that we are callinh toFixed() from primitive values which already know that primitive values have no built in methods.. this is because javascript behind the scenes will do boxing
 // Boxing involve transform those primitive values to a number obeject then call a method on that object and once the process is finished it will convert them back to a primitive values
+ */
+
+// NOTE: numeric separator
+// starting from year 2021 , we can use a feature called numeric separators to format a number in a way that it's easier for us or for other developer to read and understand
+// Hence we can use underscore to give meaning to our number
+// Suppose we want to write a very large number such as diameter of a sun
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+// It's not allowed to place the underscore at the following position _3.1415 , 3._1415, 3_.1415 , 3.1415_, 3.14__15
+// Also when we try to convert a string contain _ to a number will not work
+console.log(Number("3000_3044"));

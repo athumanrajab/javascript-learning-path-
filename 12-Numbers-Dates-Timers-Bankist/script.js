@@ -456,6 +456,7 @@ console.log(+(2.345).toFixed(2));
 // Boxing involve transform those primitive values to a number obeject then call a method on that object and once the process is finished it will convert them back to a primitive values
  */
 
+/*
 // NOTE: numeric separator
 // starting from year 2021 , we can use a feature called numeric separators to format a number in a way that it's easier for us or for other developer to read and understand
 // Hence we can use underscore to give meaning to our number
@@ -466,3 +467,56 @@ console.log(diameter);
 // It's not allowed to place the underscore at the following position _3.1415 , 3._1415, 3_.1415 , 3.1415_, 3.14__15
 // Also when we try to convert a string contain _ to a number will not work
 console.log(Number("3000_3044"));
+*/
+
+// NOTE: Working with BigInt
+// This is the special type of integer which was introduced in ES2020
+// Since javaScript store number value in 64 bit base 2.. then only 53 bits are used to store a number while.. the remaininf bits are used for storing decimal place
+// Since only 53 bits are used to store number this means we have limit of number that can be processed by javaScript
+console.log(2 ** 53 - 1); //we minus 1 because the number in js start from zero
+
+const maxSafeNumber = 9_007_199_254_740_991;
+
+console.log(2 ** 53 + 3); //This will give the wrong answer
+
+// So the Number object has the namespace for the largest value that can be processed by js which is know as MAX_SAFE_INTEGER
+console.log(Number.MAX_SAFE_INTEGER);
+
+console.log(4937480982389409823490290342934924902348);
+
+// We can use the BigInt or put n at the of the number
+console.log(4937480982389409823490290342934924902348n); //4937480982389409823490290342934924902348n
+console.log(BigInt(4937480982389409823490290342934924902348)); //4937480982389409983641378903027479478272n
+// Although the results above seems to be different so it's highly recommended to use BigInt() when working large number that fall on MAX_SAFE_INTEGER
+// BigInt() this is referred to as constructor function
+
+// Operations
+console.log(100000n + 100000n);
+console.log(1238383421212233n * 23289348948240281n);
+
+// But we can not mix bigint with other regular integer
+const hugeNum = 34892839490198102912n;
+const regularNum = 23;
+// console.log(regularNum * hugeNum); //we'll get TypeError
+
+// This can be solved by using the BigInt() constructor function to convert the regular number into int bigint
+console.log(BigInt(regularNum) * hugeNum);
+
+// But this can still work
+console.log(20n > 15);
+
+// This cannot work
+console.log(20n === 20); //the result is false because the strictly equality operator does not perform type coersion so those two number belong to the two different data types
+console.log(typeof 20n);
+console.log(typeof 20);
+
+console.log(20n == 20); //here's the result will be true because javaScript will automatically do type coercision
+console.log(20n == "20");
+
+// Also the square root does not work
+// console.log(Math.sqrt(16n));
+// console.log(16n ** (1 / 2));
+
+// Division
+console.log(10n / 3n); //here the result will not be as expected , it will return 3n since it's the closest value and cutoff the decimal part
+console.log(12n / 3n); //here the result will not be as expected , it will return 3n since it's the closest value

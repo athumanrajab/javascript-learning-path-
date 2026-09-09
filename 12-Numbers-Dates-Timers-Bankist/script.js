@@ -83,25 +83,39 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 // TODO: 1.Displaying the movement of cash in the App
 
-const displayMovement = function (movements, sort = false) {
+const displayMovement = function (acc, sort = false) {
   containerMovements.innerHTML = "";
 
   // Since we dont want to modify the original movements array, hence we'll create a shallow copy by using slice()
-  const sortedMovs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const sortedMovs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   sortedMovs.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
+
+    // TRICK: You can loop over two arrays in a single forEach as follow.. since we want also to get the movement with it's corresponding movementDate value
+    const date = new Date(acc.movementsDates[i]);
+
+    // The aim is to display the time in this format day/month/year
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    const displayDate = `${day}/${month}/${year}`;
+
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-          <div class="movements__value">${Number(mov.toFixed(2))}€</div>
+          <div class="movements__date">${displayDate}</div>
+          <div class="movements__value">${mov.toFixed(2)}€</div>
         </div>
     `;
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
 
-displayMovement(account1.movements);
+// displayMovement(account1);
 
 // TODO: 2.Computing username for each account owner
 const createUsername = function (accs) {
@@ -123,7 +137,7 @@ const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce(function (accum, mov) {
     return accum + mov;
   }, 0);
-  labelBalance.textContent = `${Number(account.balance.toFixed(2))}€`;
+  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
 };
 
 // TODO: 4.Calculate and display summary
@@ -135,7 +149,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumIn.textContent = `${Number(income.toFixed(2))}€`;
+  labelSumIn.textContent = `${income.toFixed(2)}€`;
 
   const outcome = account.movements
     .filter(function (mov) {
@@ -144,7 +158,7 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumOut.textContent = `${Number(Math.abs(outcome).toFixed(2))}€`;
+  labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
 
   // Suppose that the bank pay an interest rate of 1.2% , for a customer who deposited at least 1 euro
   const interest = account.movements
@@ -160,14 +174,14 @@ const calcDisplaySummary = function (account) {
     .reduce(function (prev, curr) {
       return prev + curr;
     }, 0);
-  labelSumInterest.textContent = `${Number(interest.toFixed(2))}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 // TODO: Function to update UI
 
 const updateUI = function (acc) {
   // Display Movement
-  displayMovement(acc.movements);
+  displayMovement(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -179,6 +193,21 @@ const updateUI = function (acc) {
 // TODO: 5.Implementing login functionality
 // Attach event handlers
 let currentAccount;
+
+// TODO: Fake always logged in
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
+
+// const now = new Date();
+
+// // The aim is to display the time in this format day/month/year
+// const day = `${now.getDate()}`.padStart(2, 0);
+// const month = `${now.getMonth() + 1}`.padStart(2, 0); //Since monthes are 0-based in js
+// const year = now.getFullYear();
+// const hour = now.getHours();
+// const min = now.getMinutes();
+
 btnLogin.addEventListener("click", function (e) {
   // Preventing form from submitting(Preventing the form from reloading th page)
   e.preventDefault();
@@ -193,6 +222,18 @@ btnLogin.addEventListener("click", function (e) {
     // Display the UI and Welcome message
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(" ")[0]}`;
     containerApp.style.opacity = 100;
+
+    // Create a current date and time when a user logged in
+    const now = new Date();
+
+    // The aim is to display the time in this format day/month/year
+    const day = `${now.getDate()}`.padStart(2, 0);
+    const month = `${now.getMonth() + 1}`.padStart(2, 0); //Since monthes are 0-based in js
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, 0);
+    const min = `${now.getMinutes()}`.padStart(2, 0);
+
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear the input fields and remove the focus
     inputLoginUsername.value = "";
@@ -233,6 +274,10 @@ btnTransfer.addEventListener("click", function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     // UpdateUI
     updateUI(currentAccount);
   }
@@ -253,6 +298,9 @@ btnLoan.addEventListener("click", function (e) {
   if (loanAmount > 0 && hasTenPercentDeposit) {
     // Add the movement to the current account
     currentAccount.movements.push(loanAmount);
+
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     //  UpdateUI
     updateUI(currentAccount);
@@ -289,7 +337,7 @@ btnSort.addEventListener("click", function (e) {
   // Preventing form from submitting(Preventing the form from reloading th page)
   e.preventDefault();
 
-  displayMovement(currentAccount.movements, !sortedState);
+  displayMovement(currentAccount, !sortedState);
   sortedState = !sortedState; //This help to invert the boolean value of sorted variable such that, initially before the sort button was clicked the boolean value of sortedState was false, after the click the button the value comes to true hence the array is sorted and come back to false
 });
 
@@ -523,6 +571,7 @@ console.log(10n / 3n); //here the result will not be as expected , it will retur
 console.log(12n / 3n); //here the result will not be as expected , it will return 3n since it's the closest value
 */
 
+/*
 // NOTE: Creating dates
 // There are four different ways of creating dates in javaScript , they all use the new date constructor function but they can accept different parameters
 const now = new Date();
@@ -581,3 +630,4 @@ console.log(new Date(1910352600000));
 console.log(Date.now());
 
 // There are also set methods like setFullYear(), setMonth(), setDate() etc
+*/

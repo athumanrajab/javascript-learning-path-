@@ -390,16 +390,19 @@ btnLoan.addEventListener("click", function (e) {
     (deposit) => deposit >= loanAmount * 0.1,
   );
 
-  if (loanAmount > 0 && hasTenPercentDeposit) {
-    // Add the movement to the current account
-    currentAccount.movements.push(loanAmount);
+  // Suppose that we want the bank to approve the loan after 3 seconds(3000 millsecond)
+  setTimeout(function () {
+    if (loanAmount > 0 && hasTenPercentDeposit) {
+      // Add the movement to the current account
+      currentAccount.movements.push(loanAmount);
 
-    // Add transfer date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add transfer date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    //  UpdateUI
-    updateUI(currentAccount);
-  }
+      //  UpdateUI
+      updateUI(currentAccount);
+    }
+  }, 3000);
 
   inputLoanAmount.value = "";
 });
@@ -802,3 +805,56 @@ console.log("Swahili : ", swahili);
 console.log("Tanzania : ", tz);
 console.log("German : ", german);
  */
+
+/*
+// NOTE: Timers: setTimeout and setInterval
+// setTimeout runs just once after a defined time
+// setInterval runs forever untill we stop it
+
+// setTimeout() - it accept 2 arguments in which the first one is the callback function and the second one is time in which the callback function will wait to be executed
+// setTimeout() - it simply reschedule the callback function to run after a certain amount of time, and the callback function is executed once
+// setTimeout(
+//   () => console.log("The function will be executed after several seconds"),
+//   3000,
+// );
+
+// console.log("Waiting....");
+// As soon as the js reach the setTimeout() , it will not stop , instead it will register the callback function and proceed with execution of other codes.. such that the time will be counted in the background so as the callback function will be called after that time elapsed
+// And that mechanism is known as asynchronous javaScript
+
+// We can also pass the arguments to the callback function... all arguments can be specified after setting out the timer in millisec
+
+// setTimeout(
+//   (ing1, ing2) => {
+//     console.log(`Here's your pizza with ${ing1} and ${ing2}.`);
+//   },
+//   3000,
+//   "Olive",
+//   "Spinach",
+// );
+
+// console.log("Waiting.....");
+
+// We can also clear the timeout as follow
+const ingridients = ["olive", "spinach"];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => {
+    console.log(`Here's your pizza with ${ing1} and ${ing2}.`);
+  },
+  3000,
+  ...ingridients,
+);
+
+console.log("Waiting.....");
+
+if (ingridients.includes("spinach")) {
+  clearTimeout(pizzaTimer);
+}
+// Since the array include the spinach then setTimeout will not be executed
+
+// setInterval() - here the callback function is executed after every amount of time specified
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
+*/

@@ -16,14 +16,14 @@ const account1 = {
   pin: 1111,
 
   movementsDates: [
-    "2019-11-18T21:31:17.178Z",
-    "2019-12-23T07:42:02.383Z",
-    "2020-01-28T09:15:04.904Z",
-    "2020-04-01T10:17:24.185Z",
-    "2020-05-08T14:11:59.604Z",
-    "2020-05-27T17:01:17.194Z",
-    "2020-07-11T23:36:17.929Z",
-    "2020-07-12T10:51:36.790Z",
+    "2026-11-18T21:31:17.178Z",
+    "2026-12-23T07:42:02.383Z",
+    "2026-01-28T09:15:04.904Z",
+    "2026-04-01T10:17:24.185Z",
+    "2026-05-08T14:11:59.604Z",
+    "2026-09-08T17:01:17.194Z",
+    "2026-09-07T23:36:17.929Z",
+    "2026-09-06T10:51:36.790Z",
   ],
   currency: "EUR",
   locale: "pt-PT", // de-DE
@@ -81,6 +81,30 @@ const inputClosePin = document.querySelector(".form__input--pin");
 /////////////////////////////////////////////////
 // Features implementation
 
+// TODO: Creating a function that will be responsible to format date in a nice way
+const formatMovementDate = function (date) {
+  // Creating another function that will display time in which a certain movement happen eg today, yesterday , 3 days ago etc
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+  const daysPassed = calcDaysPassed(new Date(), date);
+
+  if (daysPassed === 0) {
+    return "Today";
+  } else if (daysPassed === 1) {
+    return "Yesterday";
+  } else if (daysPassed <= 7) {
+    return `${daysPassed} days ago`;
+  } else {
+    // The aim is to display the time in this format day/month/year
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+};
+
 // TODO: 1.Displaying the movement of cash in the App
 
 const displayMovement = function (acc, sort = false) {
@@ -97,12 +121,7 @@ const displayMovement = function (acc, sort = false) {
     // TRICK: You can loop over two arrays in a single forEach as follow.. since we want also to get the movement with it's corresponding movementDate value
     const date = new Date(acc.movementsDates[i]);
 
-    // The aim is to display the time in this format day/month/year
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    const displayDate = `${day}/${month}/${year}`;
+    const displayDate = formatMovementDate(date);
 
     const html = `
         <div class="movements__row">
@@ -630,4 +649,26 @@ console.log(new Date(1910352600000));
 console.log(Date.now());
 
 // There are also set methods like setFullYear(), setMonth(), setDate() etc
+*/
+
+/*
+// NOTE: Operations with dates
+const future = new Date(2030, 7, 31, 10, 30, 23);
+// Operation with dates are possible because when we convert the date to number the result is going to be the timestamp which is in millisecond then by using that timestamp we can perform different calculation
+
+console.log(Number(future));
+console.log(+future);
+
+// Further more we can take the millisecond and convert them back to days, hours, years etc
+
+// Lets create a function that accepts two different dates and return the number of days that has passed
+
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const date1 = new Date(2027, 3, 23);
+const date2 = new Date(2027, 5, 16);
+
+const daysPassed = calcDaysPassed(date1, date2);
+console.log(daysPassed);
 */

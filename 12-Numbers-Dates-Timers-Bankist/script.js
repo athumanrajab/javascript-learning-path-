@@ -651,7 +651,6 @@ console.log(Date.now());
 // There are also set methods like setFullYear(), setMonth(), setDate() etc
 */
 
-/*
 // NOTE: Operations with dates
 const future = new Date(2030, 7, 31, 10, 30, 23);
 // Operation with dates are possible because when we convert the date to number the result is going to be the timestamp which is in millisecond then by using that timestamp we can perform different calculation
@@ -671,4 +670,3 @@ const date2 = new Date(2027, 5, 16);
 
 const daysPassed = calcDaysPassed(date1, date2);
 console.log(daysPassed);
-*/

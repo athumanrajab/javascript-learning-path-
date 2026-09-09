@@ -49,7 +49,32 @@ const account2 = {
   locale: "en-US",
 };
 
-const accounts = [account1, account2];
+const account3 = {
+  owner: "Danniel Purcell",
+
+  movements: [250000, 175000, -15000, -45000, -125000, -50000, 350000, -10000],
+
+  interestRate: 1.5,
+
+  pin: 3333,
+
+  movementsDates: [
+    "2026-08-01T13:15:33.035Z",
+    "2026-08-10T09:48:16.867Z",
+    "2026-08-15T06:04:23.907Z",
+    "2026-08-20T14:18:46.235Z",
+    "2026-08-25T16:33:06.386Z",
+    "2026-08-30T14:43:26.374Z",
+    "2026-09-05T18:49:59.371Z",
+    "2026-09-08T12:01:20.894Z",
+  ],
+
+  currency: "TZS",
+
+  locale: "en-TZ",
+};
+
+const accounts = [account1, account2, account3];
 
 /////////////////////////////////////////////////
 // Elements
@@ -82,7 +107,7 @@ const inputClosePin = document.querySelector(".form__input--pin");
 // Features implementation
 
 // TODO: Creating a function that will be responsible to format date in a nice way
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   // Creating another function that will display time in which a certain movement happen eg today, yesterday , 3 days ago etc
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -96,12 +121,15 @@ const formatMovementDate = function (date) {
   } else if (daysPassed <= 7) {
     return `${daysPassed} days ago`;
   } else {
-    // The aim is to display the time in this format day/month/year
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    // HACK: We can use Intl to format the date based on the locale
+    return new Intl.DateTimeFormat(locale).format(date);
 
-    return `${day}/${month}/${year}`;
+    // NOTE: The aim is to display the time in this format day/month/year by using normal JavaScript Date and Time
+    // const day = date.getDate();
+    // const month = date.getMonth() + 1;
+    // const year = date.getFullYear();
+
+    // return `${day}/${month}/${year}`;
   }
 };
 
@@ -121,7 +149,7 @@ const displayMovement = function (acc, sort = false) {
     // TRICK: You can loop over two arrays in a single forEach as follow.. since we want also to get the movement with it's corresponding movementDate value
     const date = new Date(acc.movementsDates[i]);
 
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
         <div class="movements__row">
@@ -218,15 +246,6 @@ let currentAccount;
 // updateUI(currentAccount);
 // containerApp.style.opacity = 100;
 
-// const now = new Date();
-
-// // The aim is to display the time in this format day/month/year
-// const day = `${now.getDate()}`.padStart(2, 0);
-// const month = `${now.getMonth() + 1}`.padStart(2, 0); //Since monthes are 0-based in js
-// const year = now.getFullYear();
-// const hour = now.getHours();
-// const min = now.getMinutes();
-
 btnLogin.addEventListener("click", function (e) {
   // Preventing form from submitting(Preventing the form from reloading th page)
   e.preventDefault();
@@ -242,17 +261,39 @@ btnLogin.addEventListener("click", function (e) {
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(" ")[0]}`;
     containerApp.style.opacity = 100;
 
-    // Create a current date and time when a user logged in
+    // Create a current date and time when a user logged in by using Intl API
     const now = new Date();
 
-    // The aim is to display the time in this format day/month/year
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0); //Since monthes are 0-based in js
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
+    // We can also pass some options in DateTimeFormat()
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "numeric", //it also has some few values like long,, numeric, 2-digit
+      year: "numeric",
+      // weekday: "short", //It has also some few alternative like long, short and narrow
+    };
 
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    // Refers to this website to get ISO Language Code Table http://www.lingoes.net/en/translator/langcode.html
+    // It's also not advisable to define the locale manually (the locale are en-US, sw pt-PT), instead we have to get it from user browser
+    // const locale = navigator.language;
+    // console.log(locale);
+
+    // But since each account has defined locale we can use it
+    const locale = currentAccount.locale;
+
+    labelDate.textContent = Intl.DateTimeFormat(locale, options).format(now);
+
+    // HACK: (The better solution is to use Intl API) Create a current date and time when a user logged in by using normal JavaScript time and date
+    // const now = new Date()
+
+    // The aim is to display the time in this format day/month/year
+    // const day = `${now.getDate()}`.padStart(2, 0);
+    // const month = `${now.getMonth() + 1}`.padStart(2, 0); //Since monthes are 0-based in js
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const min = `${now.getMinutes()}`.padStart(2, 0);
+    // labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear the input fields and remove the focus
     inputLoginUsername.value = "";
@@ -651,6 +692,7 @@ console.log(Date.now());
 // There are also set methods like setFullYear(), setMonth(), setDate() etc
 */
 
+/*
 // NOTE: Operations with dates
 const future = new Date(2030, 7, 31, 10, 30, 23);
 // Operation with dates are possible because when we convert the date to number the result is going to be the timestamp which is in millisecond then by using that timestamp we can perform different calculation
@@ -670,3 +712,28 @@ const date2 = new Date(2027, 5, 16);
 
 const daysPassed = calcDaysPassed(date1, date2);
 console.log(daysPassed);
+*/
+
+// NOTE: Internationalizing dates (Intl)
+// javaScript has a new internationalization API, which allow us to easily format number and strings according to different languages
+// Example currencies and dates are respresented completely differet in tanzania
+// Experimenting int API
+// const now = new Date();
+
+// // We can also pass some options in DateTimeFormat()
+// const options = {
+//   hour: "numeric",
+//   minute: "numeric",
+//   day: "numeric",
+//   month: "long", //it also has some few values like long,, numeric, 2-digit
+//   year: "numeric",
+//   weekday: "short", //It has also some few alternative like long, short and narrow
+// };
+
+// // Refers to this website to get ISO Language Code Table http://www.lingoes.net/en/translator/langcode.html
+// // It's also not advisable to define the locale manually (the locale are en-US, sw pt-PT), instead we have to get it from user browser
+
+// const locale = navigator.language;
+// console.log(locale);
+
+// labelDate.textContent = Intl.DateTimeFormat(locale, options).format(now);

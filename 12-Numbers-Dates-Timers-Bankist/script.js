@@ -133,6 +133,16 @@ const formatMovementDate = function (date, locale) {
   }
 };
 
+// TODO: A function that will be responsible to format currency
+const formatCurrency = function (value, locale, currency) {
+  const options = {
+    style: "currency",
+    currency: currency,
+  };
+
+  return new Intl.NumberFormat(locale, options).format(value);
+};
+
 // TODO: 1.Displaying the movement of cash in the App
 
 const displayMovement = function (acc, sort = false) {
@@ -151,11 +161,13 @@ const displayMovement = function (acc, sort = false) {
 
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMov = formatCurrency(mov, acc.locale, acc.currency);
+
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${mov.toFixed(2)}€</div>
+          <div class="movements__value">${formattedMov}</div>
         </div>
     `;
     containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -184,7 +196,13 @@ const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce(function (accum, mov) {
     return accum + mov;
   }, 0);
-  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
+  const formattedBalance = formatCurrency(
+    account.balance,
+    account.locale,
+    account.currency,
+  );
+
+  labelBalance.textContent = `${formattedBalance}`;
 };
 
 // TODO: 4.Calculate and display summary
@@ -196,7 +214,13 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumIn.textContent = `${income.toFixed(2)}€`;
+
+  const formattedIncome = formatCurrency(
+    income,
+    account.locale,
+    account.currency,
+  );
+  labelSumIn.textContent = `${formattedIncome}`;
 
   const outcome = account.movements
     .filter(function (mov) {
@@ -205,7 +229,13 @@ const calcDisplaySummary = function (account) {
     .reduce(function (accum, mov) {
       return accum + mov;
     }, 0);
-  labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
+
+  const formattedOutcome = formatCurrency(
+    Math.abs(outcome),
+    account.locale,
+    account.currency,
+  );
+  labelSumOut.textContent = `${formattedOutcome}`;
 
   // Suppose that the bank pay an interest rate of 1.2% , for a customer who deposited at least 1 euro
   const interest = account.movements
@@ -221,7 +251,12 @@ const calcDisplaySummary = function (account) {
     .reduce(function (prev, curr) {
       return prev + curr;
     }, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  const formattedInterest = formatCurrency(
+    interest,
+    account.locale,
+    account.currency,
+  );
+  labelSumInterest.textContent = `${formattedInterest}`;
 };
 
 // TODO: Function to update UI
@@ -715,25 +750,55 @@ console.log(daysPassed);
 */
 
 // NOTE: Internationalizing dates (Intl)
+/*
 // javaScript has a new internationalization API, which allow us to easily format number and strings according to different languages
 // Example currencies and dates are respresented completely differet in tanzania
 // Experimenting int API
 // const now = new Date();
 
 // // We can also pass some options in DateTimeFormat()
-// const options = {
-//   hour: "numeric",
-//   minute: "numeric",
-//   day: "numeric",
-//   month: "long", //it also has some few values like long,, numeric, 2-digit
-//   year: "numeric",
-//   weekday: "short", //It has also some few alternative like long, short and narrow
-// };
+const options = {
+  hour: "numeric",
+  minute: "numeric",
+  day: "numeric",
+  month: "long", //it also has some few values like long,, numeric, 2-digit
+  year: "numeric",
+  weekday: "short", //It has also some few alternative like long, short and narrow
+};
 
 // // Refers to this website to get ISO Language Code Table http://www.lingoes.net/en/translator/langcode.html
 // // It's also not advisable to define the locale manually (the locale are en-US, sw pt-PT), instead we have to get it from user browser
 
-// const locale = navigator.language;
-// console.log(locale);
+const locale = navigator.language;
+console.log(locale);
 
-// labelDate.textContent = Intl.DateTimeFormat(locale, options).format(now);
+labelDate.textContent = Intl.DateTimeFormat(locale, options).format(now);
+ */
+
+/*
+// NOTE: Internationalizing Number (Intl)
+const num = 388376463.34;
+
+// We can also specify some options in number
+const options = {
+  style: "currency", //here there are percent , currency, unit etc
+  unit: "mile-per-hour", //here there are celcius etc
+  currency: "EUR", //you have to manually specify the currency because it's not determined by locale
+  // useGrouping: false, //Turn off grouping by a separator
+};
+
+const us = Intl.NumberFormat("en-US", options).format(num);
+const swahili = Intl.NumberFormat("sw", options).format(num);
+const tz = Intl.NumberFormat("en-Tz", options).format(num);
+const german = Intl.NumberFormat("de-DE", options).format(num);
+
+// We can also get the locale from the use browser
+const locale = navigator.language;
+const userBrowser = Intl.NumberFormat(locale, options).format(num);
+console.log("User Browser: ", userBrowser);
+
+console.log("US : ", us);
+console.log("Swahili : ", swahili);
+console.log("Tanzania : ", tz);
+console.log("German : ", german);
+ */

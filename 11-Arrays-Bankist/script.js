@@ -277,7 +277,7 @@ let timer;
 
 const startLogOutTimer = function () {
   // Set time to 5 mins
-  let time = 10;
+  let time = 300;
 
   // This is the regular function that will be used as the callback function in setInterval so as the log out time could start immediately after we logged in
   const tick = function () {

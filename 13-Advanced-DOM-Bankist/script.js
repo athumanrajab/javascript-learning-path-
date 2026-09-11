@@ -33,7 +33,8 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// NOTE: Selecting, Creating and Delete elements
+/*
+// NOTE: Selecting, Creating, Inserting and Delete DOM elements
 // Selecting the whole HMTL document
 
 console.log(document.documentElement);
@@ -82,17 +83,15 @@ console.log(document.getElementsByClassName("btn"));
 
 // the position argument - where to insert the HTML ,it has the below values
 
-/*
 
-suppose the HTML element is like this
+// suppose the HTML element is like this
 
-<div>
+// <div>
 
-Existing content
+// Existing content
 
-</div>
+// </div>
 
-*/
 
 // "beforebegin" → before the <div>
 
@@ -175,3 +174,110 @@ const btnCloseCookie = document.querySelector(".btn--close-cookie");
 btnCloseCookie.addEventListener("click", function () {
   message.remove();
 });
+*/
+
+// NOTE: Style, Attribute and Classes
+// Create a message object which will display cookie message with it's close button and insert it after the header element
+const header = document.querySelector("header");
+const message = document.createElement("div");
+message.classList.add("cookie-message");
+message.innerHTML =
+  'We use cookies for improved functionalities and analytics! <button class="btn btn--close-cookie">Got it!</button>';
+
+header.append(message);
+
+// Implement the "Got it!" button on the cookie message so as when is clicked it , the cookie message should dissapear
+const btnCloseCookie = document.querySelector(".btn--close-cookie");
+
+btnCloseCookie.addEventListener("click", function () {
+  message.remove();
+});
+
+// Lets now start to add some styles on the cookie message
+message.style.backgroundColor = "#37383d";
+message.style.width = "120%";
+
+//These properties/styles are applied as inline styles
+
+// We can only use .style to get the all the inline style of the given element but not some other styles defined in CSS style sheet
+console.log(message.style.backgroundColor);
+console.log(message.style.color); //This does not work because the color properties was define in CSS style Sheet
+
+// But we realy want to get the whole styles defined in our element no matter it's inline or define in CSS style sheet we can use getComputedStyle() which accept the element as the argument , and then it will return the object with tons of properties and their respective value and hence we can be able to get the value of any property
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+// Suppose we after get the height of message element we want to add it by 40px..
+// let originalMessageHeight = message.style.height;
+// const newMessageHeight = getComputedStyle(message).height + 40 + "px";
+// console.log(newMessageHeight); //This will return a weird result like this 49.5333px40px, this is because getComputedStyle(message).height return a string of 49.5333px , hence when we try to add it 40 which is integer, the JS will perform type coercion such that it will treat 40 as a string and then concatinate those strings
+// So the solution to that is to use Number.parseFloat() so as we can parse/extract only the number part return by getComputedStyle(message).height and then add it 40 and then the result will converted back to string since we add "px"
+
+// const newMessageHeight =
+//   Number.parseFloat(getComputedStyle(message).height) + 40 + "px";
+// console.log(newMessageHeight);
+
+// originalMessageHeight = newMessageHeight;
+
+// The above steps can be summarize in one step as follow
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height) + 30 + "px";
+
+// We can also set the custom CSS properties defined in the root element of the document, for HTML document the root element is the <html></html>
+// So the :root is a CSS pseudo-class selector that targets the root element of the document.
+//  check the example below. which define CSS custom properties(CSS variable) , which can later be used like this background-color: var(--color-primary);
+// :root {
+//   --color-primary: #5ec576;
+//   --color-secondary: #ffcb03;
+//   --color-tertiary: #ff585f;
+//   --color-primary-darker: #4bbb7d;
+//   --color-secondary-darker: #ffbb00;
+//   --color-tertiary-darker: #fd424b;
+//   --color-primary-opacity: #5ec5763a;
+//   --color-secondary-opacity: #ffcd0331;
+//   --color-tertiary-opacity: #ff58602d;
+//   --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+//   --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+// }
+
+// So in DOM these properties are basically defined in document.documentElement since documentElement is always mean <html></html> which is the root element
+// So we can then set the custom css properties by using the setProperty(), the first argument it accept is the name of the our custom properties such as --color-primary, the second argument is the value that we want to change to
+
+document.documentElement.style.setProperty("--color-primary", "orangered");
+
+// Attributes - in js we can access and change different attributes of elements in an html file
+const logo = document.querySelector(".nav__logo");
+console.log(logo);
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className); //we use className not class
+// The above methods are only used when we want to get the standard attributes that are built in a specific element attribute
+
+// Suppose we want to get the custom attribute that we defined in an html element like "designer" attribute that we defined in <img src="img/logo.png" alt="Bankist logo" class="nav__logo" id="logo" designer="Purcell"/>
+// We can use getAttribute() method and pass in the string name of the custom attribute so as to get it's value
+console.log(logo.getAttribute("designer"));
+
+// We can also set the attributes value , only for those built in attributes(standard attributes)
+logo.alt = "Beautiful minimalist logo";
+
+// For non standard attribute we can set the value by using setAttribute() method, which accept the name of the propery and it's value
+
+logo.setAttribute("company", "Bankist");
+logo.setAttribute("designer", "Danniel Purcell");
+
+console.log(logo.src); //This gives the absolute url
+console.log(logo.getAttribute("src")); //This gives the  relative url
+
+// Data attribute -  This is the special type of attribute which is founc/can be added inside an html element
+// On the html file it must be written as data-name-of-the-attribute example (data-version-number), such that the attribute should start with "data-" and then you can proceed with the name, but the name should be connected with hyphen as the naming convetion used in HMTL, as we use camelCase as naming convention in js
+// Inorder to access these kind of attribute we use the dataset property and the name of the attribute in camelCase
+console.log(logo.dataset.versionNumber);
+
+// Classes
+// logo.classList.add()
+// logo.classList.remove()
+// logo.classList.toggle()
+// logo.classList.contains()
+
+// Don't use this, because it will overide all the existing classe
+// logo.className = "danniel"

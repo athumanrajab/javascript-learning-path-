@@ -98,3 +98,32 @@ tabsContainer.addEventListener("click", function (e) {
       .classList.add("operations__content--active");
   }
 });
+
+// TODO: 4.Menu fade animation
+const nav = document.querySelector("nav");
+
+const handleHoverEffect = function (e, opacity) {
+  if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+
+    // Selecting all siblings
+    const siblings = link.closest("nav").querySelectorAll(".nav__link");
+
+    // Selecting logo
+    const logo = link.closest(".nav").querySelector("img");
+
+    siblings.forEach((sibling) => {
+      if (sibling !== link) {
+        sibling.style.opacity = opacity;
+      }
+    });
+    logo.style.opacity = opacity;
+  }
+};
+
+nav.addEventListener("mouseover", function (e) {
+  handleHoverEffect(e, 0.5);
+});
+nav.addEventListener("mouseout", function (e) {
+  handleHoverEffect(e, 1);
+});

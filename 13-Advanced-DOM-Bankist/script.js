@@ -33,7 +33,7 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// TODO: Implementing smooth scrolling
+// TODO: 1.Implementing smooth scrolling
 const btnScrollTo = document.querySelector(".btn--scroll-to");
 const section1 = document.querySelector("#section--1");
 
@@ -41,4 +41,32 @@ btnScrollTo.addEventListener("click", function () {
   //Scroll the page until section1 becomes visible, using a smooth scrolling animation.
   section1.scrollIntoView({ behavior: "smooth" });
   // section1.scrollIntoView(); //Without the behavior: "smooth" , the browser jumps directly to the section
+});
+
+// TODO: 2.Implementing page navigation
+
+// NOTE: 1.By attaching an handler function(event listener) to each link ie features, operation, testimonials
+// document.querySelectorAll(".nav__link").forEach(function (link) {
+//   link.addEventListener("click", function (e) {
+//     e.preventDefault(); //prevent default action such as page scrolling, link navigation etc... so as it can be explicitly handled
+
+//     // Implementing smooth scrolling/navigation
+//     const id = this.getAttribute("href");
+//     const section = document.querySelector(id);
+//     section.scrollIntoView({ behavior: "smooth" });
+
+//     // We have attached the same handler function to each link.. this is not effiency way of doing it.. because suppose that we have attached the handler function to 1000 link.. actually it will cause performance problems
+//   });
+// });
+
+// NOTE: 2. By using event delegation, where by we attach an event listener only to a common parent element instead of adding separate listener to each child element.. and it works because of the even bubbling
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  // Make sure only the scrolling happen when exactly clicks the links,not anywhere on the container(matching strategy)
+  if (e.target.classList.contains("nav__link")) {
+    const id = e.target.getAttribute("href");
+    const section = document.querySelector(id);
+    section.scrollIntoView({ behavior: "smooth" });
+  }
 });

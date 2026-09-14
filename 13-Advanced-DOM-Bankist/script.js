@@ -42,32 +42,3 @@ btnScrollTo.addEventListener("click", function () {
   section1.scrollIntoView({ behavior: "smooth" });
   // section1.scrollIntoView(); //Without the behavior: "smooth" , the browser jumps directly to the section
 });
-
-//NOTE: Event propagation in practice
-const randomInt = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const randomColor = function () {
-  return `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
-};
-
-document.querySelector(".nav__link").addEventListener("click", function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log("Link: ", e.target); //remain original element that was clicked:(Where did the event start)
-  console.log(e.currentTarget); //Whose listener is running RIGHT NOW?
-  console.log(this === e.currentTarget);
-
-  // Stop event propagation
-  // e.stopPropagation();
-});
-document.querySelector(".nav__links").addEventListener("click", function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log("Container: ", e.target); //remain original element that was clicked:
-  console.log(e.currentTarget); //Whose listener is running RIGHT NOW?
-});
-document.querySelector(".nav").addEventListener("click", function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log("Nav: ", e.target); //remain original element that was clicked:
-  console.log(e.currentTarget); //Whose listener is running RIGHT NOW?
-});

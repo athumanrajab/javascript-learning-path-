@@ -211,6 +211,7 @@ jessica.greet();
 // Classes are executed in strict mode, even if we did not activate the strict mode in our code
  */
 
+/* 
 // NOTE: setter and getter
 // Every object in javascript can have setter and getter properties
 // and we call these special properties as assessor properties
@@ -283,3 +284,48 @@ const jessica = new Person("Jessica Davis", 2003);
 console.log(jessica);
 const danniel = new Person("Danniel", 2004);
 console.log(danniel);
+*/
+
+// NOTE: Static Methods
+// These are methods that can be called direct on constructor function.. example Number.parseInt() or Array.from().. such that they are not inherited
+// consider our constructor function below
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+
+// const danniel = new Person("Danniel", 2003);
+
+// We can create static method as follow
+// Person.greet = function () {
+//   console.log("Hello World!");
+//   console.log(this);
+// };
+
+// The function can directly called on a given constructor
+// Person.greet();
+
+// Since static method are not inherited hence they are not in the Person.prototype
+// danniel.greet();  This will throw an error
+
+// Creating static method in classes
+class Person {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // instance method, it will be added to Person.prototype
+  calcAge() {
+    console.log(2026 - this.birthYear);
+  }
+
+  // Creating static method, it will not be added to Person.prototype
+  static greet() {
+    console.log("Hello World!");
+  }
+}
+
+const jessica = new Person("Jessica", 1996);
+
+Person.greet();

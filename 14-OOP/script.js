@@ -1,5 +1,6 @@
 "use strict";
 
+/*
 // NOTE: Constructor function and the new operator
 // A constructor function is actually a completely normal function, the only difference btn a regular function and the constructor function is that, we call a constructor function with the new operator
 // The naming convention used in OOP is that the constructor function start with capital letter
@@ -124,6 +125,8 @@ Array.prototype.unique = function () {
 // This is just for fun experiment, but avoid manipulate the prototype of built-in constructor functions
 console.log(arr.unique());
 
+*/
+
 /*
 Object Oriented Programming (OOP)
 Coding Challenge #1
@@ -141,7 +144,7 @@ Test data:
 Data car 1: 'BMW' going at 120 km/h
 Data car 2: 'Mercedes' going at 95 km/h
 GOOD LUCK
-*/
+
 
 // NOTE: Coding Challenge #1: Object Oriented Programming (OOP)
 
@@ -169,3 +172,4 @@ car1.brake();
 // For car2
 car2.accelerate();
 car2.brake();
+*/

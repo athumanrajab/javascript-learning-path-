@@ -173,3 +173,38 @@ car1.brake();
 car2.accelerate();
 car2.brake();
 */
+
+// NOTE: ES6 CLASSES
+// class expression
+// const Person = class {}
+
+// class declaration
+class Person {
+  // The first this is to write the constructor method
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // We can also write the method which will be stored in object prototype
+  calcAge() {
+    console.log(2026 - this.birthYear);
+  }
+}
+
+const jessica = new Person("Jessica", 1996);
+console.log(jessica);
+jessica.calcAge();
+console.log(Object.getPrototypeOf(jessica));
+console.log(jessica.__proto__ === Person.prototype);
+
+// We can also use the prototype property to add method as we did earlier with constructor function
+Person.prototype.greet = function () {
+  console.log(`Hello ${this.firstName}`);
+};
+
+jessica.greet();
+
+// Classes are not hoisted, hence we can not use them before they are declared on the code
+// Classes are just special kind of function behind the scene
+// Hence classes are first-class citizen
+// Classes are executed in strict mode, even if we did not activate the strict mode in our code

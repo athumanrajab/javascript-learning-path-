@@ -42,3 +42,56 @@ console.log(purcell, john);
 console.log(purcell instanceof Person);
 
 // Also constructor function is not really a feature in js language, they are just pattern that have been developed by other dvelopers
+
+// NOTE: Prototypes
+// Each and every function in js automatically has a property called prototype, and that include the constructor function
+// Now, every object that will be created using constructor function will get access to all methods and properties that we define on constructor prototype properties
+console.log(Person.prototype);
+
+// Here's there is only one copy of this methods.. and all other object created from this constructor function can access and use this calcAge() method through prototypa inheritance
+Person.prototype.calcAge = function () {
+  console.log(2026 - this.birthYear);
+};
+
+// We can use the calcAge method to calculate the age of purcell even though the calcAge method is not present on the purcell object itself
+console.log(danniel); //The log does not show if the calcAge() is present
+
+// This is possible through prototypal inheritance, such that the prototype of danniel, purcell and john are Person.prototype
+danniel.calcAge();
+purcell.calcAge();
+john.calcAge();
+
+// __proto__, this property is used to confirm that danniel, purcell and john are the prototype of Person.prototype
+console.log(danniel.__proto__);
+console.log(purcell.__proto__);
+console.log(john.__proto__);
+
+console.log(danniel.__proto__ === Person.prototype); //This is true because the prototype of  danniel  object is essentially the property of the constructor function
+console.log(purcell.__proto__ === Person.prototype); //This is true because the prototype of  purcell object is essentially the property of the constructor function
+console.log(john.__proto__ === Person.prototype); //This is true because the  prototype of john object is essentially the property of the constructor function
+
+// Person.prototype is not actually not the prototye of a person, but instead it's what that is gonna be used for objects that are created with the person constructor function..
+// This can be confrimed through this console.log(danniel.__proto__ === Person.prototype); ... here is show that
+// There are also some built in method which can be used to prove this which is isPrototypeOf()
+
+console.log(Person.prototype.isPrototypeOf(danniel));
+console.log(Person.prototype.isPrototypeOf(purcell));
+console.log(Person.prototype.isPrototypeOf(john));
+console.log(Person.prototype.isPrototypeOf(Person)); //Here the result is false because the prototype property is not the prototype of a person, instead the is the property of all objects that are created from the Person constructor function
+
+// This confusion is come from the bad naming practice of the "prototype" property... which kind implies that is the prototype of a person which is actually not... probably it should be called as "prototypeOfLinkedObjects"
+
+// Not only we can create methods on the prototype, but also we can set properties
+Person.prototype.species = "Home Sapiens";
+console.log(danniel);
+console.log(purcell);
+console.log(danniel.species);
+console.log(purcell.species);
+
+// Although these properties and methods created using Person.prototype... they are only inherited and not original properties ... the original properties are declared from the constructor function
+
+// There is a method to check if the certain object really own a certain property which is called
+console.log(danniel.hasOwnProperty("firstName")); //This will be true because the firstName property is inside the danniel's object
+console.log(danniel.hasOwnProperty("species")); //This will be false because this property is not really inside the danniel's object, it simply has access to it because of it's prototype
+
+// The prototype itself is also an object because it can have methods and some other properties inside it

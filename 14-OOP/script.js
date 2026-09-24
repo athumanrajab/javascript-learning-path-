@@ -286,6 +286,7 @@ const danniel = new Person("Danniel", 2004);
 console.log(danniel);
 */
 
+/*
 // NOTE: Static Methods
 // These are methods that can be called direct on constructor function.. example Number.parseInt() or Array.from().. such that they are not inherited
 // consider our constructor function below
@@ -329,3 +330,41 @@ class Person {
 const jessica = new Person("Jessica", 1996);
 
 Person.greet();
+ */
+
+// NOTE: Object.create()
+// This is another way of implementing prototypal inheritance or deligation
+// It work differently from constructor function and the ES6 classes
+// Here no prototype properties involved , no constructor functions, and no new operator
+// We can use Object.create() to essentially manually set the prototype of an object to any other object that we want
+
+// Lets create an object that we want to be the prototype of all the Person objects
+const PersonPrototype = {
+  // We want the person object created to inherit the calcAge()
+  calcAge() {
+    console.log(2026 - this.birthYear);
+  },
+
+  //this function can be used to add properties to instance programmatically
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const danniel = Object.create(PersonPrototype); //Here we pass the object in which can be used as the prototype in all instances
+console.log(danniel);
+
+danniel.name = "Danniel";
+danniel.birthYear = 2003;
+
+danniel.calcAge();
+
+console.log(danniel.__proto__);
+console.log(danniel.__proto__ === PersonPrototype);
+
+const sarah = Object.create(PersonPrototype);
+console.log(sarah);
+sarah.init("Sarah", 2006);
+console.log(sarah);
+sarah.calcAge();

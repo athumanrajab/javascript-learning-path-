@@ -174,6 +174,7 @@ car2.accelerate();
 car2.brake();
 */
 
+/*
 // NOTE: ES6 CLASSES
 // class expression
 // const Person = class {}
@@ -208,3 +209,77 @@ jessica.greet();
 // Classes are just special kind of function behind the scene
 // Hence classes are first-class citizen
 // Classes are executed in strict mode, even if we did not activate the strict mode in our code
+ */
+
+// NOTE: setter and getter
+// Every object in javascript can have setter and getter properties
+// and we call these special properties as assessor properties
+// setter and getter basically are the functions that get and set values.. but on outside thwy look like regular properties
+
+// getters and setters for regular object
+const account = {
+  owner: "Danniel",
+  movements: [234, 342, -445, 3434, -232, 3435],
+
+  // getter
+  get latestMovement() {
+    return this.movements[this.movements.length - 1];
+  },
+
+  // setter, the setter method accept only one parameter
+  set latestMovement(mov) {
+    this.movements.push(mov);
+  },
+
+  // It's not necessary to specify the setter when we have a getter for the same property... so either a getter or a setter would be enough
+};
+
+console.log(account.latestMovement);
+
+account.latestMovement = 50;
+console.log(account.movements);
+
+// getters and setter work the same ways in class
+// class Person {
+//   constructor(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   }
+
+//   get age() {
+//     return 2026 - this.birthYear;
+//   }
+// }
+
+// const jessica = new Person("Jessica", 2003);
+// console.log(jessica.age);
+
+// getters and setters are very useful when it comes to the data validation
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  get age() {
+    return 2026 - this.birthYear;
+  }
+
+  // We can create a set property that will check if the new created object has the full name
+  // set a propert that already exist
+  set fullName(name) {
+    if (name.includes(" ")) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not a full name!`);
+    }
+  }
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+const jessica = new Person("Jessica Davis", 2003);
+console.log(jessica);
+const danniel = new Person("Danniel", 2004);
+console.log(danniel);

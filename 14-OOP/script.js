@@ -95,3 +95,31 @@ console.log(danniel.hasOwnProperty("firstName")); //This will be true because th
 console.log(danniel.hasOwnProperty("species")); //This will be false because this property is not really inside the danniel's object, it simply has access to it because of it's prototype
 
 // The prototype itself is also an object because it can have methods and some other properties inside it
+
+// NOTE: Prototypal inheritance and prototype chain
+console.log(danniel.__proto__); //Here the __proto__ will link danniel to Person.prototype
+
+console.log(danniel.__proto__.__proto__); //Here it will point to object.prototype
+
+console.log(danniel.__proto__.__proto__.__proto__); // here the result will be null
+
+// That is to say every object has automatically __proto__ property in which that __proto__ will point back to the Person.prototype.. and that Person.prototype also has __proto__ which point back to Object.protototype... the Object.prototype contain some other built in properties and methods like hasOwnProperty()  and it's __proto__ point to null
+
+// NOTE: Prototypal inheritance on built-in objects
+// Built-in objects inlude arrays, set, map etc
+
+const arr = [3, 6, 4, 3, 2, 2, 45, 6];
+console.log(arr.__proto__); //Here you will find a bunch of methods in which the arr inherit from Array.prototype
+
+// We can also check
+console.log(arr.__proto__ === Array.prototype);
+
+console.log(arr.__proto__.__proto__);
+
+// Since we already know that the array object inherit methods and properties from  the Array.prototype , then we can also add some new methods in Array.prototype
+// Lets create a method that will accept an array and return only unique values
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+// This is just for fun experiment, but avoid manipulate the prototype of built-in constructor functions
+console.log(arr.unique());

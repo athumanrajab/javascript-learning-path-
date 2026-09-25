@@ -501,7 +501,7 @@ Test data:
 §
 Data car 1: 'Tesla' going at 120 km/h, with a charge of 23%
 GOOD LUCK 😀
-*/
+
 // NOTE: Coding Challenge #3: Object Oriented Programming (OOP)
 // Parent constructor function
 const Car = function (make, speed) {
@@ -550,3 +550,67 @@ electricCar1.chargeBattery(90);
 electricCar1.accelerate();
 electricCar1.accelerate();
 electricCar1.accelerate();
+*/
+
+// NOTE: Inheritance between classes: ES6 classes
+// Parent class
+class Person {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Instance methods
+  calcAge() {
+    console.log(`Age ${2026 - this.birthYear}`);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2026 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(" ")) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not a full name!`);
+    }
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+// Child class
+// We use the "extends" keyword to inherit from parent class to child class
+// The "extends" keyword automatically links prototypes behind the scene
+class Student extends Person {
+  constructor(fullName, birthYear, course) {
+    // Here we need to write super() and pass in the paramater/properties from the parent class that we need to inherit
+    super(fullName, birthYear); //This call to a super function is responsible to create the this keyword in this subclass.. hence it need to be happen first
+    this.course = course;
+  }
+
+  // If you do not need any new properties , you dont have to bother writing the constructor method in the child class
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  // We can also overwrite the parent method
+  calcAge() {
+    console.log(
+      `I'm ${2026 - this.birthYear} years old, but as a student I feel like more ${2026 - this.birthYear + 10} years old`,
+    );
+  }
+}
+
+const danniel = new Student("Danniel Purcell", 2003, "Computer Science");
+console.log(danniel);
+danniel.introduce();
+danniel.calcAge();

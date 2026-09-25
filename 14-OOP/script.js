@@ -617,6 +617,7 @@ danniel.introduce();
 danniel.calcAge();
  */
 
+/* 
 // NOTE: Inheritance between classes: Object.create()
 // Creating a personal prototype that will act as the parent prototype of all person's object
 const PersonPrototype = {
@@ -655,3 +656,133 @@ const student1 = Object.create(StudentPrototype);
 student1.init("jay", 2003, "Computer Science");
 student1.introduce();
 student1.calcAge();
+*/
+
+/*
+// NOTE: Encapsulation: Protected properties and methods
+// Encapsulation means to keep some properties and methods private inside the class so that they are not accessible from outsode of the class
+// While some of methods are exposed as public interfaces , which we can also call the API
+// Why do we need encapsulation and data privacy?
+// 1.To prevent codes from outside the class to accidentally manipulate data inside our class
+// 2.When we expose only a small interface.. so a small API consisting only a few public methods, then we can change all other internal methods with more confidence.. because in this case we can be sure that external codes does not rely on these private methods.. therefore our codes will not break when we do internal changes
+// However javascript classes actually do not yet support real data privacy and encapsulation
+// So we'll fake encapsulation by simply using a convention (_), such that by intrdoucing _at the begining of the property name, although it does not really make the field private, it's just a convention
+// Using _, it will just tell other js developer that the field is private(protected) hence should not be accessible from the outside
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+
+    // Protected field
+    this._movements = [];
+    this._pin = pin;
+
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${this.owner}`);
+  }
+
+  deposit(val) {
+    this._movements.push(val);
+  }
+
+  withdraw(val) {
+    this._movements.push(-val);
+  }
+
+  // When you still want to make this movements accessible outside, we could expose it like this
+  getMovements() {
+    return this._movements;
+  }
+
+  _approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account("Danniel", "Tsh", 1111);
+
+acc1.deposit(234);
+acc1.withdraw(231);
+acc1.requestLoan(100);
+
+// But still someone can access the private properties like movements
+// acc1._movements.push(2933);
+
+// Access the publicly exposed movements
+console.log(acc1.getMovements());
+ */
+
+// NOTE: Encapsulation:Truly private fields and methods
+// There are four different types of class fields which are public fields, private fields, public methods , private methods
+// fields act as a properties that will be available in all instances created from a certain class
+
+class Account {
+  //Public fields(available on instances not on the prototype)
+  //these are the fields in which every new created instance will have, they are not on prototype, and they necessary need to use const or let keyword when declaring them
+  locale = navigator.language;
+
+  // Private fields(available on instances not on the prototype)
+  // These fields are not accessible from the outside, we use # at the begining of the field name to make it private
+  #movements = [];
+
+  // These two properties which are locale and movements , we want them in such a way that every instance created should have them
+
+  // Now suppose we want to make our pin private, since the pin is passed in as an argument , and is provided only when we create an object hence we can make it private as follow
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    console.log(`Thanks for opening an account, ${this.owner}`);
+  }
+
+  // Public methods
+  deposit(val) {
+    this.#movements.push(val);
+  }
+
+  withdraw(val) {
+    this.#movements.push(-val);
+  }
+
+  // When you still want to make this movements accessible outside, we could expose it like this
+  getMovements() {
+    return this.#movements;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+
+  // Private methods
+  #approveLoan(val) {
+    return true;
+  }
+}
+
+const acc1 = new Account("Danniel", "Tsh", 1111);
+
+// Trying to access private fields and methods
+// console.log(acc1.#movements);
+// console.log(acc1.#pin;
+// acc1.#approveLoan();
+
+console.log(acc1);
+
+// acc1.deposit(234);
+// acc1.withdraw(231);
+// acc1.requestLoan(100);

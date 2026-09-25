@@ -552,6 +552,7 @@ electricCar1.accelerate();
 electricCar1.accelerate();
 */
 
+/*
 // NOTE: Inheritance between classes: ES6 classes
 // Parent class
 class Person {
@@ -614,3 +615,43 @@ const danniel = new Student("Danniel Purcell", 2003, "Computer Science");
 console.log(danniel);
 danniel.introduce();
 danniel.calcAge();
+ */
+
+// NOTE: Inheritance between classes: Object.create()
+// Creating a personal prototype that will act as the parent prototype of all person's object
+const PersonPrototype = {
+  // We want the person object created to inherit the calcAge()
+  calcAge() {
+    console.log(2026 - this.birthYear);
+  },
+
+  //this function can be used to add properties to instance programmatically
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+// This is the normal person object created from PersonPrototype
+const jessica = Object.create(PersonPrototype);
+
+// Suppose we want to create a child student class(StudentPrototype) which will inherit properties from it's parent PersonPrototype
+const StudentPrototype = Object.create(PersonPrototype); //here it will return an empty object that has already linked to PersonPrototype
+
+StudentPrototype.init = function (firstName, birthYear, course) {
+  // reuse properties from a parent PersonPrototype
+  PersonPrototype.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// We can add some method in StudentPrototype
+StudentPrototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+// So now we can create different students from StudentPrototype
+
+const student1 = Object.create(StudentPrototype);
+student1.init("jay", 2003, "Computer Science");
+student1.introduce();
+student1.calcAge();

@@ -385,7 +385,7 @@ Test data:
 §
 Data car 1: 'Ford' going at 120 km/h
 GOOD LUCK 😀
-*/
+
 
 // NOTE: Coding Challenge #2 : Object Oriented Programming (OOP)
 class Car {
@@ -422,3 +422,60 @@ console.log(car1.speedUS);
 // setter
 car1.speedUS = 130;
 console.log(car1);
+*/
+
+// NOTE: Inheritance between classes: Constructor function
+// Person constructor function - Parent class
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(`Age : ${2026 - this.birthYear}`);
+};
+
+// Student constructor function - child class
+const Student = function (firstName, birthYear, course) {
+  // We can use inheritance so as a Student constructor function can inherit the firstName and birthYear properties from the Person constructor
+  //We can call the Person() as the regular function
+  // Person(firstName, birthYear); //This will throw an error because we have called the Person constructor as a regular function, while we already know that the "this" keyword in regular function will be undefined
+  //Inorder to make this work , we should manually set this keyword as well.. such that calling a function and set "this" keyword inside that function by using call()
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Linking Prototypes
+// Now we want to the Student class(Student constructor function) to be the child class of Person class (Person constructor function)
+// This means that we want the __proto__ property of Student.prototype to point back to Person.prototype... this is because the new created instance say mike.. it's __proto__ property will  be linked to Student.prototype, and then we want the Student.prototype to be linked to the Person.prototype so as we can access properties and methods defined in Person.prototype
+// This can be archived manually by using Object.create
+
+Student.prototype = Object.create(Person.prototype);
+
+// Student.prototype = Person.prototype //Never do this because Student constructor function and Person constructor function will both point to Person.prototype.. such that no inheritance
+
+// We have to connect that connection before we add any method to the prototype of Student because.. Object.create will return an empty object up to this point Student.prototype object is empty, so onto that empty object we can add methods on it
+// But if we did it other way around , then Object.create will basically overwrite those methods that we have already added to a Student prototype
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student("Mike", 2003, "Computer Science");
+console.log(mike);
+mike.introduce();
+mike.calcAge();
+
+console.log(Object.getPrototypeOf(mike)); //Here's it will print to the console that the prototype of mike is Person.. which actually is not TRUE.. the prototype of mike should be Student
+// This is because when we log the Student.prototype.constructor , it should be point or log the Student constructor but unfortunately it will log the Person constructor
+// console.log(Student.prototype.constructor);
+console.dir(Student.prototype.constructor);
+// Inorder to make the Object.getPrototypeOf(mike) to be Student prototype we have to manually set
+Student.prototype.constructor = Student;
+// console.log(Student.prototype.constructor);
+console.dir(Student.prototype.constructor);
+
+// So now mike is the instance of Student, Person and Object
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);

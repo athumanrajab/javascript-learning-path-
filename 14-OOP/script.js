@@ -802,7 +802,7 @@ Test data:
 §
 Data car 1: 'Rivian' going at 120 km/h, with a charge of 23%
 GOOD LUCK 😀
-*/
+
 
 // NOTE: Coding Challenge #4: Object Oriented Programming (OOP)
 
@@ -857,3 +857,4 @@ const electricCar1 = new EV("Rivian", 120, 23);
 // electricCar1.chargeBattery(50).accelerate();
 // electricCar1.accelerate().chargeBattery(49);
 // electricCar1.chargeBattery(50).accelerate().brake();
+*/

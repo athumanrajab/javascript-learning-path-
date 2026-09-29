@@ -721,6 +721,7 @@ acc1.requestLoan(100);
 console.log(acc1.getMovements());
  */
 
+/*
 // NOTE: Encapsulation:Truly private fields and methods
 // There are four different types of class fields which are public fields, private fields, public methods , private methods
 // fields act as a properties that will be available in all instances created from a certain class
@@ -786,3 +787,73 @@ console.log(acc1);
 // acc1.deposit(234);
 // acc1.withdraw(231);
 // acc1.requestLoan(100);
+ */
+
+/*
+Coding Challenge #4
+Your tasks:
+1. Re-create Challenge #3, but this time using ES6 classes: create an 'EVCl'
+child class of the 'CarCl' class
+2. Make the 'charge' property private
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery'
+methods of this class, and also update the 'brake' method in the 'CarCl'
+class. Then experiment with chaining!
+Test data:
+§
+Data car 1: 'Rivian' going at 120 km/h, with a charge of 23%
+GOOD LUCK 😀
+*/
+
+// NOTE: Coding Challenge #4: Object Oriented Programming (OOP)
+
+// Parent class
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make}'s speed is: ${this.speed}km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make}'s speed is: ${this.speed}km/h`);
+    return this;
+  }
+}
+
+// Child class
+class EV extends Car {
+  // Private field
+  #charge;
+
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    console.log(`${this.make}'s battery is charged to ${this.#charge}%`);
+    return this;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge -= 1;
+    console.log(
+      `${this.make} is going at ${this.speed}km/hr, with a charge of ${this.#charge}`,
+    );
+    return this;
+  }
+}
+
+const electricCar1 = new EV("Rivian", 120, 23);
+
+// Experimenting chaining
+// electricCar1.chargeBattery(50).accelerate();
+// electricCar1.accelerate().chargeBattery(49);
+// electricCar1.chargeBattery(50).accelerate().brake();

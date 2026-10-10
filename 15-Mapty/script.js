@@ -26,6 +26,7 @@ class Workout {
 
 // TODO: 5. Creating class Running which will inherit from class Workout
 class Running extends Workout {
+  type = "running";
   constructor(coords, distance, duration, cadence) {
     super(coords, distance, duration);
     this.cadence = cadence;
@@ -40,6 +41,7 @@ class Running extends Workout {
 }
 // TODO: 5. Creating class Running which will inherit from class Workout
 class Cycling extends Workout {
+  type = "cycling";
   constructor(coords, distance, duration, elevationGain) {
     super(coords, distance, duration);
     this.elevationGain = elevationGain;
@@ -56,6 +58,7 @@ class Cycling extends Workout {
 class App {
   #map;
   #mapEvent;
+  #workoutsArr = [];
 
   // The constructor method is called and executed as soon as the new object from the App class is created
   // Such that as soon as this line is executed const app = new App()
@@ -122,6 +125,60 @@ class App {
     // Prevent page reload when we submit the form
     e.preventDefault();
 
+    // TODO: Creating an helper function to validate inputs
+    // NOTE: Using regular function.. you have to use the return keyword twice
+    // const validInputs = function (...inputs) {
+    //   return inputs.every(function (inp) {
+    //     return Number.isFinite(inp);
+    //   });
+    // };
+    // const allPositive = function (...inputs) {
+    //   return inputs.every(function (inp) {
+    //     return inp > 0;
+    //   });
+    // };
+
+    // NOTE: Using arrow function
+    const validInputs = (...inputs) =>
+      inputs.every((inp) => Number.isFinite(inp));
+    const allPositive = (...inputs) => inputs.every((inp) => inp > 0);
+
+    // TODO: Get data from the form
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+    const { lat, lng } = this.#mapEvent.latlng;
+    let workout;
+
+    // TODO: If the workout is running create a running object
+    if (type === "running") {
+      const cadence = +inputCadence.value;
+      // TODO: Check if the data is valid
+      if (
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      )
+        return alert("Input has to be a positive number!");
+
+      // TODO: Creating a new running object after validating the data
+      workout = new Running([lat, lng], distance, duration, cadence);
+      this.#workoutsArr.push(workout);
+    }
+    // TODO: If the workout is cycling create a cycling object
+    if (type === "cycling") {
+      const elevationGain = +inputElevation.value;
+      if (
+        !validInputs(distance, duration, elevationGain) ||
+        !allPositive(distance, duration)
+      )
+        return alert("Input has to be a positive number!");
+      // TODO: Creating a new cycling object after validating the data
+      workout = new Cycling([lat, lng], distance, duration, elevationGain);
+    }
+
+    // TODO: push either the new created running or cycling object to workout array
+    this.#workoutsArr.push(workout);
+
     // Clear the input field after submitting the form
     inputDistance.value =
       inputDuration.value =
@@ -130,14 +187,14 @@ class App {
         "";
 
     // Display the marker
-    // mapEvent is created by leaflet
-    // console.log(mapEvent);
-    const { lat, lng } = this.#mapEvent.latlng;
+    this.renderWorkoutMarker(workout);
+  }
 
+  renderWorkoutMarker(workout) {
     // Add the marker to the map, such that the marker() method create the marker and addTo() add the marker to the map
     // Also the marker(location pin) accept the array of coordinates
     // The bindPopup can accept the string message like this bindPopup("Workout"), but also can accept an object through L.popup
-    L.marker([lat, lng])
+    L.marker(workout.coords)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
@@ -145,7 +202,7 @@ class App {
           minWidth: 100,
           autoClose: false, //override the default behavior of the popup closing when another popup is opened.
           closeOnClick: false, // override the default behavior of the popup closing when user clicks on the map.
-          className: "running-popup",
+          className: `${workout.type}-popup`,
         }),
       )
       .setPopupContent("Workout")

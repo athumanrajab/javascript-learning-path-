@@ -1,8 +1,5 @@
 "use strict";
 
-// prettier-ignore
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
 const form = document.querySelector(".form");
 const containerWorkouts = document.querySelector(".workouts");
 const inputType = document.querySelector(".form__input--type");
@@ -22,6 +19,12 @@ class Workout {
     this.distance = distance; //in km
     this.duration = duration; //in min
   }
+
+  setDescription() {
+    // prettier-ignore
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
+  }
 }
 
 // TODO: 5. Creating class Running which will inherit from class Workout
@@ -31,6 +34,7 @@ class Running extends Workout {
     super(coords, distance, duration);
     this.cadence = cadence;
     this.calcPace();
+    this.setDescription();
   }
 
   calcPace() {
@@ -46,6 +50,7 @@ class Cycling extends Workout {
     super(coords, distance, duration);
     this.elevationGain = elevationGain;
     this.calcSpeed();
+    this.setDescription();
   }
   calcSpeed() {
     // speed is given in km/hr
@@ -59,6 +64,7 @@ class App {
   #map;
   #mapEvent;
   #workoutsArr = [];
+  #mapZoomLevel = 13;
 
   // The constructor method is called and executed as soon as the new object from the App class is created
   // Such that as soon as this line is executed const app = new App()
@@ -69,6 +75,9 @@ class App {
 
     // TODO: 2(c) Listening for the event in which when we click on the type button on the rendered form and select either running or cycling , either the cadence or elevation gain should appear
     inputType.addEventListener("change", this.#toggleElevationField);
+
+    // TODO: Add event listener in such a way that when a user click a workout on a list it will directly move to the popup on the map
+    containerWorkouts.addEventListener("click", this.#moveToPopup.bind(this));
   }
 
   #getPosition() {
@@ -99,7 +108,7 @@ class App {
     const coords = [latitude, longitude];
 
     // TODO: 1(a). Initialize your map with a default view
-    this.#map = L.map("map").setView(coords, 13); // Centered on Dar es Salaam
+    this.#map = L.map("map").setView(coords, this.#mapZoomLevel); // Centered on Dar es Salaam
     // Whatever string we pass in our map() method must be the id name of element in our html and it's in that element where the map will be displayed
 
     // NOTE: Calling the setupMapLayers() so as to add theme to the map
@@ -109,6 +118,7 @@ class App {
     //Such that when a user click on a map, the marker(location pin) appear on the given position in which a user click with the popup message(banner)
     this.#map.on("click", this.#showForm.bind(this)); //Here we have to bind the this keyword because without the bind method the "this" keyword will be point to a map object... this is because the "on()" work the same as the addEventListener()
   }
+
   #showForm(mapE) {
     this.#mapEvent = mapE;
     // TODO: 2(a) Render the workout form when a user click on a map
@@ -117,10 +127,25 @@ class App {
     // Automatically focus on the distance field so as user can enter data , this improve user experience
     inputDistance.focus();
   }
+
+  #hideForm() {
+    // Clear the input field after submitting the form
+    inputDistance.value =
+      inputDuration.value =
+      inputCadence.value =
+      inputElevation.value =
+        "";
+
+    form.style.display = "none";
+    form.classList.add("hidden");
+    setTimeout(() => (form.style.display = "grid"), 1000);
+  }
+
   #toggleElevationField() {
     inputElevation.closest(".form__row").classList.toggle("form__row--hidden");
     inputCadence.closest(".form__row").classList.toggle("form__row--hidden");
   }
+
   #newWorkout(e) {
     // Prevent page reload when we submit the form
     e.preventDefault();
@@ -179,18 +204,17 @@ class App {
     // TODO: push either the new created running or cycling object to workout array
     this.#workoutsArr.push(workout);
 
-    // Clear the input field after submitting the form
-    inputDistance.value =
-      inputDuration.value =
-      inputCadence.value =
-      inputElevation.value =
-        "";
+    // TODO: Display the marker on the map
+    this.#renderWorkoutMarker(workout);
 
-    // Display the marker
-    this.renderWorkoutMarker(workout);
+    // TODO: Render workout on list
+    this.#renderWorkoutList(workout);
+
+    // TODO: Hide form + clear input fields
+    this.#hideForm();
   }
 
-  renderWorkoutMarker(workout) {
+  #renderWorkoutMarker(workout) {
     // Add the marker to the map, such that the marker() method create the marker and addTo() add the marker to the map
     // Also the marker(location pin) accept the array of coordinates
     // The bindPopup can accept the string message like this bindPopup("Workout"), but also can accept an object through L.popup
@@ -205,8 +229,75 @@ class App {
           className: `${workout.type}-popup`,
         }),
       )
-      .setPopupContent("Workout")
+      .setPopupContent(
+        `${workout.type === "running" ? "🏃‍♂️" : "🚴‍♀️"} ${workout.description}`,
+      )
       .openPopup();
+  }
+
+  #renderWorkoutList(workout) {
+    let html = `
+        <li class="workout workout--${workout.type}" data-id="${workout.id}">
+          <h2 class="workout__title">${workout.description}</h2>
+          <div class="workout__details">
+            <span class="workout__icon">${workout.type === "running" ? "🏃‍♂️" : "🚴‍♀️"}</span>
+            <span class="workout__value">${workout.distance}</span>
+            <span class="workout__unit">km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⏱</span>
+            <span class="workout__value">${workout.duration}</span>
+            <span class="workout__unit">min</span>
+          </div>`;
+
+    if (workout.type === "running") {
+      html += ` 
+          <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">${workout.pace.toFixed(1)}</span>
+            <span class="workout__unit">min/km</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">🦶🏼</span>
+            <span class="workout__value">${workout.cadence}</span>
+            <span class="workout__unit">spm</span>
+          </div>
+        </li>`;
+    }
+
+    if (workout.type === "cycling") {
+      html += `
+         <div class="workout__details">
+            <span class="workout__icon">⚡️</span>
+            <span class="workout__value">${workout.speed}</span>
+            <span class="workout__unit">km/h</span>
+          </div>
+          <div class="workout__details">
+            <span class="workout__icon">⛰</span>
+            <span class="workout__value">${workout.elevationGain}</span>
+            <span class="workout__unit">m</span>
+          </div>
+        </li>`;
+    }
+
+    form.insertAdjacentHTML("afterend", html);
+  }
+
+  #moveToPopup(e) {
+    const workoutElement = e.target.closest(".workout");
+
+    if (!workoutElement) return;
+
+    const workout = this.#workoutsArr.find(
+      (work) => work.id === workoutElement.dataset.id,
+    );
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
   }
 
   #setupMapLayers() {

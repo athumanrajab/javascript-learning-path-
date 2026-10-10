@@ -13,7 +13,46 @@ let inputElevation = document.querySelector(".form__input--elevation");
 
 let map, mapEvent;
 
-// TODO: 3 Refactoting code by using classes
+// TODO: 4. Creating class Workout which will act as parent class for child class running and child class cycling
+class Workout {
+  date = new Date();
+  id = (Date.now() + "").slice(-10); //Convert the data object to string and takeout the last 10 characters which will act as id
+  constructor(coords, distance, duration) {
+    this.coords = coords;
+    this.distance = distance; //in km
+    this.duration = duration; //in min
+  }
+}
+
+// TODO: 5. Creating class Running which will inherit from class Workout
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.calcPace();
+  }
+
+  calcPace() {
+    // pace is given in min/km
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
+// TODO: 5. Creating class Running which will inherit from class Workout
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.calcSpeed();
+  }
+  calcSpeed() {
+    // speed is given in km/hr
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
+
+// TODO: 3 Refactoting code by using classes, by creating class App
 class App {
   #map;
   #mapEvent;

@@ -43,7 +43,7 @@ class Running extends Workout {
     return this.pace;
   }
 }
-// TODO: 5. Creating class Running which will inherit from class Workout
+// TODO: 5. Creating class Cycling which will inherit from class Workout
 class Cycling extends Workout {
   type = "cycling";
   constructor(coords, distance, duration, elevationGain) {
@@ -70,6 +70,10 @@ class App {
   // Such that as soon as this line is executed const app = new App()
   constructor() {
     this.#getPosition();
+
+    // TODO: Get data from local storage
+    this.#getLocalStorage();
+
     // TODO: 2(b) Handle the rendered form in such a way that when a user submit a form the marker will be displayed on the map
     form.addEventListener("submit", this.#newWorkout.bind(this)); //We use bind because the this keyword in eventlistener always point to the given DOM element
 
@@ -111,12 +115,17 @@ class App {
     this.#map = L.map("map").setView(coords, this.#mapZoomLevel); // Centered on Dar es Salaam
     // Whatever string we pass in our map() method must be the id name of element in our html and it's in that element where the map will be displayed
 
-    // NOTE: Calling the setupMapLayers() so as to add theme to the map
+    // TODO: Calling the setupMapLayers() so as to add theme to the map
     this.#setupMapLayers();
 
     // TODO: 2. Add an event listener by using the on() which is an event listener function provided by leaflet
     //Such that when a user click on a map, the marker(location pin) appear on the given position in which a user click with the popup message(banner)
     this.#map.on("click", this.#showForm.bind(this)); //Here we have to bind the this keyword because without the bind method the "this" keyword will be point to a map object... this is because the "on()" work the same as the addEventListener()
+
+    // TODO: Render the workout marker if there is workout data stored on local storage
+    this.#workoutsArr.forEach((work) => {
+      this.#renderWorkoutMarker(work);
+    });
   }
 
   #showForm(mapE) {
@@ -187,7 +196,6 @@ class App {
 
       // TODO: Creating a new running object after validating the data
       workout = new Running([lat, lng], distance, duration, cadence);
-      this.#workoutsArr.push(workout);
     }
     // TODO: If the workout is cycling create a cycling object
     if (type === "cycling") {
@@ -212,6 +220,9 @@ class App {
 
     // TODO: Hide form + clear input fields
     this.#hideForm();
+
+    // TODO: Set local storage to all workouts
+    this.#setLocalStorage();
   }
 
   #renderWorkoutMarker(workout) {
@@ -298,6 +309,32 @@ class App {
         duration: 1,
       },
     });
+  }
+
+  // TODO: Store the new workout on a local storage provided by the browser
+  #setLocalStorage() {
+    // localStorage API , is just very simple API that a browser provide to us.. and it is adviced to be used for a small-medium web applicatio
+    localStorage.setItem("workouts", JSON.stringify(this.#workoutsArr)); //The first argument is the key, which we can use to retrieve the data, the second argument is supposed to be string and we can convert any kind of object in javascript into string by using stringify
+  }
+
+  // NOTE: One of the disadvantage of using local storage is that when we convert our data to a string and re-convert them back to an object we lost the prototypal inheritance
+
+  #getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("workouts")); //localStorage.getItem("workouts") This gives out the data in string, but we can convert the JSON string data into object by using parse, the getItem() accept the key argument which we used previously to store the data
+
+    if (!data) return;
+
+    this.#workoutsArr = data;
+
+    this.#workoutsArr.forEach((work) => {
+      this.#renderWorkoutList(work);
+    });
+  }
+
+  // TRICK: Use this method on the browser console to delete all data from the local storage "app.reset()"
+  reset() {
+    localStorage.removeItem("workouts");
+    location.reload();
   }
 
   #setupMapLayers() {

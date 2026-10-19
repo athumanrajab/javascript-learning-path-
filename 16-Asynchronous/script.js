@@ -7,7 +7,7 @@ const API_KEY = "rc_live_f8245f974c0e41ee91be321a31cd8d3b";
 // REST Countries API KEY = rc_live_f8245f974c0e41ee91be321a31cd8d3b
 
 // NEW COUNTRIES API URL (use instead of the URL shown in videos):
-// https://restcountries.com/v2/name/portugal
+// https://api.restcountries.com/countries/v5/names.common/${country}
 
 // NEW REVERSE GEOCODING API URL (use instead of the URL shown in videos):
 // https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}

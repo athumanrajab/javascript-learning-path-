@@ -14,6 +14,7 @@ const API_KEY = "rc_live_f8245f974c0e41ee91be321a31cd8d3b";
 
 ///////////////////////////////////////
 
+/*
 // NOTE: Our first AJAX call: XMLHttpRequest
 // In js there are different ways of doing AJAX calls
 
@@ -59,22 +60,22 @@ getCountryData("Tanzania");
 
 // However on the browser as we refresh the page, the arrangement of this countries will depend on which data will be first to arrive, if the portugal will be the first one to arrive then the ajax call will be fired and and then ajax call for USA will follow and vice-versa
 // Inorder to solve such that we want our code to follow the predefined order we have to chain the requests
+*/
 
-/*
 // NOTE: Welcome to callback hell
 // The callback hell is when we have a lot of nested callbacks inorder to execute asynchrnous tasks in sequences
 // The main problem with the callbackhell is that it's not easy to understand and reasoning hence can introduce bugs in our codes
 // We can escape the callback hell by using promises
-const renderCountry = function (data, className = "") {
+const renderCountry = function (countryData, className = "") {
   const html = `
-        <article class="country ${className}">
-          <img class="country__img" src="${data.flag}" />
+         <article class="country ${className}">
+          <img class="country__img" src="${countryData.flag.url_png}" />
           <div class="country__data">
-            <h3 class="country__name">${data.name}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)} people</p>
-            <p class="country__row"><span>🗣️</span>${data.language[0].name}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+            <h3 class="country__name">${countryData.names.common}</h3>
+            <h4 class="country__region">${countryData.region}</h4>
+            <p class="country__row"><span>👫</span>${(+countryData.population / 1000000).toFixed(1)}M people</p>
+            <p class="country__row"><span>🗣️</span>${countryData.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${countryData.currencies[0].name}</p>
           </div>
         </article>`;
   countriesContainer.insertAdjacentHTML("beforeend", html);
@@ -82,45 +83,55 @@ const renderCountry = function (data, className = "") {
 };
 
 const getCountryAndNeighbour = function (country) {
-  // AJAX call country 1
+  // AJAX call for country 1
   const request = new XMLHttpRequest();
   request.open(
     "GET",
-    `https://api.restcountries.com/countries/v5/names.common/${country}?api-key=rc_live_demo`,
+    `https://api.restcountries.com/countries/v5/names.common/${country}`,
   );
+  request.setRequestHeader("Authorization", `Bearer ${API_KEY}`);
   request.send();
 
   request.addEventListener("load", function () {
     // Convert JSON string into Object
-    const [data] = JSON.parse(this.responseText);
+    const { data } = JSON.parse(this.responseText);
+    const countryData = data.objects[0];
+    // console.log(countryData);
 
     // Render country 1
-    renderCountry(data);
+    renderCountry(countryData);
 
-    // Get neighbour country 2
-    const [neighbour] = data.borders;
+    // Get neighbour countries of country 1
+    const neighbour = countryData.borders[0];
+    // console.log(neighbours);
 
     // Guard clause for all countries that have no neighbours
     if (!neighbour) return;
 
-    // AJAX call country 2
+    // Check if the neighbour country code has 2 or 3 letter
+    const codeProperty =
+      neighbour.length === 2 ? "codes.alpha_2" : "codes.alpha_3";
+
+    // AJAX call for neighbouring country of country 1
     const request2 = new XMLHttpRequest();
     request2.open(
       "GET",
-      `https://api.restcountries.com/countries/v5/codes.alpha_2/${neighbour}?api-key=rc_live_demo`,
+      `https://api.restcountries.com/countries/v5/${codeProperty}/${neighbour}`,
     );
+    request2.setRequestHeader("Authorization", `Bearer ${API_KEY}`);
     request2.send();
-
-    // Listening for the load event(nested callback)
+    // Listening for the load event(nested callback) which will be emitted by js after send the request
     request2.addEventListener("load", function () {
-      const data2 = JSON.parse(this.responseText);
-      renderCountry(data2, "neighbour");
+      // console.log(this.status, this.responseText);
+      const countryData2 = JSON.parse(this.responseText).data.objects[0]; //This is because if we could do destructuring of object, it would require to the variable name to be the same as the object, data = data, and not data2
+      // console.log(countryData2.names.common);
+      renderCountry(countryData2, "neighbour");
     });
   });
 };
 
-getCountryAndNeighbour("Portugal");
- */
+getCountryAndNeighbour("Tanzania");
+// getCountryAndNeighbour("Kenya");
 
 /*
 // NOTE: Consuming Promises

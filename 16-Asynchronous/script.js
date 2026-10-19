@@ -135,6 +135,7 @@ getCountryAndNeighbour("Tanzania");
 // getCountryAndNeighbour("Kenya");
 */
 
+/*
 // NOTE: Consuming Promises
 // Consuming a promise that was returned by fetch function
 const renderCountry = function (countryData, className = "") {
@@ -182,6 +183,61 @@ const getCountryData = function (country) {
   })
     .then((response) => response.json())
     .then((responseData) => renderCountry(responseData.data.objects[0]));
+};
+
+getCountryData("Tanzania");
+ */
+
+// NOTE: Chaining Promises
+const renderCountry = function (countryData, className = "") {
+  const html = `
+         <article class="country ${className}">
+          <img class="country__img" src="${countryData.flag.url_png}" />
+          <div class="country__data">
+            <h3 class="country__name">${countryData.names.common}</h3>
+            <h4 class="country__region">${countryData.region}</h4>
+            <p class="country__row"><span>👫</span>${(+countryData.population / 1000000).toFixed(1)}M people</p>
+            <p class="country__row"><span>🗣️</span>${countryData.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${countryData.currencies[0].name}</p>
+          </div>
+        </article>`;
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+  countriesContainer.style.opacity = 1;
+};
+
+const getCountryData = function (country) {
+  // Country 1
+  fetch(`https://api.restcountries.com/countries/v5/names.common/${country}`, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((responseData) => {
+      renderCountry(responseData.data.objects[0]);
+
+      // Neighbouring country of country 1
+      const neighbour = responseData.data.objects[0].borders[0];
+
+      // Check if the neighbour country code has 2 or 3 letter
+      const codeProperty =
+        neighbour.length === 2 ? "codes.alpha_2" : "codes.alpha_3";
+
+      if (!neighbour) return;
+
+      return fetch(
+        `https://api.restcountries.com/countries/v5/${codeProperty}/${neighbour}`,
+        {
+          headers: {
+            Authorization: `Bearer ${API_KEY}`,
+          },
+        },
+      );
+    })
+    .then((response) => response.json()) //read the response body and parse its JSON into a JavaScript value.
+    .then((responseData) =>
+      renderCountry(responseData.data.objects[0], "neighbour"),
+    );
 };
 
 getCountryData("Tanzania");

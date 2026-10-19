@@ -62,6 +62,7 @@ getCountryData("Tanzania");
 // Inorder to solve such that we want our code to follow the predefined order we have to chain the requests
 */
 
+/*
 // NOTE: Welcome to callback hell
 // The callback hell is when we have a lot of nested callbacks inorder to execute asynchrnous tasks in sequences
 // The main problem with the callbackhell is that it's not easy to understand and reasoning hence can introduce bugs in our codes
@@ -132,46 +133,58 @@ const getCountryAndNeighbour = function (country) {
 
 getCountryAndNeighbour("Tanzania");
 // getCountryAndNeighbour("Kenya");
+*/
 
-/*
 // NOTE: Consuming Promises
 // Consuming a promise that was returned by fetch function
-const renderCountry = function (data, className = "") {
+const renderCountry = function (countryData, className = "") {
   const html = `
-        <article class="country ${className}">
-          <img class="country__img" src="${data.flag}" />
+         <article class="country ${className}">
+          <img class="country__img" src="${countryData.flag.url_png}" />
           <div class="country__data">
-            <h3 class="country__name">${data.name}</h3>
-            <h4 class="country__region">${data.region}</h4>
-            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)} people</p>
-            <p class="country__row"><span>🗣️</span>${data.language[0].name}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+            <h3 class="country__name">${countryData.names.common}</h3>
+            <h4 class="country__region">${countryData.region}</h4>
+            <p class="country__row"><span>👫</span>${(+countryData.population / 1000000).toFixed(1)}M people</p>
+            <p class="country__row"><span>🗣️</span>${countryData.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${countryData.currencies[0].name}</p>
           </div>
         </article>`;
   countriesContainer.insertAdjacentHTML("beforeend", html);
   countriesContainer.style.opacity = 1;
 };
 
-const getCountryData = function (country) {
-  fetch(
-    `https://api.restcountries.com/countries/v5/names.common/${country}?api-key=rc_live_demo`,
-  )
-    .then(function (response) {
-      //We use then() to specify the what to happen  when then the promise is fullfilled
-      console.log(response);
+// const getCountryData = function (country) {
+//   fetch(`https://api.restcountries.com/countries/v5/names.common/${country}`, {
+//     headers: {
+//       Authorization: `Bearer ${API_KEY}`,
+//     },
+//   })
+//     .then(function (response) {
+//       //We use then() to specify the what to happen  when then the promise is fullfilled
+//       console.log(response);
 
-      // Inorder to read the data from the body(response), we need to call the json() on response
-      // json is the method that is available on responses of the fetch method
-      return response.json(); //the json() is also asynchronous so it return a promise, so we need to handle that
-    })
-    .then(function (data) {
-      console.log(data);
-      renderCountry(data[0]);
-    });
+//       // Inorder to read the data from the body(response), we need to call the json() on response
+//       // json is the method that is available on responses of the fetch method
+//       return response.json(); //the json() is also asynchronous so it return a new promise, so we need to handle that by calling again another then() method
+//     })
+//     .then(function (data) {
+//       console.log(data.data.objects[0]);
+//       renderCountry(data.data.objects[0]);
+//     });
+// };
+
+// The above code can be further simplfied by using arrow function
+const getCountryData = function (country) {
+  fetch(`https://api.restcountries.com/countries/v5/names.common/${country}`, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((responseData) => renderCountry(responseData.data.objects[0]));
 };
 
-getCountryData("Portugal");
- */
+getCountryData("Tanzania");
 
 // NOTE: Building a promise
 // We can build a promise by using a constructor because promise is just an object, and it accept only one argument which is executor function

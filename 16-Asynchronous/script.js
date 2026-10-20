@@ -367,9 +367,7 @@ The Complete JavaScript Course
 §Coordinates 1: 52.508, 13.381 (Latitude, Longitude)
 §Coordinates 2: 19.037, 72.873
 §Coordinates 3: -33.933, 18.474
-*/
 
-// NOTE: Coding Challenge #1
 
 const renderCountry = function (countryData, className = "") {
   const html = `
@@ -470,6 +468,7 @@ const whereAmI = function (lat, lng) {
 whereAmI(-33.933, 18.474);
 // whereAmI(52.508, 13.381);
 // whereAmI(19.037, 72.873);
+*/
 
 // NOTE: Building a promise
 // We can build a promise by using a constructor because promise is just an object, and it accept only one argument which is executor function
@@ -484,7 +483,7 @@ whereAmI(-33.933, 18.474);
 //     resolve("You win"); //Calling the resolve() , will  make the function as the fulfilled promise(resolved promise)
 //     // So inside the resolve method we pass in the fulfilled value of the promise so as it can later be consumed with the then method
 //   } else {
-//     // The reject() mark the promise as rejected
+//     // The reject() mark the promise as rejected, inside the reject method we pass in the error message that can be caught in a catch block
 //     reject("You lost your money");
 //   }
 // });
@@ -499,28 +498,44 @@ whereAmI(-33.933, 18.474);
 //   });
 
 // Although the above code is not yet asynchronous.. so um let add some asynchrous behaviour by adding a time out
-// const lotteryPromise = new Promise(function (resolve, reject) {
-//   console.log("The lottery is happening!");
-//   setTimeout(function () {
-//     if (Math.random() >= 0.5) {
-//       // In this situation here, we said that we win the lottery, that means a fulfilled promise
-//       // And inorder to set the promise as the fulfilled we use the resolve() function
-//       resolve("You win"); //Calling the resolve() , will  make the function as the fulfilled promise(resolved promise)
-//       // So inside the resolve method we pass in the fulfilled value of the promise so as it can later be consumed with the then method
-//     } else {
-//       // The reject() mark the promise as rejected
-//       reject(new Error("You lost your money"));
-//     }
-//   }, 3000);
-// });
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log("The lottery is happening!🧿");
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      // In this situation here, we said that we win the lottery, that means a fulfilled promise
+      // And inorder to set the promise as the fulfilled we use the resolve() function
+      resolve("You win 😛"); //Calling the resolve() , will  make the function as the fulfilled promise(resolved promise)
+      // So inside the resolve method we pass in the fulfilled value of the promise so as it can later be consumed with the then method
+    } else {
+      // The reject() mark the promise as rejected
+      reject(new Error("You lost your money 💩"));
+    }
+  }, 3000);
+});
 
-// // Consuming the promise that we built
-// lotteryPromise
-//   .then(function (resolve) {
-//     console.log(resolve);
-//   })
-//   .catch(function (err) {
-//     console.error(err);
-//   });
+// Consuming the promise that we built
+lotteryPromise
+  .then(function (resolve) {
+    console.log(resolve);
+  })
+  .catch(function (err) {
+    console.error(err);
+  });
 
-// In practice all we actually do most of the time is to consume promise
+// In practice all we actually do most of the time is to consume promise, we only build promise to wrap old callback based function into promises.. anf this process is callled promosifying
+// Promisifying means to convert the callback based asynchronous behaviour into a promise based
+
+// Let promisify the setTimeout function and create a wait function
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+// Consuming promise
+wait(2)
+  .then(() => {
+    console.log("I waited for 2 seconds");
+    return wait(1);
+  })
+  .then(() => console.log("I waited for 1 second"));

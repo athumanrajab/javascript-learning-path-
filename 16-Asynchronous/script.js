@@ -760,6 +760,8 @@ createImage("./img/img-1.jpg")
 // Inside an async function we can have one or more await statement
 // async/await is simply a syntatic sugar over then method in promise
 // We can handles error in async/await by using try .. catch
+// async function always return a promise
+// await can only be used inside an async function
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -812,10 +814,28 @@ const whereAmI = async function () {
     }
     const data = await res.json();
     renderCountry(data.data.objects[0]);
+
+    return `You're in ${responseData.city}, ${country}`; //This will become the fullfilled value of the promise
   } catch (error) {
     console.error(`Oppsss 💩: ${error.message}`);
+
+    // Reject promise returned from async function, this will act as the trick whenever there is an error in try block it will be catched and the promise will be rejected
+    throw err;
   }
 };
+// NOTE: Returning values from async functions
+// console.log("Printed First");
+// whereAmI()
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+// console.log("Printed next");
 
-whereAmI();
-console.log("Printed First");
+// Alternatively we can return and handle values from async function by using Immediately Invoked Function Expressions (IIFE)
+(async function () {
+  try {
+    const result = await whereAmI();
+    console.log(result);
+  } catch (error) {
+    console.error(error.message);
+  }
+})();

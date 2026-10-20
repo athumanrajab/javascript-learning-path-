@@ -470,6 +470,7 @@ whereAmI(-33.933, 18.474);
 // whereAmI(19.037, 72.873);
 */
 
+/*
 // NOTE: Building a promise
 // We can build a promise by using a constructor because promise is just an object, and it accept only one argument which is executor function
 // Such that as soon as the promise constructor run it will automatically execute the executor function
@@ -539,3 +540,124 @@ wait(2)
     return wait(1);
   })
   .then(() => console.log("I waited for 1 second"));
+ */
+
+// NOTE: Promisifying Geolocation API
+// Geolocation API is among of the callback based API, so this is the great opportunity to promisify the callback based API to promise based API
+// navigator.geolocation.getCurrentPosition(
+//   (position) => console.log(position),
+//   (err) => console.error(err),
+// );
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// getPosition().then((pos) => console.log(pos));
+
+const renderCountry = function (countryData, className = "") {
+  const html = `
+         <article class="country ${className}">
+          <img class="country__img" src="${countryData.flag.url_png}" />
+          <div class="country__data">
+            <h3 class="country__name">${countryData.names.common}</h3>
+            <h4 class="country__region">${countryData.region}</h4>
+            <p class="country__row"><span>👫</span>${(+countryData.population / 1000000).toFixed(1)}M people</p>
+            <p class="country__row"><span>🗣️</span>${countryData.languages[0].name}</p>
+            <p class="country__row"><span>💰</span>${countryData.currencies[0].name}</p>
+          </div>
+        </article>`;
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+  // countriesContainer.style.opacity = 1;
+};
+
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentHTML("beforeend", msg);
+  // countriesContainer.style.opacity = 1;
+};
+
+const getJSON = function (url, msgError = "Something went wrong!") {
+  return fetch(url, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(`${msgError} (${response.status})`);
+    }
+    return response.json();
+  });
+};
+
+const getCountryData = function (country) {
+  // Country 1
+  console.log(country);
+  getJSON(
+    `https://api.restcountries.com/countries/v5/names.common/${country}`,
+    "Country not found!",
+  )
+    .then((responseData) => {
+      const country = responseData.data.objects[0];
+
+      if (!country) {
+        throw new Error("Country not found!");
+      }
+
+      renderCountry(country);
+
+      // Neighbouring country of country 1
+      const neighbour = responseData.data.objects[0].borders[0];
+      // console.log(neighbour);
+      if (!neighbour) {
+        throw new Error("No neighbour found!");
+      }
+
+      // Check if the neighbour country code has 2 or 3 letter
+      const codeProperty =
+        neighbour.length === 2 ? "codes.alpha_2" : "codes.alpha_3";
+
+      return getJSON(
+        `https://api.restcountries.com/countries/v5/${codeProperty}/${neighbour}`,
+        "Country not found!",
+      );
+    })
+    .then((responseData) =>
+      renderCountry(responseData.data.objects[0], "neighbour"),
+    )
+    .catch((err) => {
+      console.error(err);
+      renderError(`Something went wrong 💩💩: ${err.message}. Try again`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+const whereAmI = function () {
+  getPosition()
+    .then((pos) => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+      );
+    })
+
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Unable to get your location details.");
+      }
+      return response.json();
+    })
+    .then((responseBody) => {
+      const country = responseBody.countryName.split(",")[0];
+      console.log(`You are in ${responseBody.city}, ${country}`);
+      getCountryData(country);
+    })
+    .catch((err) => console.error(err.message));
+};
+
+btn.addEventListener("click", function () {
+  whereAmI();
+});

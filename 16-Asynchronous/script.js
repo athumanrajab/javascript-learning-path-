@@ -759,6 +759,7 @@ createImage("./img/img-1.jpg")
 // By using "async" keyword , it make the function asynchronous so as it can run in the background while executing the codes inside it
 // Inside an async function we can have one or more await statement
 // async/await is simply a syntatic sugar over then method in promise
+// We can handles error in async/await by using try .. catch
 const getPosition = function () {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -781,29 +782,39 @@ const renderCountry = function (countryData, className = "") {
   countriesContainer.style.opacity = 1;
 };
 const whereAmI = async function () {
-  // Consuming promise returned by getPosition()
-  const position = await getPosition();
-  const { latitude: lat, longitude: lng } = position.coords;
+  try {
+    // Consuming promise returned by getPosition()
+    const position = await getPosition();
+    const { latitude: lat, longitude: lng } = position.coords;
 
-  // Consuming promise returned after fetching through bigdatacloud API
-  const response = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
-  );
-  const responseData = await response.json();
-  const country = responseData.countryName.split(",")[0];
+    // Consuming promise returned after fetching through bigdatacloud API
+    const response = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`,
+    );
+    if (!response.ok) {
+      throw new Error("Problem getting location data!");
+    }
+    const responseData = await response.json();
+    const country = responseData.countryName.split(",")[0];
 
-  // Here we are using async/await to consume promise returned after fetching the restcountries API
-  const res = await fetch(
-    `https://api.restcountries.com/countries/v5/names.common/${country}`,
-    {
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
+    // Here we are using async/await to consume promise returned after fetching the restcountries API
+    const res = await fetch(
+      `https://api.restcountries.com/countries/v5/names.common/${country}`,
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+        },
       },
-    },
-  ); //await will stop the code execution at this point untill the promise is settled, but it is not lock the mainn thread of execution, as soon as this promise  is resolved, then the value of whole await expression, is gonna be the resolved value of the promise and we can simply store that into a variable
+    ); //await will stop the code execution at this point untill the promise is settled, but it is not lock the mainn thread of execution, as soon as this promise  is resolved, then the value of whole await expression, is gonna be the resolved value of the promise and we can simply store that into a variable
 
-  const data = await res.json();
-  renderCountry(data.data.objects[0]);
+    if (!res.ok) {
+      throw new Error("Problem getting location data!");
+    }
+    const data = await res.json();
+    renderCountry(data.data.objects[0]);
+  } catch (error) {
+    console.error(`Oppsss 💩: ${error.message}`);
+  }
 };
 
 whereAmI();

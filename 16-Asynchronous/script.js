@@ -754,7 +754,7 @@ createImage("./img/img-1.jpg")
   })
   .catch((err) => console.error(`Oppsss 💩: ${err.message}`));
 */
-
+/* 
 // NOTE: Consuming promises with async/await
 // By using "async" keyword , it make the function asynchronous so as it can run in the background while executing the codes inside it
 // Inside an async function we can have one or more await statement
@@ -839,3 +839,54 @@ const whereAmI = async function () {
     console.error(error.message);
   }
 })();
+*/
+
+// NOTE: Coding Challenge #3
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const createImage = function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const image = document.createElement("img");
+    image.src = `${imgPath}`;
+
+    image.addEventListener("load", function () {
+      imageContainer.append(image);
+      resolve(image);
+    });
+
+    image.addEventListener("error", function () {
+      reject(new Error("Image not found"));
+    });
+  });
+};
+
+//  NOTE: Solution to Coding Challenge #3
+const loadNPause = async function () {
+  try {
+    const img1 = await createImage("./img/img-1.jpg");
+    await wait(3);
+    img1.style.display = "none";
+    const img2 = await createImage("./img/img-2.jpg");
+    await wait(3);
+    img2.style.display = "none";
+    const img3 = await createImage("./img/img-3.jpg");
+    await wait(3);
+    img3.style.display = "none";
+  } catch (error) {
+    console.error(`Oppss 💩: ${error.message}`);
+  }
+};
+
+// loadNPause();
+const loadAll = async function (imgArr) {
+  const imgs = imgArr.map(async (img) => await createImage(img));
+  const images = await Promise.all(imgs);
+  images.forEach((element) => {
+    element.classList.add("parallel");
+  });
+};
+loadAll(["img/img-1.jpg", "img/img-2.jpg", "img/img-3.jpg"]);

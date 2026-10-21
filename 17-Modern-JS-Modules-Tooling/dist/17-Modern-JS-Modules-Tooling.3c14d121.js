@@ -780,6 +780,7 @@ console.log(stateClone);
 // NOTE: Bundling with parcel and npm script
 // enables Hot Module Replacement (HMR)
 if (module.hot) module.hot.accept();
+ // NOTE: Configuring babel and polyfilling
 
 },{"./shoppingCart.js":"3ZJbS","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","lodash-es":"33LEu"}],"3ZJbS":[function(require,module,exports,__globalThis) {
 // Exporting module

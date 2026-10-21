@@ -67,3 +67,5 @@ console.log(stateClone);
 if (module.hot) {
   module.hot.accept();
 }
+
+// NOTE: Configuring babel and polyfilling

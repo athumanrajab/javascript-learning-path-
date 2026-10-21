@@ -1,13 +1,12 @@
-/* 
 // NOTE: Exporting and importing in ES6 Modules
 
 // Importing named module are wrapped around curly braces
-// import { addToCart, totalPrice, totalQuantity } from "./shoppingCart.js";
+import { addToCart, totalPrice, totalQuantity } from "./shoppingCart.js";
 // Consuming imported value
-// addToCart("breads", 5);
+addToCart("breads", 5);
 
-// console.log(`Price : ${totalPrice}`);
-// console.log(`Quantity : ${totalQuantity}`);
+console.log(`Price : ${totalPrice}`);
+console.log(`Quantity : ${totalQuantity}`);
 
 // We can also import everything from a module by using *
 // import * as Shoppingcart from "./shoppingCart.js";
@@ -18,7 +17,6 @@
 // import add from "./shoppingCart.js";
 
 // add("Pizza", 2);
-*/
 
 console.log("-----Importing module-----");
 
@@ -41,7 +39,8 @@ const getLastPost = async function () {
 const lastPost = await getLastPost();
 console.log(lastPost);
  */
-import cloneDeep from "./node_modules/lodash-es/cloneDeep.js";
+// import cloneDeep from "./node_modules/lodash-es/cloneDeep.js";
+import cloneDeep from "lodash-es";
 
 const state = {
   cart: [
@@ -61,3 +60,10 @@ const state = {
 const stateClone = cloneDeep(state);
 // state.user.loggedIn = false;
 console.log(stateClone);
+
+// NOTE: Bundling with parcel and npm script
+
+// enables Hot Module Replacement (HMR)
+if (module.hot) {
+  module.hot.accept();
+}

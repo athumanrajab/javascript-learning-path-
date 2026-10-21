@@ -3,12 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "type": "commonjs",
-  "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
     "lodash-es": "^4.18.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "@swc/core@1.16.18": true,
+    "lmdb@2.8.5": true,
+    "msgpackr-extract@3.0.4": true
   }
 }

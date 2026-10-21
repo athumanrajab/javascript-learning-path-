@@ -1,3 +1,4 @@
+/* 
 // NOTE: Exporting and importing in ES6 Modules
 
 // Importing named module are wrapped around curly braces
@@ -11,11 +12,30 @@
 // We can also import everything from a module by using *
 // import * as Shoppingcart from "./shoppingCart.js";
 
-console.log("-----Importing module-----");
-
 // Shoppingcart.addToCart("Candies", 10);
 
 // When we import , exported default value , we can basically give it any name that we want.. we dont use curly braces {}
-import add from "./shoppingCart.js";
+// import add from "./shoppingCart.js";
 
-add("Pizza", 2);
+// add("Pizza", 2);
+*/
+
+console.log("-----Importing module-----");
+
+// NOTE: Top-level await
+// In modules we can use "await" keyword outside the async function
+// const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+// const data = await res.json();
+// console.log(data);
+
+// Although this block the code execution of the entire module, this can useful sometimes but also it can be harmful in some situation especially when the task is long running task
+
+const getLastPost = async function () {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data = await res.json();
+
+  return { title: data.at(-1).title, text: data.at(-1).body };
+};
+
+const lastPost = await getLastPost();
+console.log(lastPost);

@@ -22,6 +22,7 @@
 
 console.log("-----Importing module-----");
 
+/*
 // NOTE: Top-level await
 // In modules we can use "await" keyword outside the async function
 // const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -39,3 +40,24 @@ const getLastPost = async function () {
 
 const lastPost = await getLastPost();
 console.log(lastPost);
+ */
+import cloneDeep from "./node_modules/lodash-es/cloneDeep.js";
+
+const state = {
+  cart: [
+    { product: "bread", quantity: 5 },
+    { product: "pizza", quantity: 2 },
+    { product: "candy", quantity: 10 },
+  ],
+  user: { loggedIn: true },
+};
+
+// copy an entire object and store it in a new variable
+// const stateClone = Object.assign({}, state);
+// state.user.loggedIn = false;
+// console.log(stateClone);
+
+// By using loadash
+const stateClone = cloneDeep(state);
+// state.user.loggedIn = false;
+console.log(stateClone);

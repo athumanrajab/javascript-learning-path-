@@ -2,14 +2,15 @@ import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
 
 import "core-js/stable"; //Polyfilling modern js features such as Promise.allSettled([...]);
 import "regenerator-runtime/runtime"; //Polyfilling async await
 
 // TODO: Enable hot reloading
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const recipeContainer = document.querySelector(".recipe");
 
@@ -54,17 +55,30 @@ const controlSearchResults = async function () {
     // Load search results based on the passed query
     await model.loadSearchResults(query);
 
-    //Render result
-    resultsView.render(model.state.search.results);
+    //  Render result
+    // resultsView.render(model.state.search.results); //get all results at the same time
+    resultsView.render(model.getSearchResultsPage());
+
+    // Render initial pagination button
+    paginationView.render(model.state.search);
   } catch (error) {
     console.error(error);
   }
+};
+
+const controlPagination = function (goToPage) {
+  // Render new Result
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // Render new pagination button
+  paginationView.render(model.state.search);
 };
 
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 
 init();

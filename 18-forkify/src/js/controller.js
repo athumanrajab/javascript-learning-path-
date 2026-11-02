@@ -1,15 +1,17 @@
 import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
+import searchView from "./views/searchView.js";
+import resultsView from "./views/resultsView.js";
 
 import "core-js/stable"; //Polyfilling modern js features such as Promise.allSettled([...]);
 import "regenerator-runtime/runtime"; //Polyfilling async await
 
+// TODO: Enable hot reloading
+if (module.hot) {
+  module.hot.accept();
+}
+
 const recipeContainer = document.querySelector(".recipe");
-
-// NEW API URL (instead of the one shown in the video)
-// https://forkify-api.jonas.io
-
-///////////////////////////////////////
 
 const controlRecipes = async function () {
   try {
@@ -38,9 +40,31 @@ const controlRecipes = async function () {
 // Subcriber - Codes that should be executed when the event happen
 // Solution: We can subscribe to the publisher by passing into subscriber function as an argument
 
+// TODO: Implementing search results - Part 1 - the loadSearchResults() is handled here
+const controlSearchResults = async function () {
+  try {
+    // Render spinner while waiting for the search results
+    resultsView.renderSpinner();
+
+    // Get search query
+    const query = searchView.getQuery();
+
+    if (!query) return;
+
+    // Load search results based on the passed query
+    await model.loadSearchResults(query);
+
+    //Render result
+    resultsView.render(model.state.search.results);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 
 init();

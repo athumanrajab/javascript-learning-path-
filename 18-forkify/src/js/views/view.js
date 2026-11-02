@@ -1,0 +1,64 @@
+import icons from "url:../../img/icons.svg"; //parcel way of getting all static files
+
+export default class View {
+  _data;
+  render(data) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError();
+    this._data = data;
+    // Getting rid of any content including the welcome message
+    this._clear();
+
+    const markup = this._generateMarkup();
+
+    // Insert our html markup
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  // TODO: Clearing recipe container
+  _clear() {
+    this._parentElement.innerHTML = "";
+  }
+
+  // TODO: Render a loading spinner
+  renderSpinner() {
+    const markup = `
+          <div class="spinner">
+            <svg>
+              <use href="${icons}#icon-loader"></use>
+            </svg>
+          </div>`;
+    this._parentElement.innerHTML = "";
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  // TODO: Implementing errors and success messages
+  renderError(message = this._errorMessage) {
+    const markup = `
+              <div class="error">
+                <div>
+                  <svg>
+                    <use href="${icons}#icon-alert-triangle"></use>
+                  </svg>
+                </div>
+                <p>${message}</p>
+              </div>`;
+    // Getting rid of any content including the welcome message
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+  renderMessage(message = this._successmessage) {
+    const markup = `
+              <div class="message">
+                <div>
+                  <svg>
+                    <use href="${icons}#icon-smile"></use>
+                  </svg>
+                </div>
+                <p>${message}</p>
+              </div>`;
+    // Getting rid of any content including the welcome message
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+}

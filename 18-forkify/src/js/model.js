@@ -4,12 +4,16 @@ import { getJSON } from "./helpers.js";
 
 export const state = {
   recipe: {},
+  search: {
+    query: "",
+    results: [],
+  },
 };
 
 // TODO: loading Recipe
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await getJSON(`${API_URL}${id}`);
 
     const { recipe } = data.data;
     // console.log(recipe);
@@ -26,6 +30,28 @@ export const loadRecipe = async function (id) {
     };
     // console.log(recipe);
   } catch (error) {
+    throw error;
+  }
+};
+
+// TODO: Implementing search results - Part 1 (Without pagination)
+export const loadSearchResults = async function (query) {
+  try {
+    state.search.query = query;
+
+    const data = await getJSON(`${API_URL}?search=${query}`);
+
+    // NOTE: Lets create a new array by using map
+    state.search.results = data.data.recipes.map((dt) => {
+      return {
+        id: dt.id,
+        image: dt.image_url,
+        title: dt.title,
+        publisher: dt.publisher,
+      };
+    });
+  } catch (error) {
+    console.error(`Oppps 💩: ${error}`);
     throw error;
   }
 };

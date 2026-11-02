@@ -736,8 +736,7 @@ const controlRecipes = async function() {
         // NOTE: Rendering recipe
         (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
     } catch (err) {
-        // alert(err);
-        console.error(err);
+        (0, _recipeViewJsDefault.default).renderError();
     }
 };
 // showRecipe();
@@ -2649,8 +2648,7 @@ const loadRecipe = async function(id) {
         };
     // console.log(recipe);
     } catch (error) {
-        // alert(error);
-        console.error(`Oppss \u{1F4A9}\u{1F4A9}\u{1F4A9}! ${error} `);
+        throw error;
     }
 };
 
@@ -2698,6 +2696,8 @@ var _fractionJsDefault = parcelHelpers.interopDefault(_fractionJs);
 class RecipeView {
     #parentElement = document.querySelector(".recipe");
     #data;
+    #errorMessage = "We could not find that recipe. Please try another one!";
+    #successmessage = "";
     render(data) {
         this.#data = data;
         // Getting rid of any content including the welcome message
@@ -2719,6 +2719,35 @@ class RecipeView {
           </svg>
         </div>`;
         this.#parentElement.innerHTML = "";
+        this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    // TODO: Implementing errors and success messages
+    renderError(message = this.#errorMessage) {
+        const markup = `
+            <div class="error">
+              <div>
+                <svg>
+                  <use href="${(0, _iconsSvgDefault.default)}#icon-alert-triangle"></use>
+                </svg>
+              </div>
+              <p>${message}</p>
+            </div>`;
+        // Getting rid of any content including the welcome message
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    renderMessage(message = this.#successmessage) {
+        const markup = `
+            <div class="message">
+              <div>
+                <svg>
+                  <use href="${(0, _iconsSvgDefault.default)}#icon-smile"></use>
+                </svg>
+              </div>
+              <p>${message}</p>
+            </div>`;
+        // Getting rid of any content including the welcome message
+        this.#clear();
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     }
     // TODO: Registering a Publisher, while handler will act as a subsciber

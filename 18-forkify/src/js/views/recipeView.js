@@ -4,6 +4,8 @@ import Fraction from "fraction.js";
 class RecipeView {
   #parentElement = document.querySelector(".recipe");
   #data;
+  #errorMessage = "We could not find that recipe. Please try another one!";
+  #successmessage = "";
 
   render(data) {
     this.#data = data;
@@ -30,6 +32,36 @@ class RecipeView {
           </svg>
         </div>`;
     this.#parentElement.innerHTML = "";
+    this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  // TODO: Implementing errors and success messages
+  renderError(message = this.#errorMessage) {
+    const markup = `
+            <div class="error">
+              <div>
+                <svg>
+                  <use href="${icons}#icon-alert-triangle"></use>
+                </svg>
+              </div>
+              <p>${message}</p>
+            </div>`;
+    // Getting rid of any content including the welcome message
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+  renderMessage(message = this.#successmessage) {
+    const markup = `
+            <div class="message">
+              <div>
+                <svg>
+                  <use href="${icons}#icon-smile"></use>
+                </svg>
+              </div>
+              <p>${message}</p>
+            </div>`;
+    // Getting rid of any content including the welcome message
+    this.#clear();
     this.#parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 

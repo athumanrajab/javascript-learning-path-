@@ -33,6 +33,13 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
+  // TODO: Registering a Publisher, while handler will act as a subsciber
+  addHandlerRender(handler) {
+    // NOTE: Listening for load and hashchange events
+    const events = ["hashchange", "load"];
+    events.forEach((event) => window.addEventListener(event, handler));
+  }
+
   #generateMarkup() {
     // console.log(this.#data);
     return `<figure class="recipe__fig">

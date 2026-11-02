@@ -741,12 +741,16 @@ const controlRecipes = async function() {
     }
 };
 // showRecipe();
-// TODO: Listening for load and hashchange events
-const events = [
-    "hashchange",
-    "load"
-];
-events.forEach((event)=>window.addEventListener(event, controlRecipes));
+// NOTE: Event handlers in MVC: Publisher-Subscriber pattern
+// This is how we implement event listener and event handlers in MVC pattern
+// Publisher - codes that knows when to react
+// Subcriber - Codes that should be executed when the event happen
+// Solution: We can subscribe to the publisher by passing into subscriber function as an argument
+// TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
+const init = function() {
+    (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+};
+init();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","core-js/modules/web.immediate.js":"bzsBv","regenerator-runtime/runtime":"f6ot0","./model.js":"3QBkH","./views/recipeView.js":"3wx5k"}],"jnFvT":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
@@ -2684,7 +2688,7 @@ const getJSON = async function(url) {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./config.js":"2hPh4"}],"3wx5k":[function(require,module,exports,__globalThis) {
+},{"./config.js":"2hPh4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"3wx5k":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _iconsSvg = require("url:../../img/icons.svg"); //parcel way of getting all static files
@@ -2716,6 +2720,15 @@ class RecipeView {
         </div>`;
         this.#parentElement.innerHTML = "";
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    // TODO: Registering a Publisher, while handler will act as a subsciber
+    addHandlerRender(handler) {
+        // NOTE: Listening for load and hashchange events
+        const events = [
+            "hashchange",
+            "load"
+        ];
+        events.forEach((event)=>window.addEventListener(event, handler));
     }
     #generateMarkup() {
         // console.log(this.#data);

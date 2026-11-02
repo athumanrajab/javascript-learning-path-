@@ -33,6 +33,15 @@ const controlRecipes = async function () {
 };
 // showRecipe();
 
-// TODO: Listening for load and hashchange events
-const events = ["hashchange", "load"];
-events.forEach((event) => window.addEventListener(event, controlRecipes));
+// NOTE: Event handlers in MVC: Publisher-Subscriber pattern
+// This is how we implement event listener and event handlers in MVC pattern
+// Publisher - codes that knows when to react
+// Subcriber - Codes that should be executed when the event happen
+// Solution: We can subscribe to the publisher by passing into subscriber function as an argument
+
+// TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+
+init();

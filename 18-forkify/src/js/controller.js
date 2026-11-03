@@ -27,6 +27,7 @@ const controlRecipes = async function () {
 
     // Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+    // NOTE: updating bookmarks view
     bookmarksView.update(model.state.bookmarks);
 
     // NOTE: Loading recipe which was the function imported from model.js
@@ -107,8 +108,13 @@ const controlAddBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);

@@ -86,6 +86,11 @@ export const updateServings = function (newServings) {
   state.recipe.servings = newServings;
 };
 
+// TODO: Persist data in local storage
+const persistBookmarks = function () {
+  localStorage.setItem("bookmark", JSON.stringify(state.bookmarks));
+};
+
 // TODO: Implementing add bookmarking feature
 export const addBookmark = function (recipe) {
   // Add bookmark
@@ -95,6 +100,8 @@ export const addBookmark = function (recipe) {
   if (recipe.id === state.recipe.id) {
     state.recipe.bookmarked = true;
   }
+
+  persistBookmarks();
 };
 
 // TODO: Implementing remove bookmarking feature
@@ -107,4 +114,21 @@ export const deleteBookmark = function (id) {
   if (id === state.recipe.id) {
     state.recipe.bookmarked = false;
   }
+
+  persistBookmarks();
 };
+
+const init = function () {
+  const storage = localStorage.getItem("bookmark");
+  if (storage) {
+    state.bookmarks = JSON.parse(storage);
+  }
+};
+
+init();
+
+// NOTE: A function that will help clearing the bookmarks during development
+const clearBookmarks = function () {
+  localStorage.clear("bookmark");
+};
+// clearBookmarks();

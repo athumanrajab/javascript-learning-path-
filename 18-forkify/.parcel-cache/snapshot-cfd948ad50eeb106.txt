@@ -1,18 +1,23 @@
-7559
-83/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/model.js1792769926704041102 0
-94/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views/recipeView.js1792768681271868265 0
-74/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js1792768667846771585 1
+7591
+83/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/model.js1793643233170956005 0
+84/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/config.js1793633074129161123 0
+85/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/helpers.js1793387906082973604 0
+94/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views/recipeView.js1793643354239597564 0
+95/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views/resultsView.js1793631391406451420 0
+94/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views/searchView.js1793619103914165984 0
+88/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views/view.js1793631857772017504 0
+74/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js1793378878596706595 1
 75/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/img1787300710219503854 1
 89/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/sass/_upload.scss1787300710220659751 0
 76/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/sass1787300710220659751 1
 96/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/forkify-flowchart-part-2.png1787300710211737587 0
-91/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/icons.21bad73c.svg1792770083132877502 0
-100/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.f7626f62.css.map1792770083111877353 0
-91/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/icons.0809ef97.svg1792770083133941100 0
-99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.4a59a05f.js.map1792770083113121485 0
-93/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/favicon.8b2f57bf.png1792770082994811621 0
+91/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/icons.21bad73c.svg1793643219707314601 0
+100/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.f7626f62.css.map1793643219695393115 0
+91/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/icons.0809ef97.svg1793643219707314601 0
+99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.4a59a05f.js.map1793643354346806119 0
+93/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/favicon.8b2f57bf.png1793643219660392854 0
 99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.62406edb.js.map1792764625764468759 0
-72/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist1792770099285078117 1
+72/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist1793643354347098462 1
 96/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/forkify-flowchart-part-1.png1787300710206303212 0
 94/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/clone/LICENSE1792757122547697440 0
 97/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/clone/.npmignore1792757122531697345 0
@@ -131,7 +136,6 @@
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-textshadow.js1792757122988274582 0
 126/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/x-doc-messaging.js1792757123183893631 0
 127/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-text-justify.js1792757122985941543 0
-129/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-module-scripts.js1792757122965586506 0
 129/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/picture-in-picture.js1792757123116416581 0
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/webxr.js1792757123180672846 0
 123/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/font-kerning.js1792757123036557847 0
@@ -181,8 +185,6 @@
 122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/user-timing.js1792757123157919129 0
 128/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-focus-visible.js1792757122943944604 0
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/webvr.js1792757123180032273 0
-134/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/document-evaluate-xpath.js1792757123021147801 0
-140/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/background-repeat-round-space.js1792757122826201684 0
 124/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/mediarecorder.js1792757123088377498 0
 132/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/contentsecuritypolicy.js1792757122898122213 0
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/serviceworkers.js1792757123134180754 0
@@ -293,7 +295,7 @@
 122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/font-smooth.js1792757123037623197 0
 124/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/selection-api.js1792757123133660216 0
 122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/blobbuilder.js1792757122844531902 0
-85/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/package-lock.json1792765797236858586 0
+85/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/package-lock.json1792774914304795712 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/webm.js1792757123178490001 0
 120/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-table.js1792757122983297634 0
 129/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-default-pseudo.js1792757122930476993 0
@@ -521,6 +523,21 @@
 93/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite1792757123187572172 1
 105/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/supports-color/readme.md1792757122556697493 0
 104/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/supports-color/index.js1792757122537697381 0
+107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/fraction.d.mts1792774914238865119 0
+100/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/LICENSE1792774914218795196 0
+105/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/CHANGELOG.md1792774914236684316 0
+134/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/document-evaluate-xpath.js1792757123021147801 0
+140/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/background-repeat-round-space.js1792757122826201684 0
+117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/rational-pow.js1792774914235360825 0
+111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/approx.js1792774914220795208 0
+113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/egyptian.js1792774914221795214 0
+122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/hesse-convergence.js1792774914233817079 0
+102/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/README.md1792774914237602351 0
+105/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/package.json1792774914236336836 0
+113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/dist/fraction.min.js1792774914231984978 0
+129/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-module-scripts.js1792757122965586506 0
+98/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/tests1792774914231984978 1
+92/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js1792774914238865119 1
 135/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/input-autocomplete-onoff.js1792757123058175240 0
 100/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/has-flag/index.d.ts1792757122525697310 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/lightningcss-linux-x64-gnu/LICENSE1792757122521697286 0
@@ -660,6 +677,7 @@
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/utils/src/getRootDir.js1792757122742698592 0
 106/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/utils/src/svgo.js1792757122830532788 0
 131/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/css-display-contents.js1792757122934754147 0
+115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/tests/fraction.test.js1792774914232908575 0
 108/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/utils/src/schema.js1792757122824373958 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/utils/src/escape-html.js1792757122725698492 0
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/utils/src/TapStream.js1792757122831320508 0
@@ -1216,6 +1234,7 @@
 128/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/transformer-node/src/NodeTransformer.js1792757122560697517 0
 104/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/runtime-rsc/lib1792757122532697351 1
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/bundler-default/LICENSE1792757122524697304 0
+106/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/fraction.d.ts1792774914239175094 0
 126/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/bundler-default/src/DefaultBundler.js1792757122623697889 0
 108/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/bundler-default/lib1792757122534697363 1
 104/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/bundler-default1792757122623697889 1
@@ -1280,7 +1299,7 @@
 107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/cache/src/types.js1792757122691698291 0
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/core/src/assetUtils.js1792757122770834521 0
 98/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/cache/src1792757122690698285 1
-80/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/package.json1792765928205740927 0
+80/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/package.json1792774914243590885 0
 105/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/cache/index.d.ts1792757122694698309 0
 109/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/cache/lib/FSCache.js1792757122541697404 0
 109/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/cache/lib/types.d.ts1792757122698698332 0
@@ -1315,7 +1334,9 @@
 101/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/picocolors/README.md1792757122555697487 0
 104/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/picocolors/package.json1792757122544697422 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/picocolors/picocolors.browser.js1792757122525697310 0
+97/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/dist1792774914237602351 1
 102/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/picocolors/types.d.ts1792757122578697623 0
+98/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views/paginationView.js1793639756025378804 0
 91/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/picocolors1792757122564697540 1
 145/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@msgpackr-extract/msgpackr-extract-linux-x64/node.napi.musl.node1792757122624697895 0
 142/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/core/test/fixtures/config-extends-not-found/.parcelrc1792757122554697481 0
@@ -1722,7 +1743,7 @@
 134/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.symbol.is-registered-symbol.js1792765796160733271 0
 126/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.promise.all-settled.js1792765796132889212 0
 119/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/core/src/public/BundleGroup.js1792757122807053065 0
-80/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules1792765795332847256 1
+80/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules1792774914172794920 1
 101/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@swc/core/index.d.ts1792757122643698007 0
 120/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.string.cooked.js1792765796155844487 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/types-internal/lib/Glob.d.ts1792757122720698462 0
@@ -1739,6 +1760,7 @@
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.number.is-safe-integer.js1792765795980109883 0
 107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/transformer-js/src1792757122651698054 1
 122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.iterator.concat.js1792765796104310644 0
+108/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/src/fraction.js1792774914227795250 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.iterator.map.js1792765795966272919 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.array.includes.js1792765795945559486 0
 134/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.set.symmetric-difference.v2.js1792765796153945052 0
@@ -1949,7 +1971,7 @@
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/proposals/promise-any.js1792765796715107831 0
 119/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/array-buffer/is-view.js1792765796545353503 0
 105/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/json5/lib/stringify.d.ts1792757122723698480 0
-83/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/index.html1792770099284863797 0
+83/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/index.html1793643219672259503 0
 124/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/update-browserslist-db/check-npm-version.js1792757122527697322 0
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/stable/promise/index.js1792765796480540477 0
 121/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/proposals/promise-all-settled.js1792765796714879715 0
@@ -2028,6 +2050,7 @@
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/regions/AF.js1792757122695698315 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.math.log1p.js1792765795974982200 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/proposals/array-filtering.js1792765795580015998 0
+109/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/dist/fraction.js1792774914223795226 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/proposals/math-clamp-v2.js1792765796638495894 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/weak-map/emplace.js1792765795898377810 0
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/web.url-search-params.has.js1792765797127539906 0
@@ -2181,7 +2204,7 @@
 148/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/mdn-css-unicode-bidi-isolate-override.js1792757123085613727 0
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/array-for-each.js1792765795581603790 0
 110/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/string/link.js1792765796606152514 0
-80/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views1792768681271868265 1
+80/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/views1793633869370875831 1
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/transformer-postcss/src1792757122666698143 1
 146/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/set-method-get-keys-before-cloning-detection.js1792765796831188374 0
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/typed-array/keys.js1792765796591149427 0
@@ -2283,7 +2306,7 @@
 114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/instance/to-spliced.js1792765797042469814 0
 132/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/lmdb/dependencies/lmdb/libraries/liblmdb/mdb_load.c1792757122839420216 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/collection-weak.js1792765795718508249 0
-78/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/index.html1792770099189991109 0
+78/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/index.html1793630526695147502 0
 120/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/string-html-forced.js1792765796955699235 0
 128/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/create-property-descriptor.js1792765795772810230 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/number/constructor.js1792765795737758287 0
@@ -2324,6 +2347,7 @@
 114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/regexp-flags.js1792765796745867627 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/object-to-array.js1792765796675630509 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/string/match-all.js1792765796631457198 0
+101/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples1792774914235945193 1
 109/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/perform.js1792765796711160422 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/object-create.js1792765796663235264 0
 123/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.weak-map.constructor.js1792765796069334884 0
@@ -2698,6 +2722,7 @@
 122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.weak-map.upsert.js1792765796171328334 0
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/instance/find.js1792765796241499990 0
 119/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/proposals/iterator-includes.js1792765796564760234 0
+114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/valueOfPi.js1792774914236336836 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/set/is-superset-of.js1792765796543387130 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/string/ends-with.js1792765795904111383 0
 95/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/parcel/LICENSE1792757122524697304 0
@@ -2734,6 +2759,7 @@
 126/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/string-punycode-to-ascii.js1792765796966331110 0
 120/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/function/has-instance.js1792765796375998787 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/symbol/replace.js1792765796762249957 0
+111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/angles.js1792774914219795202 0
 121/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/array/virtual/flat-map.js1792765796255877704 0
 107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/semver/functions/coerce.js1792757122610697812 0
 107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/picomatch/lib/picomatch.js1792757122621697877 0
@@ -3088,7 +3114,7 @@
 100/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/instance1792765797137857997 1
 99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/stage/2.js1792765795511690365 0
 119/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/array-buffer/constructor.js1792765795738614999 0
-95/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.4a59a05f.js1792770083101877282 0
+95/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.4a59a05f.js1793643354345601782 0
 124/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/array/virtual/to-reversed.js1792765797027256419 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/typed-array/keys.js1792765796589561086 0
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/detect-libc/bin/detect-libc.js1792757122587697676 0
@@ -3243,7 +3269,7 @@
 104/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/fs/src/index.js1792757122655698078 0
 107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/regexp/split.js1792765796938808299 0
 123/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/map/get-or-insert-computed.js1792765796334281982 0
-96/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.f7626f62.css1792770083101877282 0
+96/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/18-forkify.f7626f62.css1793643219694393107 0
 119/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.string.pad-start.js1792765796012851302 0
 114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/to-primitive.js1792765797025892099 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/array/flat-map.js1792765796255610156 0
@@ -3306,6 +3332,7 @@
 110/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/iterator/take.js1792765796997829508 0
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/correct-is-regexp-logic.js1792765795767882276 0
 99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/get-port/readme.md1792757122563697534 0
+114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/integrate.js1792774914234511319 0
 113/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/date/to-iso-string.js1792765797016107855 0
 121/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/inherit-if-required.js1792765796489139398 0
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/msgpackr/dist/index-no-eval.cjs.map1792757122749698634 0
@@ -3460,6 +3487,7 @@
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/error-overlay/src/styles.js1792757122763923808 0
 106/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/string/trim.js1792765797087760618 0
 121/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/array/virtual/index-of.js1792765796408388325 0
+116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/ratio-chain.js1792774914234908513 0
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.date.set-year.js1792765795957376298 0
 108/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/object/is.js1792765796553317051 0
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/symbol/match-all.js1792765796629983984 0
@@ -3574,7 +3602,7 @@
 110/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/iterator/drop.js1792765795893850594 0
 118/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/is-big-int-array.js1792765796502854218 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/features/object/has-own.js1792765796379750239 0
-88/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/controller.js1792770002328305773 0
+88/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/js/controller.js1793643218628451581 0
 138/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/lmdb/dependencies/lmdb-data-v1/libraries/liblmdb/Doxyfile1792757122680698226 0
 107/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/msgpackr/dist/index.js.map1792757122767527989 0
 108/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/semver/internal/lrucache.js1792757122712698415 0
@@ -4625,7 +4653,7 @@
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/error/is-error.js1792765796511035133 0
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/array/reverse.js1792765796765413740 0
 118/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/object/from-entries.js1792765796301771099 0
-99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/.package-lock.json1792765797276858825 0
+99/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/.package-lock.json1792774914350651635 0
 108/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/iterator/take.js1792765796997033422 0
 114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/array-buffer.js1792765795577883619 0
 121/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/disposable-stack/index.js1792765796414453824 0
@@ -4889,6 +4917,7 @@
 118/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/es.array.to-sorted.js1792765795952270153 0
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/actual/string/virtual/replace-all.js1792765796757983101 0
 126/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/weak-map/get-or-insert-computed.js1792765796333460766 0
+115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/toFraction.js1792774914235945193 0
 110/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/iterator/chunks.js1792765795677918680 0
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/regions/RE.js1792757123124742953 0
 98/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/symbol1792765797105427542 1
@@ -4897,6 +4926,7 @@
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/iterator/flat-map.js1792765796257497614 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/number/parse-float.js1792765796700527620 0
 130/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/features/requestidlecallback.js1792757123127482010 0
+110/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/dist/fraction.mjs1792774914238116275 0
 119/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@parcel/utils/src/isDirectoryInside.js1792757122807053065 0
 122/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/stable/number/virtual/to-fixed.js1792765797012475652 0
 129/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/internals/copy-constructor-properties.js1792765795755864357 0
@@ -5510,6 +5540,7 @@
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/array/virtual/reduce.js1792765796741960455 0
 112/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/caniuse-lite/data/regions/ZM.js1792757123186872547 0
 116/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/array/virtual/group.js1792765796375559296 0
+117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/examples/tape-measure.js1792774914235627902 0
 115/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/array/virtual/fill.js1792765796200985519 0
 114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/stable/queue-microtask.js1792765796724007005 0
 114/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/array/virtual/map.js1792765796625412664 0
@@ -5654,6 +5685,7 @@
 125/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/features/dom-collections/iterator.js1792765796571305510 0
 111/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/json/stringify.js1792765796969286624 0
 101/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/self.js1792765796786855909 0
+96/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/fraction.js/src1792774914224795232 1
 132/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@swc/helpers/cjs/_unsupported_iterable_to_array.cjs1792757122831657473 0
 105/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/full/typed-array1792765797141564725 1
 85/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/src/img/icons.svg1787300710219503854 0
@@ -7353,7 +7385,7 @@
 123/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/es/disposable-stack/constructor.js1792765795739316556 0
 129/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@swc/helpers/esm/_check_private_redeclaration.js1792757122850041828 0
 110/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@swc/helpers/esm/_inherits.js1792757122876699385 0
-90/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/logo.726d37a8.png1792770082994811621 0
+90/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/dist/logo.726d37a8.png1793643219661392861 0
 127/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/core-js/modules/esnext.iterator.constructor.js1792765796104670781 0
 117/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@swc/helpers/esm/_to_property_key.js1792757122897959528 0
 123/home/purcell/HomeBase/CodeLab/javascript-learning-path-/18-forkify/node_modules/@swc/helpers/esm/_await_async_generator.js1792757122847989568 0

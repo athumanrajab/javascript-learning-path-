@@ -89,10 +89,22 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
+// TODO: Implementing a function that will control adding bookmark
+const controlAddBookmark = function () {
+  if (!model.state.recipe.bookmarked) {
+    model.addBookmark(model.state.recipe);
+  } else {
+    model.deleteBookmark(model.state.recipe.id);
+  }
+
+  recipeView.update(model.state.recipe);
+};
+
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };

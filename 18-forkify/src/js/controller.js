@@ -3,6 +3,7 @@ import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
+import bookmarksView from "./views/bookmarksView.js";
 
 import "core-js/stable"; //Polyfilling modern js features such as Promise.allSettled([...]);
 import "regenerator-runtime/runtime"; //Polyfilling async await
@@ -26,6 +27,7 @@ const controlRecipes = async function () {
 
     // Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+    bookmarksView.update(model.state.bookmarks);
 
     // NOTE: Loading recipe which was the function imported from model.js
     await model.loadRecipe(id);
@@ -91,13 +93,18 @@ const controlServings = function (newServings) {
 
 // TODO: Implementing a function that will control adding bookmark
 const controlAddBookmark = function () {
+  // Add/remove a bookmark
   if (!model.state.recipe.bookmarked) {
     model.addBookmark(model.state.recipe);
   } else {
     model.deleteBookmark(model.state.recipe.id);
   }
 
+  // Update recipe view
   recipeView.update(model.state.recipe);
+
+  // Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
 };
 
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern

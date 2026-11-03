@@ -2,15 +2,17 @@ import icons from "url:../../img/icons.svg"; //parcel way of getting all static 
 
 export default class View {
   _data;
-  render(data) {
+  render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-    this._data = data;
-    // Getting rid of any content including the welcome message
-    this._clear();
 
+    this._data = data;
     const markup = this._generateMarkup();
 
+    if (!render) return markup;
+
+    // Getting rid of any content including the welcome message
+    this._clear();
     // Insert our html markup
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }

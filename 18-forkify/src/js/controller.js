@@ -24,6 +24,9 @@ const controlRecipes = async function () {
     // NOTE: Calling the renderSpinner()
     recipeView.renderSpinner();
 
+    // Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
+
     // NOTE: Loading recipe which was the function imported from model.js
     await model.loadRecipe(id);
 
@@ -80,7 +83,10 @@ const controlServings = function (newServings) {
   model.updateServings(newServings);
 
   // Update the recipeView
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+
+  // TODO: Implement the update method which will act as render but exceptionally it will only update text and attributes in the DOM without re-render the entire view
+  recipeView.update(model.state.recipe);
 };
 
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern

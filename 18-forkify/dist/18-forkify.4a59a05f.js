@@ -738,6 +738,8 @@ const controlRecipes = async function() {
         if (!id) return;
         // NOTE: Calling the renderSpinner()
         (0, _recipeViewJsDefault.default).renderSpinner();
+        // Update results view to mark selected search result
+        (0, _resultsViewJsDefault.default).update(_modelJs.getSearchResultsPage());
         // NOTE: Loading recipe which was the function imported from model.js
         await _modelJs.loadRecipe(id);
         // NOTE: Rendering recipe
@@ -782,7 +784,9 @@ const controlServings = function(newServings) {
     // Update the recipe servings (in state)
     _modelJs.updateServings(newServings);
     // Update the recipeView
-    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+    // recipeView.render(model.state.recipe);
+    // TODO: Implement the update method which will act as render but exceptionally it will only update text and attributes in the DOM without re-render the entire view
+    (0, _recipeViewJsDefault.default).update(_modelJs.state.recipe);
 };
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
 const init = function() {
@@ -2796,7 +2800,6 @@ class RecipeView extends (0, _viewJsDefault.default) {
         this._parentElement.addEventListener("click", function(e) {
             const btn = e.target.closest(".btn--update-servings");
             if (!btn) return;
-            console.log(btn);
             const updateTo = +btn.dataset.updateTo;
             if (updateTo > 0) handler(updateTo);
         });
@@ -3298,6 +3301,22 @@ class View {
         // Insert our html markup
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
     }
+    update(data) {
+        this._data = data;
+        const newMarkup = this._generateMarkup();
+        // NOTE: Convert the markup string to the DOM object that is living in the memory so that we can then use to compare it with the actual DOM that's in the page
+        const newDOM = document.createRange().createContextualFragment(newMarkup);
+        const newElements = Array.from(newDOM.querySelectorAll("*"));
+        const currentElements = Array.from(this._parentElement.querySelectorAll("*"));
+        newElements.forEach((newEl, i)=>{
+            const curEl = currentElements[i];
+            // console.log(curEl, newEl.isEqualNode(curEl));
+            // Update changed text
+            if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") curEl.textContent = newEl.textContent;
+            // Update change attributes
+            if (!newEl.isEqualNode(curEl)) Array.from(newEl.attributes).forEach((attr)=>curEl.setAttribute(attr.name, attr.value));
+        });
+    }
     // TODO: Clearing recipe container
     _clear() {
         this._parentElement.innerHTML = "";
@@ -3382,9 +3401,10 @@ class ResultsView extends (0, _viewJsDefault.default) {
         return this._data.map(this._generateMarkupPreview).join("");
     }
     _generateMarkupPreview(result) {
+        const id = window.location.hash.slice(1);
         return `
           <li class="preview">
-            <a class="preview__link " href="#${result.id}">
+            <a class="preview__link ${result.id === id ? "preview__link--active" : ""}" href="#${result.id}">
               <figure class="preview__fig">
                 <img src="${result.image}" alt="${result.title}" />
               </figure>

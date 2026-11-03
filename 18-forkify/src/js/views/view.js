@@ -15,6 +15,39 @@ export default class View {
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
+  update(data) {
+    this._data = data;
+
+    const newMarkup = this._generateMarkup();
+
+    // NOTE: Convert the markup string to the DOM object that is living in the memory so that we can then use to compare it with the actual DOM that's in the page
+    const newDOM = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDOM.querySelectorAll("*"));
+    const currentElements = Array.from(
+      this._parentElement.querySelectorAll("*"),
+    );
+
+    newElements.forEach((newEl, i) => {
+      const curEl = currentElements[i];
+      // console.log(curEl, newEl.isEqualNode(curEl));
+
+      // Update changed text
+      if (
+        !newEl.isEqualNode(curEl) &&
+        newEl.firstChild?.nodeValue.trim() !== ""
+      ) {
+        curEl.textContent = newEl.textContent;
+      }
+
+      // Update change attributes
+      if (!newEl.isEqualNode(curEl)) {
+        Array.from(newEl.attributes).forEach((attr) =>
+          curEl.setAttribute(attr.name, attr.value),
+        );
+      }
+    });
+  }
+
   // TODO: Clearing recipe container
   _clear() {
     this._parentElement.innerHTML = "";

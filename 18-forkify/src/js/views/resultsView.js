@@ -6,7 +6,7 @@ class ResultsView extends view {
   _parentElement = document.querySelector(".results");
   _errorMessage =
     "No recipes found for your search. Please try a different keyword!";
-  _successmessage = "";
+  _successMessage = "";
 
   _generateMarkup() {
     return this._data

@@ -4,9 +4,13 @@ import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
 import bookmarksView from "./views/bookmarksView.js";
+import addRecipeView from "./views/addRecipeView.js";
 
 import "core-js/stable"; //Polyfilling modern js features such as Promise.allSettled([...]);
 import "regenerator-runtime/runtime"; //Polyfilling async await
+import addRecipeView from "./views/addRecipeView.js";
+import { MODAL_CLOSE_SEC } from "./config.js";
+// import { MODAL_CLOSE_SEC } from "./config.js";
 
 // TODO: Enable hot reloading
 // if (module.hot) {
@@ -112,6 +116,38 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+// TODO: Implementing add recipe feature
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    // Show loading spinner
+    addRecipeView.renderSpinner();
+
+    // Upload new recipe
+    await model.uploadRecipe(newRecipe);
+    // console.log(model.state.recipe);
+
+    // Render recipe
+    recipeView.render(model.state.recipe);
+
+    // Render success message
+    addRecipeView.renderMessage();
+
+    // Render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    // Change ID
+    window.history.pushState(null, "", `#${model.state.recipe.id}`);
+
+    // close the form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC * 1000);
+  } catch (error) {
+    console.error(`Oppss! ${error}`);
+    addRecipeView.renderError(error.message);
+  }
+};
+
 // TODO: Implement an init() that will help us use the Publisher-Subscriber pattern
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
@@ -120,6 +156,7 @@ const init = function () {
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 
 init();
